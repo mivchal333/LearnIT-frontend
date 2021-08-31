@@ -20,7 +20,7 @@ const TechnologyDetails = () => {
     }, [])
 
     return <div>
-        details: {technology}
+        details: {JSON.stringify(technology)}
     </div>
 }
 export default TechnologyDetails

@@ -6,6 +6,7 @@ import {useSelector} from "react-redux";
 import {Button} from "@material-ui/core";
 import {ROUTE} from "../../route/routes";
 import {values} from "lodash-es";
+import {Link} from "react-router-dom";
 
 const TechnologiesList = () => {
     let dispatch = useDispatch();
@@ -22,7 +23,7 @@ const TechnologiesList = () => {
                 <p>
                     {JSON.stringify(technology)}
                 </p>
-                <Button href={ROUTE.TECHNOLOGY + technology.id}>Show</Button>
+                <Button to={ROUTE.TECHNOLOGY + technology.id} component={Link}>Show</Button>
             </div>
         ))}
     </div>
