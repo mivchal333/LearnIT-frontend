@@ -4,7 +4,7 @@ import {fetchTechnologies} from "../../store/technologies/actions";
 import {selectTechnologies} from "../../store/technologies/technologies.slice";
 import {useSelector} from "react-redux";
 import {Button} from "@material-ui/core";
-import {ROUTE} from "../../route/routes";
+import {GET_ROUTE} from "../../route/routes";
 import {values} from "lodash-es";
 import {Link} from "react-router-dom";
 
@@ -23,7 +23,7 @@ const TechnologiesList = () => {
                 <p>
                     {JSON.stringify(technology)}
                 </p>
-                <Button to={ROUTE.TECHNOLOGY + technology.id} component={Link}>Show</Button>
+                <Button to={GET_ROUTE.TECHNOLOGY(technology.id)} component={Link}>Show</Button>
             </div>
         ))}
     </div>

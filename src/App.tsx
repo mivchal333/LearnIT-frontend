@@ -4,6 +4,7 @@ import HomePage from "./components/main/HomePage";
 import {ROUTE} from "./route/routes";
 import TechnologiesList from "./components/technologies/technologiesList";
 import TechnologyDetails from "./components/technologies/technologyDetails";
+import ConfirmStartGame from "./components/game/ConfirmStartGame";
 
 const App = () => {
 
@@ -26,7 +27,10 @@ const App = () => {
                     </ul>
                 </nav>
                 <Switch>
-                    <Route path={ROUTE.TECHNOLOGY + ":id"}>
+                    <Route path={ROUTE.GAME_START_CONFIRM} exact>
+                        <ConfirmStartGame/>
+                    </Route>
+                    <Route path={ROUTE.TECHNOLOGY} exact>
                         <TechnologyDetails/>
                     </Route>
                     <Route path={ROUTE.TECHNOLOGIES} exact>
