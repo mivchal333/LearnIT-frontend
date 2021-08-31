@@ -5,6 +5,7 @@ import {ROUTE} from "./route/routes";
 import TechnologiesList from "./components/technologies/technologiesList";
 import TechnologyDetails from "./components/technologies/technologyDetails";
 import ConfirmStartGame from "./components/game/ConfirmStartGame";
+import Game from "./components/game/Game";
 
 const App = () => {
 
@@ -27,6 +28,9 @@ const App = () => {
                     </ul>
                 </nav>
                 <Switch>
+                    <Route path={ROUTE.GAME_STARTED} exact>
+                        <Game/>
+                    </Route>
                     <Route path={ROUTE.GAME_START_CONFIRM} exact>
                         <ConfirmStartGame/>
                     </Route>
