@@ -7,7 +7,7 @@ interface GameSlice {
     technologyId: number,
     userAttemptId: string,
     question: Question,
-    answerResult?: AnswerResult,
+    answerResult: AnswerResult | null,
 }
 
 const initialState: GameSlice = {
@@ -20,7 +20,7 @@ const initialState: GameSlice = {
         technologyId: 0,
         answers: []
     },
-    answerResult: undefined,
+    answerResult: null,
 }
 
 const gameSlice = createSlice({
@@ -38,11 +38,16 @@ const gameSlice = createSlice({
         },
         setAnswerResult: (state, action: PayloadAction<AnswerResult>) => {
             state.answerResult = action.payload
+        },
+        resetAnswerResult: (state) => {
+            state.answerResult = null
         }
     }
 })
 export const {
-    setTechnologyId, setUserAttemptId, setQuestion, setAnswerResult
+    setTechnologyId,
+    setUserAttemptId, setQuestion, setAnswerResult,
+    resetAnswerResult
 } = gameSlice.actions
 
 export const selectUserAttemptId = (state: RootState) => state.game.userAttemptId

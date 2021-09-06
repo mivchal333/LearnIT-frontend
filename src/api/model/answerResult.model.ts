@@ -1,4 +1,4 @@
 export interface AnswerResult {
-    isCorrect: boolean,
+    correct: boolean,
     message: string,
 }
