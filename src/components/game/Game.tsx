@@ -1,13 +1,14 @@
 import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
-import {selectQuestion, selectUserAttemptId} from "../../store/game/game.slice";
+import {selectAnswerResult, selectUserAttemptId} from "../../store/game/game.slice";
 import {useDispatch} from "../../store/store";
 import {fetchQuestion} from "../../store/game/actions";
+import Question from "./Question";
 
 const Game = () => {
     const userAttemptId = useSelector(selectUserAttemptId)
+    const answerResult = useSelector(selectAnswerResult)
     let dispatch = useDispatch();
-    let question = useSelector(selectQuestion);
     useEffect(() => {
         dispatch(fetchQuestion())
     }, [])
@@ -16,7 +17,11 @@ const Game = () => {
     return (
         <div>
             game started, userAttemptId: {userAttemptId}
-            {JSON.stringify(question)}
+            <Question/>
+
+            {answerResult && (
+                <h1>{answerResult.isCorrect ? "Success!" : "Fail!"}</h1>
+            )}
         </div>
     )
 }

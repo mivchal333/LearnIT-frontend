@@ -1,6 +1,6 @@
 import {Dispatch, RootState} from "../store";
 import AttemptRepository from '../../api/repository/attempt.repository'
-import {selectUserAttemptId, setQuestion, setUserAttemptId} from "./game.slice";
+import {selectUserAttemptId, setAnswerResult, setQuestion, setUserAttemptId} from "./game.slice";
 import {AnyAction, ThunkAction} from "@reduxjs/toolkit";
 import QuestionRepository from '../../api/repository/questions.repository'
 
@@ -16,4 +16,12 @@ export const fetchQuestion = (): ThunkAction<void, RootState, unknown, AnyAction
     const {data} = await QuestionRepository.fetchQuestion(userAttemptId)
 
     dispatch(setQuestion(data))
+}
+
+export const submitAnswer = (answerId: number): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
+    let userAttemptId = selectUserAttemptId(getState());
+
+    const {data} = await QuestionRepository.submitAnswer(userAttemptId, answerId)
+
+    dispatch(setAnswerResult(data))
 }
