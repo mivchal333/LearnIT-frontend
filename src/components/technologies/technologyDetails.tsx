@@ -27,7 +27,10 @@ const TechnologyDetails = () => {
 
     return <div>
         details: {JSON.stringify(technology)}
-        <Button to={GET_ROUTE.GAME_START_CONFIRM(technology.id)} component={Link}>start!</Button>
+        <div>
+            <Button to={GET_ROUTE.QUIZ_START_CONFIRM(technology.id)} component={Link}>START QUIZ!</Button>
+            <Button to={GET_ROUTE.QUIZ_START_CONFIRM(technology.id)} component={Link}>START CARDS!</Button>
+        </div>
     </div>
 }
 export default TechnologyDetails

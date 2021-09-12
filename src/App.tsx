@@ -4,8 +4,8 @@ import HomePage from "./components/main/HomePage";
 import {ROUTE} from "./route/routes";
 import TechnologiesList from "./components/technologies/technologiesList";
 import TechnologyDetails from "./components/technologies/technologyDetails";
-import ConfirmStartGame from "./components/game/ConfirmStartGame";
-import Game from "./components/game/Game";
+import ConfirmStartQuiz from "./components/game/quiz/ConfirmStartQuiz";
+import Quiz from "./components/game/quiz/Quiz";
 
 const App = () => {
 
@@ -28,11 +28,11 @@ const App = () => {
                     </ul>
                 </nav>
                 <Switch>
-                    <Route path={ROUTE.GAME_STARTED} exact>
-                        <Game/>
+                    <Route path={ROUTE.QUIZ_STARTED} exact>
+                        <Quiz/>
                     </Route>
-                    <Route path={ROUTE.GAME_START_CONFIRM} exact>
-                        <ConfirmStartGame/>
+                    <Route path={ROUTE.QUIZ_START_CONFIRM} exact>
+                        <ConfirmStartQuiz/>
                     </Route>
                     <Route path={ROUTE.TECHNOLOGY} exact>
                         <TechnologyDetails/>

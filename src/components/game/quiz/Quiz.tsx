@@ -1,12 +1,13 @@
 import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
-import {resetAnswerResult, selectAnswerResult, selectUserAttemptId} from "../../store/game/game.slice";
-import {useDispatch} from "../../store/store";
-import {loadNextQuestion, loadQuestion} from "../../store/game/actions";
+import {resetAnswerResult, selectAnswerResult} from "../../../store/quiz/quiz.slice";
+import {useDispatch} from "../../../store/store";
+import {loadNextQuestion, loadQuestion} from "../../../store/quiz/actions";
 import Question from "./Question";
 import {Button} from "@material-ui/core";
+import {selectUserAttemptId} from "../../../store/game/game.slice";
 
-const Game = () => {
+const Quiz = () => {
     const userAttemptId = useSelector(selectUserAttemptId)
     const answerResult = useSelector(selectAnswerResult)
     let dispatch = useDispatch();
@@ -33,4 +34,4 @@ const Game = () => {
         </div>
     )
 }
-export default Game
+export default Quiz

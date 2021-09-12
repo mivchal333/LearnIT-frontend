@@ -2,13 +2,15 @@ import {configureStore} from "@reduxjs/toolkit";
 import questionsReducer from './questions/questions.slice'
 import {useDispatch as useOriginalDispatch} from "react-redux";
 import technologiesReducer from './technologies/technologies.slice'
+import quizReducer from './quiz/quiz.slice';
 import gameReducer from './game/game.slice';
 
 const store = configureStore({
     reducer: {
         questions: questionsReducer,
         technologies: technologiesReducer,
-        game: gameReducer
+        quiz: quizReducer,
+        game: gameReducer,
     },
 })
 export type RootState = ReturnType<typeof store.getState>

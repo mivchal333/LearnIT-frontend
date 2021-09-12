@@ -2,16 +2,16 @@ export const ROUTE = {
     HOME: "/",
     TECHNOLOGIES: "/technology",
     TECHNOLOGY: '/technology/:id',
-    GAME_START_CONFIRM: '/game/:id/confirm',
-    GAME_STARTED: '/game/:id/start'
+    QUIZ_START_CONFIRM: '/quiz/:id/confirm',
+    QUIZ_STARTED: '/quiz/:id/start'
 }
 
 export const GET_ROUTE = {
     HOME: () => "/",
     TECHNOLOGIES: () => "/technology",
     TECHNOLOGY: (id: number | string) => `/technology/${id}`,
-    GAME_START_CONFIRM: (id: number | string) => `/game/${id}/confirm`,
-    GAME_STARTED: (id: number | string) => `/game/${id}/start`,
-
-
+    QUIZ_START_CONFIRM: (id: number | string) => `/quiz/${id}/confirm`,
+    QUIZ_STARTED: (id: number | string) => `/quiz/${id}/start`,
+    CARDS_START_CONFIRM: (id: number | string) => `/cards/${id}/confirm`,
+    CARDS_STARTED: (id: number | string) => `/cards/${id}/start`,
 }
