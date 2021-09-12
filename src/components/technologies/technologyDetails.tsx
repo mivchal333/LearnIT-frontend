@@ -29,7 +29,7 @@ const TechnologyDetails = () => {
         details: {JSON.stringify(technology)}
         <div>
             <Button to={GET_ROUTE.QUIZ_START_CONFIRM(technology.id)} component={Link}>START QUIZ!</Button>
-            <Button to={GET_ROUTE.QUIZ_START_CONFIRM(technology.id)} component={Link}>START CARDS!</Button>
+            <Button to={GET_ROUTE.CARDS_START_CONFIRM(technology.id)} component={Link}>START CARDS!</Button>
         </div>
     </div>
 }

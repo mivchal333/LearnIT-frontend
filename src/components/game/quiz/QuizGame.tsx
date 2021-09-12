@@ -7,7 +7,7 @@ import Question from "./Question";
 import {Button} from "@material-ui/core";
 import {selectUserAttemptId} from "../../../store/game/game.slice";
 
-const Quiz = () => {
+const QuizGame = () => {
     const userAttemptId = useSelector(selectUserAttemptId)
     const answerResult = useSelector(selectAnswerResult)
     let dispatch = useDispatch();
@@ -34,4 +34,4 @@ const Quiz = () => {
         </div>
     )
 }
-export default Quiz
+export default QuizGame

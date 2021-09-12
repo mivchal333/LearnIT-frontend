@@ -4,6 +4,7 @@ import {useDispatch as useOriginalDispatch} from "react-redux";
 import technologiesReducer from './technologies/technologies.slice'
 import quizReducer from './quiz/quiz.slice';
 import gameReducer from './game/game.slice';
+import {cardsReducer} from "./cards/cards.slice";
 
 const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
         technologies: technologiesReducer,
         quiz: quizReducer,
         game: gameReducer,
+        cards: cardsReducer,
     },
 })
 export type RootState = ReturnType<typeof store.getState>

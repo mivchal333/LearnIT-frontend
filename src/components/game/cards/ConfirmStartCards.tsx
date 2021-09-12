@@ -19,7 +19,7 @@ const ConfirmStartCards = () => {
 
     const onConfirm = async () => {
         await dispatch(startAttempt(toNumber(id)))
-        history.push(GET_ROUTE.QUIZ_STARTED(id))
+        history.push(GET_ROUTE.CARDS_STARTED(id))
     }
 
     return (

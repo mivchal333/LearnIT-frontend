@@ -1,17 +1,32 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import HomePage from "./components/main/HomePage";
-import {ROUTE} from "./route/routes";
+import {ROUTE_META, Routes} from "./route/routes";
 import TechnologiesList from "./components/technologies/technologiesList";
 import TechnologyDetails from "./components/technologies/technologyDetails";
 import ConfirmStartQuiz from "./components/game/quiz/ConfirmStartQuiz";
-import Quiz from "./components/game/quiz/Quiz";
+import QuizGame from "./components/game/quiz/QuizGame";
+import {map} from "lodash-es";
+import ConfirmStartCards from "./components/game/cards/ConfirmStartCards";
+import CardsGame from "./components/game/cards/CardsGame";
+
+
+type RouteContentType = {
+    [key in Routes]: ReactNode
+}
+
+const RouteContent: RouteContentType = {
+    CARDS_STARTED: <CardsGame/>,
+    CARDS_START_CONFIRM: <ConfirmStartCards/>,
+    QUIZ_STARTED: <QuizGame/>,
+    QUIZ_START_CONFIRM: <ConfirmStartQuiz/>,
+    TECHNOLOGIES: <TechnologiesList/>,
+    TECHNOLOGY: <TechnologyDetails/>,
+    HOME: <HomePage/>
+}
 
 const App = () => {
-
-
     return (
-
         <Router>
             <div>
                 <nav>
@@ -20,7 +35,7 @@ const App = () => {
                             <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <Link to={ROUTE.TECHNOLOGIES}>Technologies</Link>
+                            <Link to={ROUTE_META.TECHNOLOGIES}>Technologies</Link>
                         </li>
                         <li>
                             <Link to="/users">Users</Link>
@@ -28,21 +43,13 @@ const App = () => {
                     </ul>
                 </nav>
                 <Switch>
-                    <Route path={ROUTE.QUIZ_STARTED} exact>
-                        <Quiz/>
-                    </Route>
-                    <Route path={ROUTE.QUIZ_START_CONFIRM} exact>
-                        <ConfirmStartQuiz/>
-                    </Route>
-                    <Route path={ROUTE.TECHNOLOGY} exact>
-                        <TechnologyDetails/>
-                    </Route>
-                    <Route path={ROUTE.TECHNOLOGIES} exact>
-                        <TechnologiesList/>
-                    </Route>
-                    <Route path="/">
-                        <HomePage/>
-                    </Route>
+                    {map(RouteContent, (routeComponent, route: Routes) => {
+                        return (
+                            <Route key={route} path={ROUTE_META[route]} exact>
+                                {routeComponent}
+                            </Route>
+                        )
+                    })}
                 </Switch>
             </div>
         </Router>
