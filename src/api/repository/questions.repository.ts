@@ -7,7 +7,7 @@ const fetchQuestion = (attemptId: string) => axios.get("/question", {
     }
 })
 
-const submitAnswer = (attemptId: string, answerId: number): Promise<AxiosResponse<AnswerResult>> => axios.post("/question/answer", {
+const submitAnswer = (attemptId: string, answerId?: number): Promise<AxiosResponse<AnswerResult>> => axios.post("/question/answer", {
     attemptId,
     answerId,
 })

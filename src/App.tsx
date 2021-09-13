@@ -8,7 +8,7 @@ import ConfirmStartQuiz from "./components/game/quiz/ConfirmStartQuiz";
 import QuizGame from "./components/game/quiz/QuizGame";
 import {map} from "lodash-es";
 import ConfirmStartCards from "./components/game/cards/ConfirmStartCards";
-import CardsGame from "./components/game/cards/CardsGame";
+import CardsGameWrapper from "./components/game/cards/CardsGameWrapper";
 
 
 type RouteContentType = {
@@ -16,7 +16,7 @@ type RouteContentType = {
 }
 
 const RouteContent: RouteContentType = {
-    CARDS_STARTED: <CardsGame/>,
+    CARDS_STARTED: <CardsGameWrapper/>,
     CARDS_START_CONFIRM: <ConfirmStartCards/>,
     QUIZ_STARTED: <QuizGame/>,
     QUIZ_START_CONFIRM: <ConfirmStartQuiz/>,
