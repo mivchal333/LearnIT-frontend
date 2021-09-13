@@ -1,7 +1,9 @@
 import axios, {AxiosResponse} from "axios";
 import {AnswerResult} from "../model/answerResult.model";
+import {GameProgress} from "../model/gameProgress.model";
+import {Question} from "../model/Question.model";
 
-const fetchQuestion = (attemptId: string) => axios.get("/question", {
+const fetchQuestion = (attemptId: string): Promise<AxiosResponse<GameProgress<Question>>> => axios.get("/question", {
     params: {
         attemptId
     }

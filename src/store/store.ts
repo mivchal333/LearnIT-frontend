@@ -1,5 +1,4 @@
 import {configureStore} from "@reduxjs/toolkit";
-import questionsReducer from './questions/questions.slice'
 import {useDispatch as useOriginalDispatch} from "react-redux";
 import technologiesReducer from './technologies/technologies.slice'
 import quizReducer from './quiz/quiz.slice';
@@ -8,7 +7,6 @@ import {cardsReducer} from "./cards/cards.slice";
 
 const store = configureStore({
     reducer: {
-        questions: questionsReducer,
         technologies: technologiesReducer,
         quiz: quizReducer,
         game: gameReducer,

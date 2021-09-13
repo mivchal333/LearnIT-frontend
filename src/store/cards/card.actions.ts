@@ -1,17 +1,24 @@
 import {AnyAction, ThunkAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import CardsRepository from '../../api/repository/cards.repository'
-import {selectUserAttemptId} from "../game/game.slice";
+import {finishGame, selectProgress, selectUserAttemptId, setProgress} from "../game/game.slice";
 import {selectCurrentCard, setCurrentCard} from "./cards.slice";
 import QuestionRepository from "../../api/repository/questions.repository";
 
 
 export const loadCard = (): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
+    const progress = selectProgress(getState());
+    if (progress.actual === progress.total - 1) {
+        dispatch(finishGame())
+        return;
+    }
+
     const userAttemptId = selectUserAttemptId(getState());
     if (userAttemptId) {
-        const {data} = await CardsRepository.loadCard(userAttemptId)
+        const {data: {actual, total, entry}} = await CardsRepository.loadCard(userAttemptId)
 
-        dispatch(setCurrentCard(data))
+        dispatch(setCurrentCard(entry))
+        dispatch(setProgress({actual, total}))
     } else {
         console.error("Not found user attempt ID!")
     }
@@ -26,12 +33,10 @@ const markCardKnown = (): ThunkAction<void, RootState, undefined, AnyAction> => 
     }
 
     const {data} = await QuestionRepository.submitAnswer(userAttemptId, currentCard.answer.id)
-
-
 }
 
 export const knowItAction = (): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
-    dispatch(markCardKnown())
+    await dispatch(markCardKnown())
     dispatch(loadCard())
 }
 

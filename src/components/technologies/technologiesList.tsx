@@ -3,10 +3,8 @@ import {useDispatch} from "../../store/store";
 import {fetchTechnologies} from "../../store/technologies/actions";
 import {selectTechnologies} from "../../store/technologies/technologies.slice";
 import {useSelector} from "react-redux";
-import {Button} from "@material-ui/core";
-import {GET_ROUTE} from "../../route/routes";
 import {values} from "lodash-es";
-import {Link} from "react-router-dom";
+import TechnologyListItem from "./TechnologyListItem";
 
 const TechnologiesList = () => {
     let dispatch = useDispatch();
@@ -19,12 +17,8 @@ const TechnologiesList = () => {
 
 
     return <div>
-        {values(technologies).map((technology) => (<div>
-                <p>
-                    {JSON.stringify(technology)}
-                </p>
-                <Button to={GET_ROUTE.TECHNOLOGY(technology.id)} component={Link}>Show</Button>
-            </div>
+        {values(technologies).map((technology) => (
+            <TechnologyListItem technology={technology}/>
         ))}
     </div>
 }

@@ -1,4 +1,5 @@
-export interface GameProgress {
+export interface GameProgress<T> {
     total: number,
     actual: number,
+    entry: T,
 }

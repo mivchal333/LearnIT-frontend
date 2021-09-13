@@ -6,6 +6,9 @@ import {loadCard, notKnowItAction} from "../../../store/cards/card.actions";
 import {resetCurrentCard, selectCurrentCard, selectIsFlipped, setIsFlipped} from "../../../store/cards/cards.slice";
 import KnownButton from "./KnownButton";
 import NextCardButton from "./NextCardButton";
+import ProgressTracker from "./ProgressTracker";
+import {selectIsFinished} from "../../../store/game/game.slice";
+import GameFinishedCard from "../finish/GameFinishedCard";
 
 
 const useStyles = makeStyles((theme: any) => ({
@@ -32,6 +35,8 @@ const CardsGameWrapper = () => {
     const classes = useStyles();
     const card = useSelector(selectCurrentCard);
     const isFlipped = useSelector(selectIsFlipped);
+    const isFinished = useSelector(selectIsFinished);
+
     const dispatch = useDispatch();
     const [isAnswerShowed, setIsAnswerShowed] = useState(false)
     useEffect(() => {
@@ -59,9 +64,13 @@ const CardsGameWrapper = () => {
     if (!card) {
         return <CircularProgress/>
     }
+    if (isFinished) {
+        return <GameFinishedCard/>
+    }
 
     return (
         <div>
+            <ProgressTracker/>
             <Paper elevation={3} className={classes.paper} onClick={onClick}>
                 {!isFlipped
                     ? <Typography className={classes.cardBody}>{card.body}</Typography>
