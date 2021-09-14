@@ -8,19 +8,23 @@ interface ProgressType {
 
 interface GameSlice {
     technologyId: number,
-    userAttemptId: string,
-    progress: ProgressType,
-    isFinished: boolean,
+    gameState: {
+        userAttemptId: string,
+        progress: ProgressType,
+        isFinished: boolean,
+    }
 }
 
 const initialState: GameSlice = {
     technologyId: 0,
-    userAttemptId: '',
-    progress: {
-        actual: 0,
-        total: 0,
-    },
-    isFinished: false,
+    gameState: {
+        userAttemptId: '',
+        progress: {
+            actual: 0,
+            total: 0,
+        },
+        isFinished: false,
+    }
 }
 
 const gameSlice = createSlice({
@@ -31,20 +35,19 @@ const gameSlice = createSlice({
             state.technologyId = action.payload;
         },
         setUserAttemptId: (state, action: PayloadAction<string>) => {
-            state.userAttemptId = action.payload;
+            state.gameState.userAttemptId = action.payload;
         },
         setProgress: (state, action: PayloadAction<ProgressType>) => {
-            state.progress = action.payload
+            state.gameState.progress = action.payload
         },
         finishGame: (state) => {
-            state.isFinished = true
+            state.gameState.isFinished = true
         },
         resetGameState: (state) => {
-            state.progress.actual = 0
-            state.progress.total = 0
-            state.isFinished = false
-            state.technologyId = 0
-            state.userAttemptId = ''
+            state.gameState.userAttemptId = ''
+            state.gameState.isFinished = false
+            state.gameState.progress.actual = 0
+            state.gameState.progress.total = 0
         }
     }
 })
@@ -56,9 +59,9 @@ export const {
     resetGameState,
 } = gameSlice.actions
 
-export const selectUserAttemptId = (state: RootState) => state.game.userAttemptId
-export const selectProgress = (state: RootState) => state.game.progress
-export const selectIsFinished = (state: RootState) => state.game.isFinished
+export const selectUserAttemptId = (state: RootState) => state.game.gameState.userAttemptId
+export const selectProgress = (state: RootState) => state.game.gameState.progress
+export const selectIsFinished = (state: RootState) => state.game.gameState.isFinished
 export const selectTechnologyId = (state: RootState) => state.game.technologyId
 
 export default gameSlice.reducer;

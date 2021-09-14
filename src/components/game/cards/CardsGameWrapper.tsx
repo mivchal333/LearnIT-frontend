@@ -6,9 +6,9 @@ import {loadCard, notKnowItAction} from "../../../store/cards/card.actions";
 import {resetCurrentCard, selectCurrentCard, selectIsFlipped, setIsFlipped} from "../../../store/cards/cards.slice";
 import KnownButton from "./KnownButton";
 import NextCardButton from "./NextCardButton";
-import ProgressTracker from "./ProgressTracker";
+import ProgressTracker from "../common/ProgressTracker";
 import {resetGameState, selectIsFinished} from "../../../store/game/game.slice";
-import GameFinishedCard from "../finish/GameFinishedCard";
+import GameFinishedCard from "../common/GameFinishedCard";
 
 
 const useStyles = makeStyles((theme: any) => ({
