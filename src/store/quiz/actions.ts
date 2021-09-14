@@ -2,10 +2,11 @@ import {Dispatch, RootState} from "../store";
 import AttemptRepository from '../../api/repository/attempt.repository'
 import {AnyAction, ThunkAction} from "@reduxjs/toolkit";
 import QuestionRepository from '../../api/repository/questions.repository'
-import {selectUserAttemptId, setProgress, setUserAttemptId} from "../game/game.slice";
+import {resetGameState, selectUserAttemptId, setProgress, setUserAttemptId} from "../game/game.slice";
 import {resetAnswerResult, setAnswerResult, setQuestion} from "./quiz.slice";
 
 export const startAttempt = (technologyId: number) => async (dispatch: Dispatch) => {
+    dispatch(resetGameState())
     const {data} = await AttemptRepository.startAttempt(technologyId)
 
     dispatch(setUserAttemptId(data.id))
@@ -15,7 +16,7 @@ export const loadQuestion = (): ThunkAction<void, RootState, unknown, AnyAction>
     let userAttemptId = selectUserAttemptId(getState());
 
     const {data: {entry, actual, total}} = await QuestionRepository.fetchQuestion(userAttemptId)
-
+    console.log(entry)
     dispatch(setQuestion(entry))
     dispatch(setProgress({actual, total}))
 }

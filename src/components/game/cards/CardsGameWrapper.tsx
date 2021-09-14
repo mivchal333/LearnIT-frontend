@@ -7,7 +7,7 @@ import {resetCurrentCard, selectCurrentCard, selectIsFlipped, setIsFlipped} from
 import KnownButton from "./KnownButton";
 import NextCardButton from "./NextCardButton";
 import ProgressTracker from "./ProgressTracker";
-import {selectIsFinished} from "../../../store/game/game.slice";
+import {resetGameState, selectIsFinished} from "../../../store/game/game.slice";
 import GameFinishedCard from "../finish/GameFinishedCard";
 
 
@@ -43,6 +43,7 @@ const CardsGameWrapper = () => {
         dispatch(loadCard())
         return () => {
             dispatch(resetCurrentCard())
+            dispatch(resetGameState())
         }
     }, [])
 

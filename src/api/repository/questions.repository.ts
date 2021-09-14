@@ -14,4 +14,5 @@ const submitAnswer = (attemptId: string, answerId?: number): Promise<AxiosRespon
     answerId,
 })
 
-export default {fetchQuestion, submitAnswer};
+const QuestionRepository = {fetchQuestion, submitAnswer};
+export default QuestionRepository

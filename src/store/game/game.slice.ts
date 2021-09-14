@@ -38,6 +38,13 @@ const gameSlice = createSlice({
         },
         finishGame: (state) => {
             state.isFinished = true
+        },
+        resetGameState: (state) => {
+            state.progress.actual = 0
+            state.progress.total = 0
+            state.isFinished = false
+            state.technologyId = 0
+            state.userAttemptId = ''
         }
     }
 })
@@ -46,6 +53,7 @@ export const {
     setUserAttemptId,
     setProgress,
     finishGame,
+    resetGameState,
 } = gameSlice.actions
 
 export const selectUserAttemptId = (state: RootState) => state.game.userAttemptId

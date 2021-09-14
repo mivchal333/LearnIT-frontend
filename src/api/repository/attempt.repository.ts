@@ -7,6 +7,7 @@ const startAttempt = async (technologyId: number): Promise<AxiosResponse<UserAtt
     }
 })
 
-export default {
+const AttemptRepository = {
     startAttempt
 }
+export default AttemptRepository

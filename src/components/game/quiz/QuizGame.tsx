@@ -6,6 +6,8 @@ import {loadNextQuestion, loadQuestion} from "../../../store/quiz/actions";
 import Question from "./Question";
 import {Button} from "@material-ui/core";
 import {selectUserAttemptId} from "../../../store/game/game.slice";
+import SuccessAnswerMessage from "./SuccessAnswerMessage";
+import WrongAnswerMessage from "./WrongAnswerMessage";
 
 const QuizGame = () => {
     const userAttemptId = useSelector(selectUserAttemptId)
@@ -21,13 +23,13 @@ const QuizGame = () => {
 
     return (
         <div>
-            game started, userAttemptId: {userAttemptId}
-
             <Question/>
 
             {answerResult && (
                 <>
-                    <h1>{answerResult.correct ? "Success!" : "Fail!"}</h1>
+                    {answerResult.correct
+                        ? <SuccessAnswerMessage/>
+                        : <WrongAnswerMessage/>}
                     <Button onClick={() => dispatch(loadNextQuestion())}>Next Question</Button>
                 </>
             )}

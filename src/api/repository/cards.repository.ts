@@ -8,6 +8,7 @@ const loadCard = async (attemptId: string): Promise<AxiosResponse<GameProgress<C
     }
 })
 
-export default {
+const CardsRepository = {
     loadCard
 }
+export default CardsRepository
