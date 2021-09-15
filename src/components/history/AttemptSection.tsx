@@ -4,6 +4,14 @@ import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {UserAttempt} from "../../api/model/userAttempt.model";
+import {
+    Timeline,
+    TimelineConnector,
+    TimelineContent,
+    TimelineDot,
+    TimelineItem,
+    TimelineSeparator
+} from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -27,14 +35,22 @@ const AttemptSection = (props: PropsTypes) => {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon/>}
                     aria-controls="panel1a-content"
+                    id={`attempt-section-${props.attempt.id}`}
                 >
                     <Typography className={classes.heading}>Started at {props.attempt.startDate}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                    </Typography>
+                    <Timeline>
+                        {props.attempt.history.map(entry => (
+                            <TimelineItem>
+                                <TimelineSeparator>
+                                    <TimelineDot color={entry.answerResult ? 'primary' : 'secondary'}/>
+                                    <TimelineConnector/>
+                                </TimelineSeparator>
+                                <TimelineContent>{entry.question.body}</TimelineContent>
+                            </TimelineItem>
+                        ))}
+                    </Timeline>
                 </AccordionDetails>
             </Accordion>
         </ListItem>
