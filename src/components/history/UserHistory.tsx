@@ -1,20 +1,48 @@
 import React from "react";
-import {Card} from "@material-ui/core";
-import {useDispatch, useSelector} from "../../store/store";
-import {selectUserAttempt} from "../../store/history/history.slice";
-import {selectTechnologyId} from "../../store/game/game.slice";
+import {Card, List} from "@material-ui/core";
+import {useSelector} from "../../store/store";
+import {selectUserAttempts} from "../../store/history/history.slice";
 import useLoadHistory from "../../hooks/useLoadHistory";
+import AttemptSection from "./AttemptSection";
+import {map} from "lodash-es";
+import {selectTechnologyContextId} from "../../store/technologies/technologies.slice";
+import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            width: '100%',
+            maxWidth: '30em',
+            backgroundColor: theme.palette.background.paper,
+            position: 'relative',
+            overflow: 'auto',
+            maxHeight: "60em",
+        },
+        listSection: {
+            backgroundColor: 'inherit',
+        },
+        ul: {
+            backgroundColor: 'inherit',
+            padding: 0,
+        },
+    }),
+);
 
 const UserHistory = () => {
-    const dispatch = useDispatch();
-    const technologyId = useSelector(selectTechnologyId);
+    const classes = useStyles();
+
+    const technologyId = useSelector(selectTechnologyContextId);
     useLoadHistory()
-    useSelector((state) => selectUserAttempt(state, technologyId))
+    const userAttempts = useSelector((state) => selectUserAttempts(state, technologyId))
 
     return (
-        <Card>
-
+        <Card className={classes.root}>
+            <List>
+                {map(userAttempts, userAttempt => (
+                    <AttemptSection attempt={userAttempt}/>
+                ))}
+            </List>
         </Card>
     )
 }

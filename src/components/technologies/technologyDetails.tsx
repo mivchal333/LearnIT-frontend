@@ -7,7 +7,6 @@ import {isEmpty, toNumber} from "lodash-es";
 import {fetchTechnology} from "../../store/technologies/actions";
 import {Button, Card, CardActions, CardContent, makeStyles, Typography} from "@material-ui/core";
 import {GET_ROUTE} from "../../route/routes";
-import UserHistory from "../history/UserHistory";
 
 
 const useStyles = makeStyles({
@@ -45,7 +44,7 @@ const TechnologyDetails = () => {
 
     const createDate = new Date(technology.createDate);
     return (
-        <>
+        <div className={classes.root}>
             <Card className={classes.root}>
                 <CardContent>
                     <Typography variant="h5" component="h2">
@@ -64,8 +63,7 @@ const TechnologyDetails = () => {
                     <Button to={GET_ROUTE.CARDS_START_CONFIRM(technology.id)} component={Link}>START CARDS!</Button>
                 </CardActions>
             </Card>
-            <UserHistory/>
-        </>
+        </div>
     )
 }
 export default TechnologyDetails
