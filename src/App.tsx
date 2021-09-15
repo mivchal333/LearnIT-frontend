@@ -9,6 +9,7 @@ import QuizGame from "./components/game/quiz/QuizGame";
 import {map} from "lodash-es";
 import ConfirmStartCards from "./components/game/cards/ConfirmStartCards";
 import CardsGameWrapper from "./components/game/cards/CardsGameWrapper";
+import UserHistory from "./components/history/UserHistory";
 
 
 type RouteContentType = {
@@ -22,7 +23,8 @@ const RouteContent: RouteContentType = {
     QUIZ_START_CONFIRM: <ConfirmStartQuiz/>,
     TECHNOLOGIES: <TechnologiesList/>,
     TECHNOLOGY: <TechnologyDetails/>,
-    HOME: <HomePage/>
+    HOME: <HomePage/>,
+    USER_HISTORY: <UserHistory/>,
 }
 
 const App = () => {
