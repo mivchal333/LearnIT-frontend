@@ -8,8 +8,8 @@ import QuizGame from "./components/game/quiz/QuizGame";
 import {map} from "lodash-es";
 import ConfirmStartCards from "./components/game/cards/ConfirmStartCards";
 import CardsGameWrapper from "./components/game/cards/CardsGameWrapper";
-import UserHistory from "./components/history/UserHistory";
-import TechnologyDetailsPage from "./components/technologies/TechnologyDetailsPage";
+import TechnologyDetailsPage from "./components/technologies/details/TechnologyDetailsPage";
+import AddTechnologyPage from "./components/technologies/add/AddTechnologyPage";
 
 
 type RouteContentType = {
@@ -21,10 +21,10 @@ const RouteContent: RouteContentType = {
     CARDS_START_CONFIRM: <ConfirmStartCards/>,
     QUIZ_STARTED: <QuizGame/>,
     QUIZ_START_CONFIRM: <ConfirmStartQuiz/>,
+    TECHNOLOGY_ADD: <AddTechnologyPage/>,
     TECHNOLOGIES: <TechnologiesList/>,
     TECHNOLOGY: <TechnologyDetailsPage/>,
-    HOME: <HomePage/>,
-    USER_HISTORY: <UserHistory/>,
+    HOME: <HomePage/>
 }
 
 const App = () => {
@@ -38,9 +38,6 @@ const App = () => {
                         </li>
                         <li>
                             <Link to={ROUTE_META.TECHNOLOGIES}>Technologies</Link>
-                        </li>
-                        <li>
-                            <Link to="/users">Users</Link>
                         </li>
                     </ul>
                 </nav>

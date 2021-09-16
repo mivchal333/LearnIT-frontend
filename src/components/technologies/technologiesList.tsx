@@ -5,6 +5,8 @@ import {selectTechnologies} from "../../store/technologies/technologies.slice";
 import {useSelector} from "react-redux";
 import {values} from "lodash-es";
 import TechnologyListItem from "./TechnologyListItem";
+import AddTechnologyButton from "./AddTechnologyButton";
+
 
 const TechnologiesList = () => {
     let dispatch = useDispatch();
@@ -17,6 +19,7 @@ const TechnologiesList = () => {
 
 
     return <div>
+        <AddTechnologyButton/>
         {values(technologies).map((technology) => (
             <TechnologyListItem technology={technology}/>
         ))}

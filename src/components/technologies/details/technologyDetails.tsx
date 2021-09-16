@@ -1,12 +1,12 @@
 import React, {useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
-import {TechnologyRouteParam} from "../../route/route.model";
-import {selectTechnology, setTechnologyContextId} from "../../store/technologies/technologies.slice";
-import {useDispatch, useSelector} from "../../store/store";
+import {TechnologyRouteParam} from "../../../route/route.model";
+import {selectTechnology, setTechnologyContextId} from "../../../store/technologies/technologies.slice";
+import {useDispatch, useSelector} from "../../../store/store";
 import {isEmpty, toNumber} from "lodash-es";
-import {fetchTechnology} from "../../store/technologies/actions";
+import {fetchTechnology} from "../../../store/technologies/actions";
 import {Button, Card, CardActions, CardContent, makeStyles, Typography} from "@material-ui/core";
-import {GET_ROUTE} from "../../route/routes";
+import {GET_ROUTE} from "../../../route/routes";
 
 
 const useStyles = makeStyles({

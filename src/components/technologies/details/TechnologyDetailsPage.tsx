@@ -1,5 +1,5 @@
 import React from "react";
-import UserHistory from "../history/UserHistory";
+import UserHistory from "../../history/UserHistory";
 import TechnologyDetails from "./technologyDetails";
 import {makeStyles} from "@material-ui/core";
 
