@@ -7,6 +7,7 @@ import {isEmpty, toNumber} from "lodash-es";
 import {fetchTechnology} from "../../../store/technologies/actions";
 import {Button, Card, CardActions, CardContent, makeStyles, Typography} from "@material-ui/core";
 import {GET_ROUTE} from "../../../route/routes";
+import DeleteTechnologyButton from "./DeleteTechnologyButton";
 
 
 const useStyles = makeStyles({
@@ -61,6 +62,7 @@ const TechnologyDetails = () => {
                 <CardActions>
                     <Button to={GET_ROUTE.QUIZ_START_CONFIRM(technology.id)} component={Link}>START QUIZ!</Button>
                     <Button to={GET_ROUTE.CARDS_START_CONFIRM(technology.id)} component={Link}>START CARDS!</Button>
+                    <DeleteTechnologyButton/>
                 </CardActions>
             </Card>
         </div>

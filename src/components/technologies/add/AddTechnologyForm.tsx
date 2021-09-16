@@ -6,6 +6,8 @@ import {useDispatch} from "../../../store/store";
 import {addTechnology} from "../../../store/technologies/actions";
 import AddIcon from '@material-ui/icons/Add';
 import MuiAlert from '@material-ui/lab/Alert';
+import {GET_ROUTE} from "../../../route/routes";
+import {Link} from "react-router-dom";
 
 export interface CreateTechnologyPayload {
     name: string,
@@ -93,7 +95,12 @@ const AddTechnologyForm = () => {
             </Formik>
             <Snackbar open={showMessage} autoHideDuration={6000} onClose={() => setShowMessage(false)}>
                 <MuiAlert onClose={() => setShowMessage(false)} severity="success" elevation={6} variant="filled">
-                    Success! Technology added.
+                    <span>
+                        Success! Technology added.
+                    </span>
+                    <Button to={GET_ROUTE.TECHNOLOGIES()} component={Link}>
+                        Go to list
+                    </Button>
                 </MuiAlert>
             </Snackbar>
         </>
