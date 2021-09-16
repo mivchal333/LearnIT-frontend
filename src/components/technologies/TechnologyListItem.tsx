@@ -4,9 +4,13 @@ import {Technology} from "../../api/model/Technology.model";
 import {GET_ROUTE} from "../../route/routes";
 import {Link} from "react-router-dom";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
         maxWidth: '30em',
+        marginBottom: "2em",
+        marginLeft: '1em',
+        marginTop: '1em',
+        backgroundColor: theme.palette.grey[100],
     },
     title: {
         fontSize: 14,
@@ -14,7 +18,7 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
-});
+}));
 
 interface PropsType {
     technology: Technology,

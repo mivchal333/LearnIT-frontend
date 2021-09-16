@@ -1,10 +1,10 @@
 import React from "react";
-import {Card, List} from "@material-ui/core";
+import {Card, CardContent, List, Typography} from "@material-ui/core";
 import {useSelector} from "../../store/store";
 import {selectUserAttempts} from "../../store/history/history.slice";
 import useLoadHistory from "../../hooks/useLoadHistory";
 import AttemptSection from "./AttemptSection";
-import {map} from "lodash-es";
+import {isEmpty, map} from "lodash-es";
 import {selectTechnologyContextId} from "../../store/technologies/technologies.slice";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 
@@ -36,13 +36,21 @@ const UserHistory = () => {
     useLoadHistory()
     const userAttempts = useSelector((state) => selectUserAttempts(state, technologyId))
 
+    if (isEmpty(userAttempts)) {
+        return null
+    }
     return (
         <Card className={classes.root}>
-            <List>
-                {map(userAttempts, userAttempt => (
-                    <AttemptSection attempt={userAttempt}/>
-                ))}
-            </List>
+            <CardContent>
+                <Typography variant="h5" component="h2">
+                    Attempts
+                </Typography>
+                <List>
+                    {map(userAttempts, userAttempt => (
+                        <AttemptSection attempt={userAttempt}/>
+                    ))}
+                </List>
+            </CardContent>
         </Card>
     )
 }

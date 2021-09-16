@@ -4,14 +4,8 @@ import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {UserAttempt} from "../../api/model/userAttempt.model";
-import {
-    Timeline,
-    TimelineConnector,
-    TimelineContent,
-    TimelineDot,
-    TimelineItem,
-    TimelineSeparator
-} from "@material-ui/lab";
+import {Timeline} from "@material-ui/lab";
+import AnswerTimelineItem from "./AnswerTimelineItem";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -42,13 +36,7 @@ const AttemptSection = (props: PropsTypes) => {
                 <AccordionDetails>
                     <Timeline>
                         {props.attempt.history.map(entry => (
-                            <TimelineItem>
-                                <TimelineSeparator>
-                                    <TimelineDot color={entry.answerResult ? 'primary' : 'secondary'}/>
-                                    <TimelineConnector/>
-                                </TimelineSeparator>
-                                <TimelineContent>{entry.question.body}</TimelineContent>
-                            </TimelineItem>
+                            <AnswerTimelineItem entry={entry}/>
                         ))}
                     </Timeline>
                 </AccordionDetails>
