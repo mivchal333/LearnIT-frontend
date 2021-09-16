@@ -94,13 +94,13 @@ const AddTechnologyForm = () => {
                 )}
             </Formik>
             <Snackbar open={showMessage} autoHideDuration={6000} onClose={() => setShowMessage(false)}>
-                <MuiAlert onClose={() => setShowMessage(false)} severity="success" elevation={6} variant="filled">
+                <MuiAlert onClose={() => setShowMessage(false)} severity="success" elevation={6} variant="filled"
+                          action={<Button to={GET_ROUTE.TECHNOLOGIES()} component={Link}>
+                              Go to list
+                          </Button>}>
                     <span>
                         Success! Technology added.
                     </span>
-                    <Button to={GET_ROUTE.TECHNOLOGIES()} component={Link}>
-                        Go to list
-                    </Button>
                 </MuiAlert>
             </Snackbar>
         </>

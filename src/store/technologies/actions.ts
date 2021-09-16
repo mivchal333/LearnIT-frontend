@@ -1,5 +1,5 @@
 import {Dispatch, RootState} from "../store";
-import {setTechnologies, setTechnology} from "./technologies.slice";
+import {selectTechnologyContextId, setTechnologies, setTechnology} from "./technologies.slice";
 import TechnologiesRepository from '../../api/repository/technologies.repository'
 import {AnyAction, ThunkAction} from "@reduxjs/toolkit";
 import {CreateTechnologyPayload} from "../../components/technologies/add/AddTechnologyForm";
@@ -21,4 +21,7 @@ export const addTechnology = (values: CreateTechnologyPayload): ThunkAction<void
     dispatch(setTechnology(data))
 }
 
-
+export const deleteTechnology = (): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch, getState) => {
+    const technologyId = selectTechnologyContextId(getState())
+    await TechnologiesRepository.remove(technologyId)
+}

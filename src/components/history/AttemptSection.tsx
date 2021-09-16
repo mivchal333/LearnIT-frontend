@@ -23,6 +23,8 @@ interface PropsTypes {
 const AttemptSection = (props: PropsTypes) => {
     const classes = useStyles();
 
+    const startDate = new Date(props.attempt.startDate);
+
     return (
         <ListItem>
             <Accordion>
@@ -31,7 +33,8 @@ const AttemptSection = (props: PropsTypes) => {
                     aria-controls="panel1a-content"
                     id={`attempt-section-${props.attempt.id}`}
                 >
-                    <Typography className={classes.heading}>Started at {props.attempt.startDate}</Typography>
+                    <Typography className={classes.heading}>Started
+                        on {startDate.toLocaleDateString()} at {startDate.toLocaleTimeString()}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Timeline>
