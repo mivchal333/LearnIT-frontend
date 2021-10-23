@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import HomePage from "./components/main/HomePage";
 import {ROUTE_META, Routes} from "./route/routes";
 import TechnologiesList from "./components/technologies/technologiesList";
@@ -10,6 +10,7 @@ import ConfirmStartCards from "./components/game/cards/ConfirmStartCards";
 import CardsGameWrapper from "./components/game/cards/CardsGameWrapper";
 import TechnologyDetailsPage from "./components/technologies/details/TechnologyDetailsPage";
 import AddTechnologyPage from "./components/technologies/add/AddTechnologyPage";
+import AppBar from "./components/appbar/AppBar";
 
 
 type RouteContentType = {
@@ -30,17 +31,7 @@ const RouteContent: RouteContentType = {
 const App = () => {
     return (
         <Router>
-            <div>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to={ROUTE_META.TECHNOLOGIES}>Technologies</Link>
-                        </li>
-                    </ul>
-                </nav>
+            <AppBar>
                 <Switch>
                     {map(RouteContent, (routeComponent, route: Routes) => {
                         return (
@@ -50,7 +41,7 @@ const App = () => {
                         )
                     })}
                 </Switch>
-            </div>
+            </AppBar>
         </Router>
     );
 }
