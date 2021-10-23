@@ -9,6 +9,10 @@ export enum Routes {
     CARDS_START_CONFIRM = 'CARDS_START_CONFIRM',
     CARDS_STARTED = 'CARDS_STARTED',
 
+    STATISTICS = 'STATISTICS',
+
+    LOG_IN = 'LOG_IN',
+    ACCOUNT = 'ACCOUNT',
 }
 
 type RoutesMeta = {
@@ -27,6 +31,10 @@ export const ROUTE_META: RoutesMeta = {
     CARDS_START_CONFIRM: "/cards/:id/confirm",
     CARDS_STARTED: '/cards/:id/start',
 
+    STATISTICS: '/stats',
+
+    LOG_IN: "/login",
+    ACCOUNT: "/account"
 }
 
 type GetRoute = {
@@ -42,4 +50,9 @@ export const GET_ROUTE: GetRoute = {
     QUIZ_STARTED: (id: number | string) => `/quiz/${id}/start`,
     CARDS_START_CONFIRM: (id: number | string) => `/cards/${id}/confirm`,
     CARDS_STARTED: (id: number | string) => `/cards/${id}/start`,
+
+    STATISTICS: () => '/stats',
+
+    LOG_IN: () => "/login",
+    ACCOUNT: () => '/account'
 }

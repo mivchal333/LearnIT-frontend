@@ -11,6 +11,9 @@ import CardsGameWrapper from "./components/game/cards/CardsGameWrapper";
 import TechnologyDetailsPage from "./components/technologies/details/TechnologyDetailsPage";
 import AddTechnologyPage from "./components/technologies/add/AddTechnologyPage";
 import AppBar from "./components/appbar/AppBar";
+import LoginPage from "./components/account/LoginPage";
+import MyAccountPage from "./components/account/MyAccountPage";
+import StatisticsPage from "./components/statistics/StatisticsPage";
 
 
 type RouteContentType = {
@@ -18,13 +21,19 @@ type RouteContentType = {
 }
 
 const RouteContent: RouteContentType = {
-    CARDS_STARTED: <CardsGameWrapper/>,
     CARDS_START_CONFIRM: <ConfirmStartCards/>,
     QUIZ_STARTED: <QuizGame/>,
     QUIZ_START_CONFIRM: <ConfirmStartQuiz/>,
     TECHNOLOGY_ADD: <AddTechnologyPage/>,
     TECHNOLOGIES: <TechnologiesList/>,
     TECHNOLOGY: <TechnologyDetailsPage/>,
+    CARDS_STARTED: <CardsGameWrapper/>,
+
+    LOG_IN: <LoginPage/>,
+    ACCOUNT: <MyAccountPage/>,
+    STATISTICS: <StatisticsPage/>,
+
+    // default one
     HOME: <HomePage/>
 }
 

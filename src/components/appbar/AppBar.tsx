@@ -1,15 +1,15 @@
 import React from "react";
 import clsx from 'clsx';
-import {makeStyles} from "@material-ui/core";
+import {Button, Container, makeStyles} from "@material-ui/core";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import AppDrawer from "./AppDrawer";
+import AppDrawer from "./drawer/AppDrawer";
+import {GET_ROUTE} from "../../route/routes";
+import {Link} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -57,10 +57,14 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh',
         overflow: 'auto',
     },
+    container: {
+        paddingTop: theme.spacing(4),
+        paddingBottom: theme.spacing(4),
+    },
 }));
 
 interface PropsType {
-    children: React.ReactNode
+    children: any
 }
 
 const AppBarWrapper = (props: PropsType) => {
@@ -86,17 +90,22 @@ const AppBarWrapper = (props: PropsType) => {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         Dashboard
                     </Typography>
-                    <IconButton color="inherit">
-                        <Badge badgeContent={4} color="secondary">
-                            <NotificationsIcon/>
-                        </Badge>
-                    </IconButton>
+                    <Button
+                        className={classes.root}
+                        to={GET_ROUTE.LOG_IN()}
+                        component={Link}
+                        color="inherit"
+                    >
+                        Log in
+                    </Button>
                 </Toolbar>
             </AppBar>
             <AppDrawer isOpen={open} setOpen={setOpen}/>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer}/>
-                {props.children}
+                <Container maxWidth="lg" className={classes.container}>
+                    {props.children}
+                </Container>
             </main>
         </div>
     );
