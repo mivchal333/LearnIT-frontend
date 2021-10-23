@@ -1,19 +1,22 @@
 import React, {ReactNode} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import HomePage from "./components/main/HomePage";
+import HomePage from "./components/pages/main/HomePage";
 import {ROUTE_META, Routes} from "./route/routes";
-import TechnologiesList from "./components/technologies/technologiesList";
-import ConfirmStartQuiz from "./components/game/quiz/ConfirmStartQuiz";
-import QuizGame from "./components/game/quiz/QuizGame";
+import TechnologiesList from "./components/pages/technologies/technologiesList";
+import ConfirmStartQuiz from "./components/pages/game/quiz/ConfirmStartQuiz";
+import QuizGame from "./components/pages/game/quiz/QuizGame";
 import {map} from "lodash-es";
-import ConfirmStartCards from "./components/game/cards/ConfirmStartCards";
-import CardsGameWrapper from "./components/game/cards/CardsGameWrapper";
-import TechnologyDetailsPage from "./components/technologies/details/TechnologyDetailsPage";
-import AddTechnologyPage from "./components/technologies/add/AddTechnologyPage";
+import ConfirmStartCards from "./components/pages/game/cards/ConfirmStartCards";
+import CardsGameWrapper from "./components/pages/game/cards/CardsGameWrapper";
+import TechnologyDetailsPage from "./components/pages/technologies/details/TechnologyDetailsPage";
+import AddTechnologyPage from "./components/pages/technologies/add/AddTechnologyPage";
 import AppBar from "./components/appbar/AppBar";
-import LoginPage from "./components/account/LoginPage";
-import MyAccountPage from "./components/account/MyAccountPage";
-import StatisticsPage from "./components/statistics/StatisticsPage";
+import LoginPage from "./components/pages/account/LoginPage";
+import MyAccountPage from "./components/pages/account/MyAccountPage";
+import StatisticsPage from "./components/pages/statistics/StatisticsPage";
+import StickyFooter from "./components/footer/StickyFooter";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import {makeStyles} from "@material-ui/core";
 
 
 type RouteContentType = {
@@ -37,20 +40,34 @@ const RouteContent: RouteContentType = {
     HOME: <HomePage/>
 }
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+        overflow: 'hidden',
+    },
+}));
+
 const App = () => {
+    const classes = useStyles();
     return (
         <Router>
-            <AppBar>
-                <Switch>
-                    {map(RouteContent, (routeComponent, route: Routes) => {
-                        return (
-                            <Route key={route} path={ROUTE_META[route]} exact>
-                                {routeComponent}
-                            </Route>
-                        )
-                    })}
-                </Switch>
-            </AppBar>
+            <div className={classes.root}>
+                <CssBaseline/>
+                <AppBar>
+                    <Switch>
+                        {map(RouteContent, (routeComponent, route: Routes) => {
+                            return (
+                                <Route key={route} path={ROUTE_META[route]} exact>
+                                    {routeComponent}
+                                </Route>
+                            )
+                        })}
+                    </Switch>
+                </AppBar>
+                <StickyFooter/>
+            </div>
         </Router>
     );
 }

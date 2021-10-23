@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from "axios";
-import {CreateTechnologyPayload} from "../../components/technologies/add/AddTechnologyForm";
 import {Technology} from "../model/Technology.model";
+import {CreateTechnologyPayload} from "../../components/pages/technologies/add/AddTechnologyForm";
 
 const fetchTechnologies = () => axios.get("/technology")
 const fetchTechnology = (id: number) => axios.get(`/technology/${id}`)

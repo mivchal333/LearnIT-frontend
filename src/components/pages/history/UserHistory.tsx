@@ -1,11 +1,11 @@
 import React from "react";
 import {Card, CardContent, List, Typography} from "@material-ui/core";
-import {useSelector} from "../../store/store";
-import {selectUserAttempts} from "../../store/history/history.slice";
-import useLoadHistory from "../../hooks/useLoadHistory";
+import {useSelector} from "../../../store/store";
+import {selectUserAttempts} from "../../../store/history/history.slice";
+import useLoadHistory from "../../../hooks/useLoadHistory";
 import AttemptSection from "./AttemptSection";
 import {isEmpty, map} from "lodash-es";
-import {selectTechnologyContextId} from "../../store/technologies/technologies.slice";
+import {selectTechnologyContextId} from "../../../store/technologies/technologies.slice";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 
 

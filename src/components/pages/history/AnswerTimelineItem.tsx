@@ -1,6 +1,6 @@
 import React from "react";
 import {TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@material-ui/lab";
-import {HistoryEntry} from "../../api/model/historyEntry.model";
+import {HistoryEntry} from "../../../api/model/historyEntry.model";
 import {makeStyles} from "@material-ui/core/styles";
 
 

@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
-import {useDispatch} from "../../store/store";
-import {fetchTechnologies} from "../../store/technologies/actions";
-import {selectTechnologies} from "../../store/technologies/technologies.slice";
+import {useDispatch} from "../../../store/store";
+import {fetchTechnologies} from "../../../store/technologies/actions";
+import {selectTechnologies} from "../../../store/technologies/technologies.slice";
 import {useSelector} from "react-redux";
 import {values} from "lodash-es";
 import TechnologyListItem from "./TechnologyListItem";

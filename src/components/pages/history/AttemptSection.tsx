@@ -3,7 +3,7 @@ import {Accordion, AccordionSummary, ListItem, Typography} from "@material-ui/co
 import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {UserAttempt} from "../../api/model/userAttempt.model";
+import {UserAttempt} from "../../../api/model/userAttempt.model";
 import {Timeline} from "@material-ui/lab";
 import AnswerTimelineItem from "./AnswerTimelineItem";
 

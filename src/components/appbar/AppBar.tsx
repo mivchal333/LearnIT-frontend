@@ -1,7 +1,6 @@
 import React from "react";
 import clsx from 'clsx';
 import {Button, Container, makeStyles} from "@material-ui/core";
-import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -15,7 +14,7 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',
+        display: "flex",
     },
     toolbar: {
         paddingRight: 24, // keep right padding when drawer closed
@@ -54,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     appBarSpacer: theme.mixins.toolbar,
     content: {
         flexGrow: 1,
-        height: '100vh',
+        height: '95vh',
         overflow: 'auto',
     },
     container: {
@@ -75,7 +74,6 @@ const AppBarWrapper = (props: PropsType) => {
     };
     return (
         <div className={classes.root}>
-            <CssBaseline/>
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
                     <IconButton
@@ -91,7 +89,6 @@ const AppBarWrapper = (props: PropsType) => {
                         Dashboard
                     </Typography>
                     <Button
-                        className={classes.root}
                         to={GET_ROUTE.LOG_IN()}
                         component={Link}
                         color="inherit"

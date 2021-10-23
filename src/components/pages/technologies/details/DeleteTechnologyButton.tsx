@@ -3,9 +3,9 @@ import {Button} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {red} from '@material-ui/core/colors';
 import {useDispatch} from "react-redux";
-import {deleteTechnology} from "../../../store/technologies/actions";
 import {useHistory} from "react-router-dom";
-import {GET_ROUTE} from "../../../route/routes";
+import {deleteTechnology} from "../../../../store/technologies/actions";
+import {GET_ROUTE} from "../../../../route/routes";
 
 
 const useStyles = makeStyles({

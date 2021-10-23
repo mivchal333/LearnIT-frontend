@@ -1,10 +1,10 @@
 import React, {ChangeEvent, FormEvent, useState} from "react";
 import {useSelector} from "react-redux";
-import {useDispatch} from "../../../store/store";
-import {submitAnswer} from "../../../store/quiz/actions";
+import {useDispatch} from "../../../../store/store";
+import {submitAnswer} from "../../../../store/quiz/actions";
 import {Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from "@material-ui/core";
 import {isEmpty, toNumber} from "lodash-es";
-import {selectAnswerResult, selectQuestion} from "../../../store/quiz/quiz.slice";
+import {selectAnswerResult, selectQuestion} from "../../../../store/quiz/quiz.slice";
 
 const Question = () => {
     const question = useSelector(selectQuestion);

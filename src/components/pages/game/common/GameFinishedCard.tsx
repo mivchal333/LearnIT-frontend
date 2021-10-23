@@ -2,9 +2,9 @@ import React from "react";
 import MuiAlert from '@material-ui/lab/Alert';
 import {Button} from "@material-ui/core";
 import {useSelector} from "react-redux";
-import {selectTechnologyId} from "../../../store/game/game.slice";
-import {GET_ROUTE} from "../../../route/routes";
 import {Link} from "react-router-dom";
+import {selectTechnologyId} from "../../../../store/game/game.slice";
+import {GET_ROUTE} from "../../../../route/routes";
 
 const GameFinishedCard = () => {
     const technologyId = useSelector(selectTechnologyId);

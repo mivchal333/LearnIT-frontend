@@ -2,12 +2,12 @@ import React, {useState} from "react";
 import {Formik} from 'formik';
 import {Button, Grid, Snackbar, TextField} from "@material-ui/core";
 import {isEmpty} from "lodash-es";
-import {useDispatch} from "../../../store/store";
-import {addTechnology} from "../../../store/technologies/actions";
 import AddIcon from '@material-ui/icons/Add';
 import MuiAlert from '@material-ui/lab/Alert';
-import {GET_ROUTE} from "../../../route/routes";
 import {Link} from "react-router-dom";
+import {GET_ROUTE} from "../../../../route/routes";
+import {useDispatch} from "../../../../store/store";
+import {addTechnology} from "../../../../store/technologies/actions";
 
 export interface CreateTechnologyPayload {
     name: string,

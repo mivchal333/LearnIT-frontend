@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
-import {useDispatch} from "../../../store/store";
 import {CircularProgress, makeStyles, Paper, Typography} from "@material-ui/core";
-import {loadCard, notKnowItAction} from "../../../store/cards/card.actions";
-import {resetCurrentCard, selectCurrentCard, selectIsFlipped, setIsFlipped} from "../../../store/cards/cards.slice";
 import KnownButton from "./KnownButton";
 import NextCardButton from "./NextCardButton";
 import ProgressTracker from "../common/ProgressTracker";
-import {resetGameState, selectIsFinished} from "../../../store/game/game.slice";
 import GameFinishedCard from "../common/GameFinishedCard";
+import {resetCurrentCard, selectCurrentCard, selectIsFlipped, setIsFlipped} from "../../../../store/cards/cards.slice";
+import {resetGameState, selectIsFinished} from "../../../../store/game/game.slice";
+import {useDispatch} from "../../../../store/store";
+import {loadCard, notKnowItAction} from "../../../../store/cards/card.actions";
 
 
 const useStyles = makeStyles((theme: any) => ({

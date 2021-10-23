@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
-import {resetAnswerResult, selectAnswerResult} from "../../../store/quiz/quiz.slice";
-import {useDispatch} from "../../../store/store";
-import {loadNextQuestion, loadQuestion} from "../../../store/quiz/actions";
+import {resetAnswerResult, selectAnswerResult} from "../../../../store/quiz/quiz.slice";
+import {useDispatch} from "../../../../store/store";
+import {loadNextQuestion, loadQuestion} from "../../../../store/quiz/actions";
 import Question from "./Question";
 import {Button} from "@material-ui/core";
-import {selectIsFinished, selectUserAttemptId} from "../../../store/game/game.slice";
+import {selectIsFinished, selectUserAttemptId} from "../../../../store/game/game.slice";
 import SuccessAnswerMessage from "./SuccessAnswerMessage";
 import WrongAnswerMessage from "./WrongAnswerMessage";
 import GameFinishedCard from "../common/GameFinishedCard";

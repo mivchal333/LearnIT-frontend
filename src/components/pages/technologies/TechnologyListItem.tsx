@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Card, CardActions, CardContent, makeStyles, Typography} from "@material-ui/core";
-import {Technology} from "../../api/model/Technology.model";
-import {GET_ROUTE} from "../../route/routes";
+import {Technology} from "../../../api/model/Technology.model";
+import {GET_ROUTE} from "../../../route/routes";
 import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
