@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Formik} from 'formik';
-import {Button, Grid, Snackbar, TextField} from "@material-ui/core";
+import {Button, createStyles, Grid, makeStyles, Snackbar, TextField} from "@material-ui/core";
 import {isEmpty} from "lodash-es";
 import AddIcon from '@material-ui/icons/Add';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -8,6 +8,8 @@ import {Link} from "react-router-dom";
 import {GET_ROUTE} from "../../../../route/routes";
 import {useDispatch} from "../../../../store/store";
 import {addTechnology} from "../../../../store/technologies/actions";
+import {Theme} from "@material-ui/core/styles";
+import ImageField from "./ImageField";
 
 export interface CreateTechnologyPayload {
     name: string,
@@ -19,7 +21,21 @@ interface FormErrorState {
     description?: string,
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            '& > *': {
+                margin: theme.spacing(1),
+            },
+        },
+        nameField: {
+            display: 'flex',
+        }
+    }),
+);
+
 const AddTechnologyForm = () => {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const [showMessage, setShowMessage] = useState(false)
 
@@ -54,29 +70,38 @@ const AddTechnologyForm = () => {
                       isSubmitting,
                   }) => (
                     <form onSubmit={handleSubmit}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} md={12}>
+                        <Grid container spacing={4}>
+                            <Grid item xs={3}>
+                                <ImageField value={"https://source.unsplash.com/random"} onChange={() => {
+                                }}/>
+                            </Grid>
+                            <Grid item xs={6}>
                                 <TextField
+                                    className={classes.nameField}
                                     label="Name"
                                     name="name"
+                                    variant="filled"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.name}
                                     helperText={errors.name}
                                     error={!isEmpty(errors.name)}
+                                    fullWidth
                                 />
                             </Grid>
-                            <Grid item xs={12} md={12}>
+                            <Grid item xs={12}>
                                 <TextField
                                     label="Description"
                                     name="description"
+                                    variant="filled"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.description}
                                     helperText={errors.description}
                                     error={!isEmpty(errors.description)}
                                     multiline
-                                    rows={4}
+                                    minRows={5}
+                                    fullWidth
                                 />
                             </Grid>
                             <Button
