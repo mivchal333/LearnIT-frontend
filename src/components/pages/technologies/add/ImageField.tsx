@@ -8,6 +8,9 @@ import TechnologyRepository from "../../../../api/repository/technologies.reposi
 import {failFlag} from "../../../../service/flag.service";
 import {addFlag} from "../../../../store/page/page.slice";
 import {useDispatch} from "../../../../store/store";
+import {FileUploadedMessage} from "../../../../api/model/fileUploadedMessage.model";
+import {UploadedFile} from "../../../../api/model/uploadedFile.model";
+import {EMPTY_IMAGE_PATH, getStaticImageUrl} from "../../../../service/staticProvider";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -33,10 +36,9 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-
 interface PropsType {
-    value?: string,
-    onChange: (value: string) => void,
+    value?: UploadedFile,
+    onChange: (file: UploadedFile) => void,
     onBlur: FocusEventHandler<HTMLInputElement>,
 }
 
@@ -50,20 +52,22 @@ const ImageField = (props: PropsType) => {
         const file = head(files);
         if (file) {
             try {
-                const imageUrl = await uploadFile(file)
-                props.onChange(imageUrl)
+                const uploadedFile = await uploadFile(file)
+                props.onChange(uploadedFile)
             } catch (e) {
                 dispatch(addFlag(failFlag("Error occurred while uploading")))
             }
         }
     };
 
-    const uploadFile = async (file: File): Promise<string> => {
+    const uploadFile = async (file: File): Promise<FileUploadedMessage> => {
         const formData = new FormData();
         formData.append("file", file)
         const {data} = await TechnologyRepository.uploadImageFile(formData)
-        return data.fileUrl
+        return data
     }
+
+    const imageUrl = props.value?.fileUrl || getStaticImageUrl(EMPTY_IMAGE_PATH)
 
     return (
         <Card
@@ -73,7 +77,7 @@ const ImageField = (props: PropsType) => {
         >
             <CardMedia
                 className={classes.cardMedia}
-                image={props.value}
+                image={imageUrl}
             >
                 {showButton && (
                     <div className={classes.uploadDimmer}>

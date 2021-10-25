@@ -1,4 +1,5 @@
-export interface FileUploadedMessage {
-    message: string,
-    fileUrl: string,
+import {UploadedFile} from "./uploadedFile.model";
+
+export interface FileUploadedMessage extends UploadedFile {
+    message: string
 }

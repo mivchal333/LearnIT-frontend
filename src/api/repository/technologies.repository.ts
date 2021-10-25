@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from "axios";
-import {Technology} from "../model/Technology.model";
-import {CreateTechnologyPayload} from "../../components/pages/technologies/add/AddTechnologyForm";
+import {Technology} from "../model/technology.model";
 import {FileUploadedMessage} from "../model/fileUploadedMessage.model";
+import {CreateTechnologyPayload} from "../../store/technologies/createTechnologyPayload";
 
 const fetchTechnologies = () => axios.get("/technology")
 const fetchTechnology = (id: number) => axios.get(`/technology/${id}`)

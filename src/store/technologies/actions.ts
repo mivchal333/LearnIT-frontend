@@ -2,7 +2,7 @@ import {Dispatch, RootState} from "../store";
 import {selectTechnologyContextId, setTechnologies, setTechnology} from "./technologies.slice";
 import TechnologiesRepository from '../../api/repository/technologies.repository'
 import {AnyAction, ThunkAction} from "@reduxjs/toolkit";
-import {CreateTechnologyPayload} from "../../components/pages/technologies/add/AddTechnologyForm";
+import {CreateTechnologyPayload} from "./createTechnologyPayload";
 
 export const fetchTechnologies = () => async (dispatch: Dispatch) => {
     const {data} = await TechnologiesRepository.fetchTechnologies();

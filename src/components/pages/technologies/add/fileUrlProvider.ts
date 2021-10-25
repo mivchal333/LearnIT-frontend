@@ -1,1 +1,0 @@
-export const getFileUrl = (file?: File): string | null => file ? URL.createObjectURL(file) : null

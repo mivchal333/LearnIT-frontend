@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {Technology} from "../../api/model/Technology.model";
+import {Technology} from "../../api/model/technology.model";
 import {RootState} from "../store";
 import {keyBy} from 'lodash-es'
 
