@@ -17,6 +17,7 @@ import StatisticsPage from "./components/pages/statistics/StatisticsPage";
 import StickyFooter from "./components/footer/StickyFooter";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {makeStyles} from "@material-ui/core";
+import FlagWrapper from "./components/FlagWrapper";
 
 
 type RouteContentType = {
@@ -53,6 +54,7 @@ const App = () => {
     const classes = useStyles();
     return (
         <Router>
+            <FlagWrapper/>
             <div className={classes.root}>
                 <CssBaseline/>
                 <AppBar>

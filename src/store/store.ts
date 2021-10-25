@@ -5,6 +5,7 @@ import quizReducer from './quiz/quiz.slice';
 import gameReducer from './game/game.slice';
 import {cardsReducer} from "./cards/cards.slice";
 import {userHistoryReducer} from "./history/history.slice";
+import {pageReducer} from "./page/page.slice";
 
 const store = configureStore({
     reducer: {
@@ -12,7 +13,8 @@ const store = configureStore({
         quiz: quizReducer,
         game: gameReducer,
         cards: cardsReducer,
-        userHistory: userHistoryReducer
+        userHistory: userHistoryReducer,
+        page: pageReducer
     },
 })
 export type RootState = ReturnType<typeof store.getState>

@@ -14,11 +14,13 @@ import ImageField from "./ImageField";
 export interface CreateTechnologyPayload {
     name: string,
     description: string,
+    imageUrl?: string,
 }
 
 interface FormErrorState {
     name?: string,
     description?: string,
+    imageUrl?: string,
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -54,6 +56,7 @@ const AddTechnologyForm = () => {
                     return errors;
                 }}
                 onSubmit={async (values: CreateTechnologyPayload, {setSubmitting}) => {
+                    console.log(values)
                     await dispatch(addTechnology(values))
                     setSubmitting(false);
                     setShowMessage(true)
@@ -68,12 +71,16 @@ const AddTechnologyForm = () => {
                       handleBlur,
                       handleSubmit,
                       isSubmitting,
+                      setFieldValue
                   }) => (
                     <form onSubmit={handleSubmit}>
                         <Grid container spacing={4}>
                             <Grid item xs={3}>
-                                <ImageField value={"https://source.unsplash.com/random"} onChange={() => {
-                                }}/>
+                                <ImageField
+                                    value={values.imageUrl}
+                                    onChange={(value) => setFieldValue('imageUrl', value)}
+                                    onBlur={handleBlur}
+                                />
                             </Grid>
                             <Grid item xs={6}>
                                 <TextField

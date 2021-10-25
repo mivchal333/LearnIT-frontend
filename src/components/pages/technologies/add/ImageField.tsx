@@ -1,13 +1,20 @@
-import React, {useState} from "react";
+import React, {ChangeEvent, FocusEventHandler, useState} from "react";
 import {Card, CardMedia, createStyles, makeStyles} from "@material-ui/core";
 import {Theme} from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import {head} from "lodash-es";
+import TechnologyRepository from "../../../../api/repository/technologies.repository";
+import {failFlag} from "../../../../service/flag.service";
+import {addFlag} from "../../../../store/page/page.slice";
+import {useDispatch} from "../../../../store/store";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         imageCard: {
             marginRight: theme.spacing(6),
+            width: '200px',
+            height: '200px',
         },
         cardMedia: {
             width: '200px',
@@ -21,21 +28,43 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '100%',
-            width: '100%',
+            height: '200px',
         }
     }),
 );
 
 
 interface PropsType {
-    value: string,
+    value?: string,
     onChange: (value: string) => void,
+    onBlur: FocusEventHandler<HTMLInputElement>,
 }
 
 const ImageField = (props: PropsType) => {
+    const dispatch = useDispatch()
     const classes = useStyles();
     const [showButton, setShowButton] = useState(false)
+
+    const onFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+        const {files = []} = event.target
+        const file = head(files);
+        if (file) {
+            try {
+                const imageUrl = await uploadFile(file)
+                props.onChange(imageUrl)
+            } catch (e) {
+                dispatch(addFlag(failFlag("Error occurred while uploading")))
+            }
+        }
+    };
+
+    const uploadFile = async (file: File): Promise<string> => {
+        const formData = new FormData();
+        formData.append("file", file)
+        const {data} = await TechnologyRepository.uploadImageFile(formData)
+        return data.fileUrl
+    }
+
     return (
         <Card
             className={classes.imageCard}
@@ -44,13 +73,20 @@ const ImageField = (props: PropsType) => {
         >
             <CardMedia
                 className={classes.cardMedia}
-                // image={props.value}
-                image="https://source.unsplash.com/random"
+                image={props.value}
             >
                 {showButton && (
                     <div className={classes.uploadDimmer}>
-                        <input accept="image/*" className={classes.input} id="icon-button-file" type="file"/>
-                        <label htmlFor="icon-button-file">
+                        <input
+                            id="avatar-file-input"
+                            name="image"
+                            accept="image/*"
+                            className={classes.input}
+                            type="file"
+                            onChange={onFileChange}
+                            onBlur={props.onBlur}
+                        />
+                        <label htmlFor="avatar-file-input">
                             <IconButton color="secondary" aria-label="upload picture" component="span" size="medium">
                                 <PhotoCamera/>
                             </IconButton>
@@ -61,4 +97,4 @@ const ImageField = (props: PropsType) => {
         </Card>
     )
 }
-export default React.memo(ImageField)
+export default ImageField
