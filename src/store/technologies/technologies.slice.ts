@@ -12,7 +12,7 @@ interface TechnologiesSlice {
 
 const initialState: TechnologiesSlice = {
     technologies: {},
-    technologyContextId: 0
+    technologyContextId: -1
 }
 
 const technologiesSlice = createSlice({

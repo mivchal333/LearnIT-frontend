@@ -1,7 +1,6 @@
 export interface Flag {
     type: FlagType,
-    title: string,
-    content?: string,
+    content: string,
 }
 
 export enum FlagType {

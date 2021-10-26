@@ -16,13 +16,19 @@ const FlagWrapper = () => {
     return (
         <>
             {map(flags, flag => (
-                <Snackbar open={!isEmpty(flags)} autoHideDuration={6000} onClose={handleClose}>
+                <Snackbar
+                    key={flag.content}
+                    open={!isEmpty(flags)}
+                    autoHideDuration={6000}
+                    onClose={handleClose}
+                    anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                >
                     <Alert
                         variant="filled"
                         severity={flag.type}
                         onClose={handleClose}
                     >
-                        {flag.title}
+                        {flag.content}
                     </Alert>
                 </Snackbar>))
             }

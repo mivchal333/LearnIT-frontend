@@ -41,7 +41,7 @@ const menuListItems: MenuPosition[] = [
 const DrawerMenuItems = () => (
     <List>
         {menuListItems.map(listItem => (
-            <LinkListItem href={listItem.href}>
+            <LinkListItem href={listItem.href} key={listItem.title}>
                 <ListItemIcon>
                     {listItem.icon}
                 </ListItemIcon>

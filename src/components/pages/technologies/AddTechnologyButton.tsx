@@ -1,16 +1,15 @@
 import React from "react";
 import {Button, makeStyles} from "@material-ui/core";
-import {green} from "@material-ui/core/colors";
 import {GET_ROUTE} from "../../../route/routes";
 import {Link} from "react-router-dom";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        color: theme.palette.getContrastText(green[500]),
-        backgroundColor: green[500],
-        '&:hover': {
-            backgroundColor: green[700],
-        },
+        display: "flex",
+        alignSelf: "flex-end",
+        width: "13em",
+        marginLeft: "auto"
     },
 }));
 
@@ -19,10 +18,14 @@ const AddTechnologyButton = () => {
 
     return <Button
         className={classes.root}
+        variant="outlined"
+        color="primary"
         to={GET_ROUTE.TECHNOLOGY_ADD()}
         component={Link}
+        startIcon={<AddIcon/>}
+
     >
-        ADD
+        Create new one
     </Button>
 }
 

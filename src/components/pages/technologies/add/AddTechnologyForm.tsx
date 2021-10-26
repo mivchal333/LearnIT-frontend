@@ -1,7 +1,7 @@
 import React from "react";
 import {Formik} from 'formik';
 import {Button, createStyles, Grid, makeStyles, TextField} from "@material-ui/core";
-import {isEmpty} from "lodash-es";
+import {isEmpty, size} from "lodash-es";
 import AddIcon from '@material-ui/icons/Add';
 import {useDispatch} from "../../../../store/store";
 import {addTechnology} from "../../../../store/technologies/actions";
@@ -9,6 +9,8 @@ import {Theme} from "@material-ui/core/styles";
 import ImageField from "./ImageField";
 import {UploadedFile} from "../../../../api/model/uploadedFile.model";
 import {CreateTechnologyPayload} from "../../../../store/technologies/createTechnologyPayload";
+import {GET_ROUTE} from "../../../../route/routes";
+import {Link, useHistory} from "react-router-dom";
 
 export interface CreateTechnologyForm {
     name: string,
@@ -31,6 +33,10 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         nameField: {
             display: 'flex',
+        },
+        buttons: {
+            display: 'flex',
+            justifyContent: 'flex-end',
         }
     }),
 );
@@ -38,6 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const AddTechnologyForm = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory()
 
     const initialValues: CreateTechnologyForm = {name: '', description: ''}
 
@@ -51,10 +58,11 @@ const AddTechnologyForm = () => {
                         errors.name = 'Required';
                     } else if (isEmpty(values.description))
                         errors.description = 'Required';
+                    else if (size(values.description) > 255)
+                        errors.description = 'Too long';
                     return errors;
                 }}
                 onSubmit={async (values: CreateTechnologyForm, {setSubmitting}) => {
-                    console.log(values)
                     const {name, description, image} = values
 
                     const payload: CreateTechnologyPayload = {
@@ -62,9 +70,12 @@ const AddTechnologyForm = () => {
                         description,
                         image: image?.filename
                     }
-                    await dispatch(addTechnology(payload))
+                    const isSuccess: boolean = await dispatch(addTechnology(payload))
 
                     setSubmitting(false);
+                    if (isSuccess) {
+                        history.push(GET_ROUTE.TECHNOLOGIES())
+                    }
                 }}
             >
                 {({
@@ -88,10 +99,10 @@ const AddTechnologyForm = () => {
                             </Grid>
                             <Grid item xs={6}>
                                 <TextField
+                                    required
                                     className={classes.nameField}
                                     label="Name"
                                     name="name"
-                                    variant="filled"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.name}
@@ -102,9 +113,9 @@ const AddTechnologyForm = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    required
                                     label="Description"
                                     name="description"
-                                    variant="filled"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.description}
@@ -115,12 +126,18 @@ const AddTechnologyForm = () => {
                                     fullWidth
                                 />
                             </Grid>
-                            <Grid item>
+                            <Grid item className={classes.buttons} xs={12}>
                                 <Button
+                                    to={GET_ROUTE.TECHNOLOGIES()}
+                                    component={Link}
+                                >
+                                    Back
+                                </Button>
+                                <Button
+                                    variant="contained"
                                     type="submit"
                                     disabled={isSubmitting}
                                     color="primary"
-                                    variant="outlined"
                                     startIcon={<AddIcon/>}
                                 >
                                     Add

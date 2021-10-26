@@ -14,13 +14,16 @@ const useStyles = makeStyles((theme) => ({
             padding: theme.spacing(3),
         },
     },
+    title: {
+        marginBottom: theme.spacing(3)
+    }
 }));
 
 const AddTechnologyPage = () => {
     const classes = useStyles();
     return <>
         <Paper className={classes.paper}>
-            <Typography component="h1" variant="h4" align="center">
+            <Typography component="h1" variant="h4" align="center" className={classes.title}>
                 Add Technology
             </Typography>
             <div>
