@@ -2,13 +2,13 @@ import React, {useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {isEmpty, toNumber} from "lodash-es";
 import {Button, Card, CardActions, CardContent, CardMedia, makeStyles, Typography} from "@material-ui/core";
-import DeleteTechnologyButton from "./DeleteTechnologyButton";
 import {useDispatch, useSelector} from "../../../../store/store";
 import {selectTechnology, setTechnologyContextId} from "../../../../store/technologies/technologies.slice";
 import {TechnologyRouteParam} from "../../../../route/route.model";
 import {fetchTechnology} from "../../../../store/technologies/actions";
 import {Modal} from "../../../../store/shared/page/modal.model";
 import {showModal} from "../../../../store/shared/page/page.slice";
+import ActionButtonGroup from "./ActionButtonGroup";
 
 
 const useStyles = makeStyles({
@@ -37,10 +37,6 @@ const useStyles = makeStyles({
         marginTop: "auto",
 
     },
-    headerAction: {
-        display: "flex",
-        justifyContent: "end",
-    }
 });
 
 const TechnologyDetails = () => {
@@ -69,7 +65,7 @@ const TechnologyDetails = () => {
 
     return (
         <Card className={classes.root}>
-            <DeleteTechnologyButton className={classes.headerAction}/>
+            <ActionButtonGroup/>
 
             {technology.image && (
                 <CardMedia

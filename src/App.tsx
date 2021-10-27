@@ -17,6 +17,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import {makeStyles} from "@material-ui/core";
 import FlagWrapper from "./components/FlagWrapper";
 import ModalWrapper from "./components/ModalWrapper";
+import AddQuestionPage from "./components/pages/technologies/addQuestion/AddQuestionPage";
 
 
 type RouteContentType = {
@@ -25,9 +26,11 @@ type RouteContentType = {
 
 const RouteContent: RouteContentType = {
     QUIZ_STARTED: <QuizGame/>,
-    TECHNOLOGY_ADD: <AddTechnologyPage/>,
     TECHNOLOGIES: <TechnologiesList/>,
     TECHNOLOGY: <TechnologyDetailsPage/>,
+    TECHNOLOGY_ADD: <AddTechnologyPage/>,
+    TECHNOLOGY_QUESTION_ADD: <AddQuestionPage/>,
+
     CARDS_STARTED: <CardsGameWrapper/>,
 
     LOG_IN: <LoginPage/>,
