@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
 import {isEmpty, toNumber} from "lodash-es";
-import {Button, Card, CardActions, CardContent, makeStyles, Typography} from "@material-ui/core";
+import {Button, Card, CardActions, CardContent, CardMedia, makeStyles, Typography} from "@material-ui/core";
 import DeleteTechnologyButton from "./DeleteTechnologyButton";
 import {useDispatch, useSelector} from "../../../../store/store";
 import {selectTechnology, setTechnologyContextId} from "../../../../store/technologies/technologies.slice";
@@ -12,15 +12,34 @@ import {GET_ROUTE} from "../../../../route/routes";
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: '30em',
+        display: "flex",
+        flexDirection: "column",
+        width: "70vw",
+        height: "80vh",
+        padding: "3em",
     },
     title: {
         fontSize: 14,
     },
-    pos: {
+    description: {
         marginBottom: 12,
+        wordBreak: "break-word"
     },
-    date: {}
+    cardMedia: {
+        width: '300px',
+        height: '300px',
+        display: "flex",
+    },
+    footer: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        marginTop: "auto",
+
+    },
+    headerAction: {
+        display: "flex",
+        justifyContent: "end",
+    }
 });
 
 const TechnologyDetails = () => {
@@ -43,29 +62,29 @@ const TechnologyDetails = () => {
         return <h1>Loading...</h1>
     }
 
-    const createDate = new Date(technology.createDate);
     return (
-        <div className={classes.root}>
-            <Card className={classes.root}>
-                <CardContent>
-                    <Typography variant="h5" component="h2">
-                        {technology.name}
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                        {technology.description}
-                    </Typography>
+        <Card className={classes.root}>
+            <DeleteTechnologyButton className={classes.headerAction}/>
 
-                    <Typography className={classes.date}>
-                        {`Created on ${createDate.toLocaleDateString()} at ${createDate.toLocaleTimeString()}`}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button to={GET_ROUTE.QUIZ_START_CONFIRM(technology.id)} component={Link}>START QUIZ!</Button>
-                    <Button to={GET_ROUTE.CARDS_START_CONFIRM(technology.id)} component={Link}>START CARDS!</Button>
-                    <DeleteTechnologyButton/>
-                </CardActions>
-            </Card>
-        </div>
+            {technology.image && (
+                <CardMedia
+                    className={classes.cardMedia}
+                    image={technology.image?.fileUrl}
+                />
+            )}
+            <CardContent>
+                <Typography variant="h5" component="h2">
+                    {technology.name}
+                </Typography>
+                <Typography className={classes.description} color="textSecondary">
+                    {technology.description}
+                </Typography>
+            </CardContent>
+            <CardActions className={classes.footer}>
+                <Button to={GET_ROUTE.QUIZ_START_CONFIRM(technology.id)} component={Link}>PLAY QUIZ!</Button>
+                <Button to={GET_ROUTE.CARDS_START_CONFIRM(technology.id)} component={Link}>PLAY CARDS!</Button>
+            </CardActions>
+        </Card>
     )
 }
 export default TechnologyDetails

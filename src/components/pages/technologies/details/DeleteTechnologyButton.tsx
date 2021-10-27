@@ -20,7 +20,12 @@ const useStyles = makeStyles({
 
     }
 })
-const DeleteTechnologyButton = () => {
+
+interface PropsType {
+    className?: string,
+}
+
+const DeleteTechnologyButton = (props: PropsType) => {
     const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
@@ -31,12 +36,14 @@ const DeleteTechnologyButton = () => {
     }
 
     return (
-        <Button
-            className={classes.root}
-            onClick={onClick}
-        >
-            Delete
-        </Button>
+        <div className={props.className}>
+            <Button
+                className={classes.root}
+                onClick={onClick}
+            >
+                Delete
+            </Button>
+        </div>
     )
 }
 export default DeleteTechnologyButton;
