@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch, useSelector} from "../store/store";
-import {dismissFlag, selectFlags} from "../store/page/page.slice";
+import {dismissFlag, selectFlags} from "../store/shared/page/page.slice";
 import {isEmpty, map} from "lodash-es";
 import {Snackbar} from "@material-ui/core";
 import {Alert} from "@material-ui/lab";

@@ -2,10 +2,10 @@ import {configureStore} from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useDispatch as useOriginalDispatch, useSelector as useReduxDispatch} from "react-redux";
 import technologiesReducer from './technologies/technologies.slice'
 import quizReducer from './quiz/quiz.slice';
-import gameReducer from './game/game.slice';
+import gameReducer from './shared/game/game.slice';
 import {cardsReducer} from "./cards/cards.slice";
 import {userHistoryReducer} from "./history/history.slice";
-import {pageReducer} from "./page/page.slice";
+import {pageReducer} from "./shared/page/page.slice";
 
 const store = configureStore({
     reducer: {

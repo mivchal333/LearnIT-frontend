@@ -1,7 +1,7 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {selectProgress} from "../../../../store/game/game.slice";
 import {Chip} from "@material-ui/core";
+import {selectProgress} from "../../../../store/shared/game/game.slice";
 
 const ProgressTracker = () => {
     const progress = useSelector(selectProgress);

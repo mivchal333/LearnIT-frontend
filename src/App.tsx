@@ -3,10 +3,8 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import HomePage from "./components/pages/main/HomePage";
 import {ROUTE_META, Routes} from "./route/routes";
 import TechnologiesList from "./components/pages/technologies/technologiesList";
-import ConfirmStartQuiz from "./components/pages/game/quiz/ConfirmStartQuiz";
 import QuizGame from "./components/pages/game/quiz/QuizGame";
 import {map} from "lodash-es";
-import ConfirmStartCards from "./components/pages/game/cards/ConfirmStartCards";
 import CardsGameWrapper from "./components/pages/game/cards/CardsGameWrapper";
 import TechnologyDetailsPage from "./components/pages/technologies/details/TechnologyDetailsPage";
 import AddTechnologyPage from "./components/pages/technologies/add/AddTechnologyPage";
@@ -18,6 +16,7 @@ import StickyFooter from "./components/footer/StickyFooter";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {makeStyles} from "@material-ui/core";
 import FlagWrapper from "./components/FlagWrapper";
+import ModalWrapper from "./components/ModalWrapper";
 
 
 type RouteContentType = {
@@ -25,9 +24,7 @@ type RouteContentType = {
 }
 
 const RouteContent: RouteContentType = {
-    CARDS_START_CONFIRM: <ConfirmStartCards/>,
     QUIZ_STARTED: <QuizGame/>,
-    QUIZ_START_CONFIRM: <ConfirmStartQuiz/>,
     TECHNOLOGY_ADD: <AddTechnologyPage/>,
     TECHNOLOGIES: <TechnologiesList/>,
     TECHNOLOGY: <TechnologyDetailsPage/>,
@@ -55,6 +52,7 @@ const App = () => {
     return (
         <Router>
             <FlagWrapper/>
+            <ModalWrapper/>
             <div className={classes.root}>
                 <CssBaseline/>
                 <AppBar>

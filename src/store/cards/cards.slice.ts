@@ -3,12 +3,19 @@ import {RootState} from "../store";
 import {Card} from "../../api/model/card.model";
 
 interface CardsSlice {
-    currentCard: Card | null,
+    currentCard: Card,
     isFlipped: boolean,
 }
 
+const emptyCard = {
+    answer: {
+        id: 0,
+        body: ""
+    },
+    body: " a "
+};
 const initialState: CardsSlice = {
-    currentCard: null,
+    currentCard: emptyCard,
     isFlipped: false,
 }
 
@@ -20,7 +27,7 @@ const cardsSlice = createSlice({
             state.currentCard = action.payload;
         },
         resetCurrentCard: (state) => {
-            state.currentCard = null
+            state.currentCard = emptyCard
         },
         setIsFlipped: (state, action: PayloadAction<boolean>) => {
             state.isFlipped = action.payload;

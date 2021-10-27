@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {RootState} from "../store";
+import {RootState} from "../../store";
 
 interface ProgressType {
     actual: number,
@@ -13,6 +13,7 @@ interface GameSlice {
         progress: ProgressType,
         isFinished: boolean,
     }
+    isLoading: boolean,
 }
 
 const initialState: GameSlice = {
@@ -24,7 +25,8 @@ const initialState: GameSlice = {
             total: 0,
         },
         isFinished: false,
-    }
+    },
+    isLoading: false
 }
 
 const gameSlice = createSlice({
@@ -48,6 +50,9 @@ const gameSlice = createSlice({
             state.gameState.isFinished = false
             state.gameState.progress.actual = 0
             state.gameState.progress.total = 0
+        },
+        setIsLoading: (state, action: PayloadAction<boolean>) => {
+            state.isLoading = action.payload
         }
     }
 })
@@ -57,11 +62,13 @@ export const {
     setProgress,
     finishGame,
     resetGameState,
+    setIsLoading,
 } = gameSlice.actions
 
 export const selectUserAttemptId = (state: RootState) => state.game.gameState.userAttemptId
 export const selectProgress = (state: RootState) => state.game.gameState.progress
 export const selectIsFinished = (state: RootState) => state.game.gameState.isFinished
 export const selectTechnologyId = (state: RootState) => state.game.technologyId
+export const selectIsLoading = (state: RootState) => state.game.isLoading
 
 export default gameSlice.reducer;

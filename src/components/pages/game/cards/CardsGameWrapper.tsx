@@ -6,9 +6,11 @@ import NextCardButton from "./NextCardButton";
 import ProgressTracker from "../common/ProgressTracker";
 import GameFinishedCard from "../common/GameFinishedCard";
 import {resetCurrentCard, selectCurrentCard, selectIsFlipped, setIsFlipped} from "../../../../store/cards/cards.slice";
-import {resetGameState, selectIsFinished} from "../../../../store/game/game.slice";
 import {useDispatch} from "../../../../store/store";
 import {loadCard, notKnowItAction} from "../../../../store/cards/card.actions";
+import {resetGameState, selectIsFinished, selectIsLoading} from "../../../../store/shared/game/game.slice";
+import {useTechnologyContext} from "./useTechnologyContext";
+import {useRequireUserAttempt} from "./useRequireUserAttempt";
 
 
 const useStyles = makeStyles((theme: any) => ({
@@ -33,11 +35,15 @@ const useStyles = makeStyles((theme: any) => ({
 
 const CardsGameWrapper = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const card = useSelector(selectCurrentCard);
+    const isLoading = useSelector(selectIsLoading);
     const isFlipped = useSelector(selectIsFlipped);
     const isFinished = useSelector(selectIsFinished);
 
-    const dispatch = useDispatch();
+    useTechnologyContext()
+    useRequireUserAttempt()
+
     const [isAnswerShowed, setIsAnswerShowed] = useState(false)
     useEffect(() => {
         dispatch(loadCard())
@@ -45,7 +51,7 @@ const CardsGameWrapper = () => {
             dispatch(resetCurrentCard())
             dispatch(resetGameState())
         }
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         setIsAnswerShowed(false)
@@ -62,12 +68,13 @@ const CardsGameWrapper = () => {
     }
 
 
-    if (!card) {
+    if (isLoading) {
         return <CircularProgress/>
     }
     if (isFinished) {
         return <GameFinishedCard/>
     }
+
 
     return (
         <div>

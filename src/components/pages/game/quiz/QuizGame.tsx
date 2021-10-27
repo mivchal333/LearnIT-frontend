@@ -5,11 +5,11 @@ import {useDispatch} from "../../../../store/store";
 import {loadNextQuestion, loadQuestion} from "../../../../store/quiz/actions";
 import Question from "./Question";
 import {Button} from "@material-ui/core";
-import {selectIsFinished, selectUserAttemptId} from "../../../../store/game/game.slice";
 import SuccessAnswerMessage from "./SuccessAnswerMessage";
 import WrongAnswerMessage from "./WrongAnswerMessage";
 import GameFinishedCard from "../common/GameFinishedCard";
 import ProgressTracker from "../common/ProgressTracker";
+import {selectIsFinished, selectUserAttemptId} from "../../../../store/shared/game/game.slice";
 
 const QuizGame = () => {
     const userAttemptId = useSelector(selectUserAttemptId)

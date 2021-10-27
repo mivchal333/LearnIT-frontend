@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {isEmpty, toNumber} from "lodash-es";
 import {Button, Card, CardActions, CardContent, CardMedia, makeStyles, Typography} from "@material-ui/core";
 import DeleteTechnologyButton from "./DeleteTechnologyButton";
@@ -7,7 +7,8 @@ import {useDispatch, useSelector} from "../../../../store/store";
 import {selectTechnology, setTechnologyContextId} from "../../../../store/technologies/technologies.slice";
 import {TechnologyRouteParam} from "../../../../route/route.model";
 import {fetchTechnology} from "../../../../store/technologies/actions";
-import {GET_ROUTE} from "../../../../route/routes";
+import {Modal} from "../../../../store/shared/page/modal.model";
+import {showModal} from "../../../../store/shared/page/page.slice";
 
 
 const useStyles = makeStyles({
@@ -62,6 +63,10 @@ const TechnologyDetails = () => {
         return <h1>Loading...</h1>
     }
 
+    const showConfirm = (modal: Modal) => {
+        dispatch(showModal(modal))
+    }
+
     return (
         <Card className={classes.root}>
             <DeleteTechnologyButton className={classes.headerAction}/>
@@ -81,8 +86,8 @@ const TechnologyDetails = () => {
                 </Typography>
             </CardContent>
             <CardActions className={classes.footer}>
-                <Button to={GET_ROUTE.QUIZ_START_CONFIRM(technology.id)} component={Link}>PLAY QUIZ!</Button>
-                <Button to={GET_ROUTE.CARDS_START_CONFIRM(technology.id)} component={Link}>PLAY CARDS!</Button>
+                <Button onClick={() => showConfirm(Modal.START_QUIZ)}>PLAY QUIZ!</Button>
+                <Button onClick={() => showConfirm(Modal.START_CARDS)}>PLAY CARDS!</Button>
             </CardActions>
         </Card>
     )

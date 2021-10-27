@@ -3,8 +3,8 @@ import {selectTechnologyContextId, setTechnologies, setTechnology} from "./techn
 import TechnologiesRepository from '../../api/repository/technologies.repository'
 import {AnyAction, ThunkAction} from "@reduxjs/toolkit";
 import {CreateTechnologyPayload} from "./createTechnologyPayload";
-import {addFlag} from "../page/page.slice";
-import {failFlag, successFlag} from "../../service/flag.service";
+import {addFlag} from "../shared/page/page.slice";
+import {errorFlag, successFlag} from "../../service/flag.service";
 
 export const fetchTechnologies = () => async (dispatch: Dispatch) => {
     const {data} = await TechnologiesRepository.fetchTechnologies();
@@ -26,7 +26,7 @@ export const addTechnology = (values: CreateTechnologyPayload): ThunkAction<Prom
         return true;
     } catch (e) {
         console.log(e)
-        dispatch(addFlag(failFlag("Cannot add technology")))
+        dispatch(addFlag(errorFlag("Cannot add technology")))
         return false;
     }
 }

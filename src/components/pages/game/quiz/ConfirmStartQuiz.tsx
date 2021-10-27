@@ -5,8 +5,8 @@ import {toNumber} from "lodash-es";
 import {Button} from "@material-ui/core";
 import {GET_ROUTE} from "../../../../route/routes";
 import {startAttempt} from "../../../../store/quiz/actions";
-import {setTechnologyId} from "../../../../store/game/game.slice";
 import {StartGameRouteParam} from "../../../../route/route.model";
+import {setTechnologyId} from "../../../../store/shared/game/game.slice";
 
 const ConfirmStartQuiz = () => {
     const {id} = useParams<StartGameRouteParam>()

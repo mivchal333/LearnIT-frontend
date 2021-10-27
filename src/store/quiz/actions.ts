@@ -9,14 +9,14 @@ import {
     selectUserAttemptId,
     setProgress,
     setUserAttemptId
-} from "../game/game.slice";
+} from "../shared/game/game.slice";
 import {resetAnswerResult, setAnswerResult, setQuestion} from "./quiz.slice";
 
 export const startAttempt = (technologyId: number) => async (dispatch: Dispatch) => {
     dispatch(resetGameState())
     const {data} = await AttemptRepository.startAttempt(technologyId)
 
-    dispatch(setUserAttemptId(data.id))
+    await dispatch(setUserAttemptId(data.id))
 }
 
 export const loadQuestion = (): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch, getState) => {

@@ -1,12 +1,15 @@
 import {AnyAction, ThunkAction} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import CardsRepository from '../../api/repository/cards.repository'
-import {finishGame, selectProgress, selectUserAttemptId, setProgress} from "../game/game.slice";
 import {selectCurrentCard, setCurrentCard} from "./cards.slice";
 import QuestionRepository from "../../api/repository/questions.repository";
+import {errorFlag} from "../../service/flag.service";
+import {addFlag} from "../shared/page/page.slice";
+import {finishGame, selectProgress, selectUserAttemptId, setIsLoading, setProgress} from "../shared/game/game.slice";
 
 
 export const loadCard = (): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
+    dispatch(setIsLoading(true))
     const progress = selectProgress(getState());
     if (progress.actual === progress.total - 1) {
         dispatch(finishGame())
@@ -14,13 +17,16 @@ export const loadCard = (): ThunkAction<void, RootState, undefined, AnyAction> =
     }
 
     const userAttemptId = selectUserAttemptId(getState());
-    if (userAttemptId) {
-        const {data: {actual, total, entry}} = await CardsRepository.loadCard(userAttemptId)
 
+    try {
+        const {data: {actual, total, entry}} = await CardsRepository.loadCard(userAttemptId)
         dispatch(setCurrentCard(entry))
         dispatch(setProgress({actual, total}))
-    } else {
-        console.error("Not found user attempt ID!")
+        dispatch(setIsLoading(false))
+    } catch (e) {
+        console.error(e)
+        dispatch(addFlag(errorFlag("Cannot load card!")))
+        dispatch(setIsLoading(false))
     }
 }
 
