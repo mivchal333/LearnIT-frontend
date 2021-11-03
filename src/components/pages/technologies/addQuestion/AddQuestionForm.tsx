@@ -10,6 +10,7 @@ import {GET_ROUTE} from "../../../../route/routes";
 import {Link, useHistory} from "react-router-dom";
 import {selectTechnologyContextId} from "../../../../store/technologies/technologies.slice";
 import {useTechnologyContext} from "../../game/cards/useTechnologyContext";
+import DifficultySliderInput from "./DifficultySliderInput";
 
 export type CreateQuestionForm = {
     body: string,
@@ -73,7 +74,6 @@ const AddQuestionForm = () => {
                     return errors;
                 }}
                 onSubmit={async (values: CreateQuestionForm, {setSubmitting}) => {
-                    console.log('ala')
                     const isSuccess = await dispatch(addQuestion(values))
 
                     setSubmitting(false);
@@ -89,12 +89,17 @@ const AddQuestionForm = () => {
                       handleChange,
                       handleBlur,
                       handleSubmit,
-                      isSubmitting
+                      isSubmitting,
+                      setFieldValue
                   }) => (
                     <form onSubmit={handleSubmit}>
                         <Grid container spacing={4}>
                             <Grid item xs={6}>
-                                {/*// TODO difficulty field!*/}
+
+                                <DifficultySliderInput
+                                    value={values.difficulty}
+                                    onChange={(value) => setFieldValue("difficulty", value)}
+                                />
                                 <TextField
                                     required
                                     className={classes.nameField}
