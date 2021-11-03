@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, makeStyles} from "@material-ui/core";
-import {GET_ROUTE} from "../../../route/routes";
+import {GET_ROUTE} from "../../../../route/routes";
 import {Link} from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 

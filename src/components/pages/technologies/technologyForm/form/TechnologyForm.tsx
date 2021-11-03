@@ -4,10 +4,9 @@ import {Button, createStyles, Grid, makeStyles, TextField} from "@material-ui/co
 import {isEmpty, size} from "lodash-es";
 import AddIcon from '@material-ui/icons/Add';
 import {Theme} from "@material-ui/core/styles";
-import ImageField from "./ImageField";
-import {UploadedFile} from "../../../../api/model/uploadedFile.model";
-import {GET_ROUTE} from "../../../../route/routes";
-import {Link} from "react-router-dom";
+import ImageField from "./field/ImageField";
+import {UploadedFile} from "../../../../../api/model/uploadedFile.model";
+import {useHistory} from "react-router-dom";
 import {FormikHelpers} from "formik/dist/types";
 
 export interface TechnologyFormPayload {
@@ -46,8 +45,9 @@ interface PropsType {
     onSubmit: (values: TechnologyFormPayload, formikHelpers: FormikHelpers<TechnologyFormPayload>) => void | Promise<any>,
 }
 
-const AddTechnologyForm = (props: PropsType) => {
+const TechnologyForm = (props: PropsType) => {
     const classes = useStyles();
+    const history = useHistory()
 
     const {initialValues = initialFormState} = props
 
@@ -95,7 +95,6 @@ const AddTechnologyForm = (props: PropsType) => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.name}
-                                    helperText={errors.name}
                                     error={touched.name && !isEmpty(errors.name)}
                                     fullWidth
                                 />
@@ -108,7 +107,6 @@ const AddTechnologyForm = (props: PropsType) => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.description}
-                                    helperText={errors.description}
                                     error={touched.description && !isEmpty(errors.description)}
                                     multiline
                                     minRows={5}
@@ -117,8 +115,7 @@ const AddTechnologyForm = (props: PropsType) => {
                             </Grid>
                             <Grid item className={classes.buttons} xs={12}>
                                 <Button
-                                    to={GET_ROUTE.TECHNOLOGIES()}
-                                    component={Link}
+                                    onClick={() => history.goBack()}
                                 >
                                     Back
                                 </Button>
@@ -139,4 +136,4 @@ const AddTechnologyForm = (props: PropsType) => {
         </>
     )
 }
-export default AddTechnologyForm
+export default TechnologyForm

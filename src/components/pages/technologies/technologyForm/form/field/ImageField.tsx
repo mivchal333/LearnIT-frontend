@@ -4,13 +4,13 @@ import {Theme} from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import {head} from "lodash-es";
-import TechnologyRepository from "../../../../api/repository/technologies.repository";
-import {errorFlag} from "../../../../service/flag.service";
-import {useDispatch} from "../../../../store/store";
-import {FileUploadedMessage} from "../../../../api/model/fileUploadedMessage.model";
-import {UploadedFile} from "../../../../api/model/uploadedFile.model";
-import {EMPTY_IMAGE_PATH, getStaticImageUrl} from "../../../../service/staticProvider";
-import {addFlag} from "../../../../store/shared/page/page.slice";
+import TechnologyRepository from "../../../../../../api/repository/technologies.repository";
+import {errorFlag} from "../../../../../../service/flag.service";
+import {useDispatch} from "../../../../../../store/store";
+import {FileUploadedMessage} from "../../../../../../api/model/fileUploadedMessage.model";
+import {UploadedFile} from "../../../../../../api/model/uploadedFile.model";
+import {EMPTY_IMAGE_PATH, getStaticImageUrl} from "../../../../../../service/staticProvider";
+import {addFlag} from "../../../../../../store/shared/page/page.slice";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

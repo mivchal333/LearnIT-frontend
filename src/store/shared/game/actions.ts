@@ -4,7 +4,7 @@ import {AnyAction, ThunkAction} from "@reduxjs/toolkit";
 import QuestionRepository from '../../../api/repository/questions.repository'
 import {selectUserAttemptId, setUserAttemptId} from "./game.slice";
 import {resetAnswerResult, setAnswerResult} from "../../quiz/quiz.slice";
-import {loadQuestion} from "../../quiz/actions";
+import {loadQuestion} from "../../quiz/quiz.actions";
 
 export const startAttempt = (technologyId: number) => async (dispatch: Dispatch) => {
     const {data} = await AttemptRepository.startAttempt(technologyId)

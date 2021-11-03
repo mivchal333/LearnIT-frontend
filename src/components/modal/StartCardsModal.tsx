@@ -7,7 +7,7 @@ import {useHistory} from "react-router-dom";
 import {GET_ROUTE} from "../../route/routes";
 import {Theme} from "@material-ui/core/styles";
 import {selectTechnologyContextId} from "../../store/technologies/technologies.slice";
-import {startAttempt} from "../../store/quiz/actions";
+import {startAttempt} from "../../store/quiz/quiz.actions";
 import {toNumber} from "lodash-es";
 import {errorFlag} from "../../service/flag.service";
 import {addFlag, closeModal} from "../../store/shared/page/page.slice";

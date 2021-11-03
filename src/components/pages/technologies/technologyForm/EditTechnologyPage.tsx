@@ -1,13 +1,15 @@
 import React from "react";
-import {Paper, Typography} from "@material-ui/core";
+import {CircularProgress, Paper, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
-import AddTechnologyForm, {TechnologyFormPayload} from "./AddTechnologyForm";
-import {FormikHelpers} from "formik/dist/types";
+import TechnologyForm, {TechnologyFormPayload} from "./form/TechnologyForm";
+import {useTechnologyContext} from "../../game/cards/useTechnologyContext";
+import {Technology} from "../../../../api/model/technology.model";
 import {TechnologyDataPayload} from "../../../../api/model/technologyDataPayload";
-import {useDispatch} from "../../../../store/store";
-import {addTechnology} from "../../../../store/technologies/actions";
+import {editTechnology} from "../../../../store/technologies/actions";
 import {GET_ROUTE} from "../../../../route/routes";
 import {useHistory} from "react-router-dom";
+import {useDispatch} from "../../../../store/store";
+import {FormikHelpers} from "formik/dist/types";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -25,10 +27,17 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const AddTechnologyPage = () => {
+const EditTechnologyPage = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
-    const history = useHistory();
+    const [technology, technologyId] = useTechnologyContext()
+    const history = useHistory()
+    const dispatch = useDispatch()
+
+    const mapToFormValues = (technology: Technology) => ({
+        name: technology.name,
+        description: technology.description,
+        image: technology.image,
+    })
 
     const onSubmit = async (values: TechnologyFormPayload, {setSubmitting}: FormikHelpers<TechnologyFormPayload>) => {
         const {name, description, image} = values
@@ -39,22 +48,25 @@ const AddTechnologyPage = () => {
             description,
             image: image?.filename
         }
-        const result = await dispatch(addTechnology(payload))
+        const isSuccess: boolean = await dispatch(editTechnology(payload))
 
         setSubmitting(false);
-        if (result) {
-            history.push(GET_ROUTE.TECHNOLOGY(result.id))
+        if (isSuccess) {
+            history.push(GET_ROUTE.TECHNOLOGY(technologyId))
         }
     }
     return <>
         <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center" className={classes.title}>
-                Add Technology
+                Edit Technology
             </Typography>
             <div>
-                <AddTechnologyForm onSubmit={onSubmit}/>
+                {technology
+                    ? <TechnologyForm initialValues={mapToFormValues(technology)} onSubmit={onSubmit}/>
+                    : <CircularProgress/>
+                }
             </div>
         </Paper>
     </>
 }
-export default AddTechnologyPage
+export default EditTechnologyPage

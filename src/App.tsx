@@ -2,12 +2,12 @@ import React, {ReactNode} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import HomePage from "./components/pages/main/HomePage";
 import {ROUTE_META, Routes} from "./route/routes";
-import TechnologiesList from "./components/pages/technologies/technologiesList";
+import TechnologiesList from "./components/pages/technologies/list/technologiesList";
 import QuizGame from "./components/pages/game/quiz/QuizGame";
 import {map} from "lodash-es";
 import CardsGameWrapper from "./components/pages/game/cards/CardsGameWrapper";
 import TechnologyDetailsPage from "./components/pages/technologies/details/TechnologyDetailsPage";
-import AddTechnologyPage from "./components/pages/technologies/addForm/AddTechnologyPage";
+import AddTechnologyPage from "./components/pages/technologies/technologyForm/AddTechnologyPage";
 import AppBar from "./components/appbar/AppBar";
 import LoginPage from "./components/pages/account/LoginPage";
 import MyAccountPage from "./components/pages/account/MyAccountPage";
@@ -18,7 +18,7 @@ import {makeStyles} from "@material-ui/core";
 import FlagWrapper from "./components/FlagWrapper";
 import ModalWrapper from "./components/ModalWrapper";
 import AddQuestionPage from "./components/pages/technologies/addQuestion/AddQuestionPage";
-import EditTechnologyPage from "./components/pages/technologies/editForm/EditTechnologyPage";
+import EditTechnologyPage from "./components/pages/technologies/technologyForm/EditTechnologyPage";
 
 
 type RouteContentType = {

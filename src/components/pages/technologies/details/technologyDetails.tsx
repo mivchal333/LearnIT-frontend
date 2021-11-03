@@ -9,7 +9,9 @@ import {fetchTechnology} from "../../../../store/technologies/actions";
 import {Modal} from "../../../../store/shared/page/modal.model";
 import {showModal} from "../../../../store/shared/page/page.slice";
 import ActionButtonGroup from "./ActionButtonGroup";
-
+import Chip from '@material-ui/core/Chip';
+import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 
 const useStyles = makeStyles({
     root: {
@@ -80,11 +82,17 @@ const TechnologyDetails = () => {
                 <Typography className={classes.description} color="textSecondary">
                     {technology.description}
                 </Typography>
+                <Chip label={`${technology.questionCount} Questions`}/>
+
             </CardContent>
-            <CardActions className={classes.footer}>
-                <Button onClick={() => showConfirm(Modal.START_QUIZ)}>PLAY QUIZ!</Button>
-                <Button onClick={() => showConfirm(Modal.START_CARDS)}>PLAY CARDS!</Button>
-            </CardActions>
+            {technology.questionCount > 0 && (
+                <CardActions className={classes.footer}>
+                    <Button onClick={() => showConfirm(Modal.START_QUIZ)} startIcon={<RadioButtonCheckedIcon/>}>PLAY
+                        QUIZ!</Button>
+                    <Button onClick={() => showConfirm(Modal.START_CARDS)} startIcon={<ViewCarouselIcon/>}>PLAY
+                        CARDS!</Button>
+                </CardActions>
+            )}
         </Card>
     )
 }

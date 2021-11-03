@@ -123,7 +123,6 @@ const AddQuestionForm = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.body}
-                                    helperText={errors.body}
                                     isError={touched.body && !isEmpty(errors.body)}
                                 />
                             </Grid>
@@ -140,7 +139,6 @@ const AddQuestionForm = () => {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.correctAnswer}
-                                            helperText={errors.correctAnswer}
                                             error={touched.correctAnswer && !isEmpty(errors.correctAnswer)}
                                             fullWidth
                                             multiline
@@ -161,7 +159,6 @@ const AddQuestionForm = () => {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.badAnswer1}
-                                            helperText={errors.badAnswer1}
                                             error={touched.badAnswer1 && !isEmpty(errors.badAnswer1)}
                                             multiline
                                             fullWidth
@@ -182,7 +179,6 @@ const AddQuestionForm = () => {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.badAnswer2}
-                                            helperText={errors.badAnswer2}
                                             error={touched.badAnswer2 && !isEmpty(errors.badAnswer2)}
                                             multiline
                                             fullWidth
@@ -203,7 +199,6 @@ const AddQuestionForm = () => {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.badAnswer3}
-                                            helperText={errors.badAnswer3}
                                             error={touched.badAnswer3 && !isEmpty(errors.badAnswer3)}
                                             multiline
                                             fullWidth

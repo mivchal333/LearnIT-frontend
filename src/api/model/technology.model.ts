@@ -4,5 +4,6 @@ export interface Technology {
     id: number,
     name: string,
     description: string,
-    image: UploadedFile
+    image: UploadedFile,
+    questionCount: number,
 }
