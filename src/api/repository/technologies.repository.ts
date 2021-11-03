@@ -1,11 +1,17 @@
 import axios, {AxiosResponse} from "axios";
 import {Technology} from "../model/technology.model";
 import {FileUploadedMessage} from "../model/fileUploadedMessage.model";
-import {CreateTechnologyPayload} from "../../store/technologies/createTechnologyPayload";
+import {TechnologyDataPayload} from "../model/technologyDataPayload";
 
 const fetchTechnologies = () => axios.get("/technology")
+
 const fetchTechnology = (id: number) => axios.get(`/technology/${id}`)
-const createTechnology = (technologyPayload: CreateTechnologyPayload): Promise<AxiosResponse<Technology>> => axios.post(`/technology`, technologyPayload)
+
+const createTechnology = (technologyPayload: TechnologyDataPayload): Promise<AxiosResponse<Technology>> => axios.post(`/technology`, technologyPayload)
+
+const editTechnology = (id: number, technologyPayload: TechnologyDataPayload): Promise<AxiosResponse<Technology>> => axios
+    .put(`/technology/${id}`, technologyPayload)
+
 const remove = (technologyId: number): Promise<AxiosResponse<void>> => axios.delete(`/technology/${technologyId}`,)
 
 const uploadImageFile = (formData: FormData): Promise<AxiosResponse<FileUploadedMessage>> => axios.post('/upload', formData, {
@@ -14,5 +20,12 @@ const uploadImageFile = (formData: FormData): Promise<AxiosResponse<FileUploaded
     }
 })
 
-const TechnologyRepository = {fetchTechnologies, fetchTechnology, createTechnology, remove, uploadImageFile};
+const TechnologyRepository = {
+    fetchTechnologies,
+    fetchTechnology,
+    createTechnology,
+    remove,
+    uploadImageFile,
+    editTechnology
+};
 export default TechnologyRepository

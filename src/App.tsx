@@ -7,7 +7,7 @@ import QuizGame from "./components/pages/game/quiz/QuizGame";
 import {map} from "lodash-es";
 import CardsGameWrapper from "./components/pages/game/cards/CardsGameWrapper";
 import TechnologyDetailsPage from "./components/pages/technologies/details/TechnologyDetailsPage";
-import AddTechnologyPage from "./components/pages/technologies/add/AddTechnologyPage";
+import AddTechnologyPage from "./components/pages/technologies/addForm/AddTechnologyPage";
 import AppBar from "./components/appbar/AppBar";
 import LoginPage from "./components/pages/account/LoginPage";
 import MyAccountPage from "./components/pages/account/MyAccountPage";
@@ -18,6 +18,7 @@ import {makeStyles} from "@material-ui/core";
 import FlagWrapper from "./components/FlagWrapper";
 import ModalWrapper from "./components/ModalWrapper";
 import AddQuestionPage from "./components/pages/technologies/addQuestion/AddQuestionPage";
+import EditTechnologyPage from "./components/pages/technologies/editForm/EditTechnologyPage";
 
 
 type RouteContentType = {
@@ -29,6 +30,7 @@ const RouteContent: RouteContentType = {
     TECHNOLOGIES: <TechnologiesList/>,
     TECHNOLOGY: <TechnologyDetailsPage/>,
     TECHNOLOGY_ADD: <AddTechnologyPage/>,
+    TECHNOLOGY_EDIT: <EditTechnologyPage/>,
     TECHNOLOGY_QUESTION_ADD: <AddQuestionPage/>,
 
     CARDS_STARTED: <CardsGameWrapper/>,

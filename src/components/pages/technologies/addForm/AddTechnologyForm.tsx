@@ -3,16 +3,14 @@ import {Formik} from 'formik';
 import {Button, createStyles, Grid, makeStyles, TextField} from "@material-ui/core";
 import {isEmpty, size} from "lodash-es";
 import AddIcon from '@material-ui/icons/Add';
-import {useDispatch} from "../../../../store/store";
-import {addTechnology} from "../../../../store/technologies/actions";
 import {Theme} from "@material-ui/core/styles";
 import ImageField from "./ImageField";
 import {UploadedFile} from "../../../../api/model/uploadedFile.model";
-import {CreateTechnologyPayload} from "../../../../store/technologies/createTechnologyPayload";
 import {GET_ROUTE} from "../../../../route/routes";
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
+import {FormikHelpers} from "formik/dist/types";
 
-export interface CreateTechnologyForm {
+export interface TechnologyFormPayload {
     name: string,
     description: string,
     image?: UploadedFile,
@@ -41,18 +39,23 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const AddTechnologyForm = () => {
-    const classes = useStyles();
-    const dispatch = useDispatch();
-    const history = useHistory()
+export const initialFormState = {name: '', description: ''};
 
-    const initialValues: CreateTechnologyForm = {name: '', description: ''}
+interface PropsType {
+    initialValues?: TechnologyFormPayload,
+    onSubmit: (values: TechnologyFormPayload, formikHelpers: FormikHelpers<TechnologyFormPayload>) => void | Promise<any>,
+}
+
+const AddTechnologyForm = (props: PropsType) => {
+    const classes = useStyles();
+
+    const {initialValues = initialFormState} = props
 
     return (
         <>
             <Formik
                 initialValues={initialValues}
-                validate={(values: CreateTechnologyForm) => {
+                validate={(values: TechnologyFormPayload) => {
                     const errors: FormErrorState = {};
                     if (isEmpty(values.name)) {
                         errors.name = 'Required';
@@ -62,21 +65,7 @@ const AddTechnologyForm = () => {
                         errors.description = 'Too long';
                     return errors;
                 }}
-                onSubmit={async (values: CreateTechnologyForm, {setSubmitting}) => {
-                    const {name, description, image} = values
-
-                    const payload: CreateTechnologyPayload = {
-                        name,
-                        description,
-                        image: image?.filename
-                    }
-                    const isSuccess: boolean = await dispatch(addTechnology(payload))
-
-                    setSubmitting(false);
-                    if (isSuccess) {
-                        history.push(GET_ROUTE.TECHNOLOGIES())
-                    }
-                }}
+                onSubmit={props.onSubmit}
             >
                 {({
                       values,

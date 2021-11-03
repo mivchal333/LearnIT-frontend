@@ -2,11 +2,12 @@ import {Dispatch, RootState} from "../store";
 import {selectTechnologyContextId, setTechnologies, setTechnology} from "./technologies.slice";
 import TechnologiesRepository from '../../api/repository/technologies.repository'
 import {AnyAction, ThunkAction} from "@reduxjs/toolkit";
-import {CreateTechnologyPayload} from "./createTechnologyPayload";
+import {TechnologyDataPayload} from "../../api/model/technologyDataPayload";
 import {addFlag} from "../shared/page/page.slice";
 import {errorFlag, successFlag} from "../../service/flag.service";
 import {CreateQuestionForm} from "../../components/pages/technologies/addQuestion/AddQuestionForm";
 import {QuestionService} from "../../service/question.service";
+import {Technology} from "../../api/model/technology.model";
 
 export const fetchTechnologies = () => async (dispatch: Dispatch) => {
     const {data} = await TechnologiesRepository.fetchTechnologies();
@@ -19,16 +20,31 @@ export const fetchTechnology = (id: number) => async (dispatch: Dispatch) => {
 }
 
 
-export const addTechnology = (values: CreateTechnologyPayload): ThunkAction<Promise<boolean>, RootState, unknown, AnyAction> => async (dispatch, getState) => {
+export const addTechnology = (values: TechnologyDataPayload): ThunkAction<Promise<Technology | false>, RootState, unknown, AnyAction> => async (dispatch) => {
     try {
         const {data} = await TechnologiesRepository.createTechnology(values)
 
         dispatch(setTechnology(data))
         dispatch(addFlag(successFlag("Technology saved successfully.")))
-        return true;
+        return data;
     } catch (e) {
         console.log(e)
         dispatch(addFlag(errorFlag("Cannot add technology")))
+        return false;
+    }
+}
+
+export const editTechnology = (values: TechnologyDataPayload): ThunkAction<Promise<boolean>, RootState, unknown, AnyAction> => async (dispatch, getState) => {
+    try {
+        const technologyId = selectTechnologyContextId(getState());
+        const {data} = await TechnologiesRepository.editTechnology(technologyId, values)
+
+        dispatch(setTechnology(data))
+        dispatch(addFlag(successFlag("Technology edited successfully.")))
+        return true;
+    } catch (e) {
+        console.log(e)
+        dispatch(addFlag(errorFlag("Cannot edit technology")))
         return false;
     }
 }

@@ -7,6 +7,10 @@ import {Link, useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {deleteTechnology} from "../../../../store/technologies/actions";
 import {red} from "@material-ui/core/colors";
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 const useStyles = makeStyles({
     headerAction: {
@@ -47,12 +51,22 @@ const ActionButtonGroup = (props: PropsType) => {
                 to={GET_ROUTE.TECHNOLOGY_QUESTION_ADD(technologyId)}
                 component={Link}
                 variant="outlined"
+                startIcon={<AddIcon/>}
             >
                 Add Question
             </Button>
             <Button
+                to={GET_ROUTE.TECHNOLOGY_EDIT(technologyId)}
+                component={Link}
+                variant="outlined"
+                startIcon={<EditIcon/>}
+            >
+                Edit
+            </Button>
+            <Button
                 className={classes.deleteButton}
                 onClick={onDeleteClick}
+                startIcon={<DeleteIcon/>}
             >
                 Delete
             </Button>

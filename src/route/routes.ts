@@ -5,6 +5,7 @@ export enum Routes {
     TECHNOLOGIES = 'TECHNOLOGIES',
     TECHNOLOGY = 'TECHNOLOGY',
     TECHNOLOGY_ADD = 'TECHNOLOGY_ADD',
+    TECHNOLOGY_EDIT = 'TECHNOLOGY_EDIT',
     TECHNOLOGY_QUESTION_ADD = 'TECHNOLOGY_QUESTION_ADD',
 
     QUIZ_STARTED = 'QUIZ_STARTED',
@@ -28,6 +29,7 @@ export const ROUTE_META: RoutesMeta = {
     TECHNOLOGIES: "/technology",
     TECHNOLOGY: `/technology/${IdParamPath}`,
     TECHNOLOGY_ADD: '/technology/add',
+    TECHNOLOGY_EDIT: '/technology/:id/edit',
     TECHNOLOGY_QUESTION_ADD: `/technology/${IdParamPath}/add`,
 
     QUIZ_STARTED: `/quiz/${IdParamPath}/start`,
@@ -48,6 +50,7 @@ export const GET_ROUTE: GetRoute = {
     TECHNOLOGIES: () => "/technology",
     TECHNOLOGY: (id: ReactText) => `/technology/${id}`,
     TECHNOLOGY_ADD: () => '/technology/add',
+    TECHNOLOGY_EDIT: (id: ReactText) => `/technology/${id}/edit`,
     TECHNOLOGY_QUESTION_ADD: (id: ReactText) => `/technology/${id}/add`,
 
     QUIZ_STARTED: (id: ReactText) => `/quiz/${id}/start`,
