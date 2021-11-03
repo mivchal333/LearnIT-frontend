@@ -10,11 +10,15 @@ import {GET_ROUTE} from "../../../../route/routes";
 import {Link, useHistory} from "react-router-dom";
 import {selectTechnologyContextId} from "../../../../store/technologies/technologies.slice";
 import {useTechnologyContext} from "../../game/cards/useTechnologyContext";
-import DifficultySliderInput from "./DifficultySliderInput";
+import DifficultySliderInput from "./inputs/DifficultySliderInput";
+import MultilineText from "./inputs/MultilineText";
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import {FormikHelpers} from "formik/dist/types";
 
 export type CreateQuestionForm = {
     body: string,
-    difficulty: number,
+    difficultyValue: number,
     correctAnswer: string,
     badAnswer1: string,
     badAnswer2: string,
@@ -38,6 +42,12 @@ const useStyles = makeStyles((theme: Theme) =>
         buttons: {
             display: 'flex',
             justifyContent: 'flex-end',
+        },
+        tickIcon: {
+            color: theme.palette.success.main,
+        },
+        wrongIcon: {
+            color: theme.palette.error.main,
         }
     }),
 );
@@ -50,37 +60,41 @@ const AddQuestionForm = () => {
     useTechnologyContext()
 
     const initialValues: CreateQuestionForm = {
-        body: "", correctAnswer: "", difficulty: 0, badAnswer1: "", badAnswer2: "", badAnswer3: ""
+        body: "", correctAnswer: "", difficultyValue: 1, badAnswer1: "", badAnswer2: "", badAnswer3: ""
     }
 
+    const validateFields = (values: CreateQuestionForm) => {
+        const errors: FormErrorState = {};
+        if (isEmpty(values.body)) {
+            errors.body = 'Required';
+        } else if (!values.difficultyValue)
+            errors.difficultyValue = 'Required';
+        else if (isEmpty(values.correctAnswer))
+            errors.correctAnswer = 'Required';
+        else if (isEmpty(values.badAnswer1))
+            errors.badAnswer1 = 'Required';
+        else if (isEmpty(values.badAnswer2))
+            errors.badAnswer2 = 'Required';
+        else if (isEmpty(values.badAnswer3))
+            errors.badAnswer3 = 'Required';
+        return errors;
+    };
+
+    const onSubmit = async (values: CreateQuestionForm, {setSubmitting}: FormikHelpers<CreateQuestionForm>) => {
+        console.log('submit')
+        const isSuccess = await dispatch(addQuestion(values))
+
+        setSubmitting(false);
+        if (isSuccess) {
+            history.push(GET_ROUTE.TECHNOLOGY(technologyId))
+        }
+    };
     return (
         <>
             <Formik
                 initialValues={initialValues}
-                validate={(values: CreateQuestionForm) => {
-                    const errors: FormErrorState = {};
-                    if (isEmpty(values.body)) {
-                        errors.body = 'Required';
-                    } else if (isEmpty(values.difficulty))
-                        errors.difficulty = 'Required';
-                    else if (isEmpty(values.correctAnswer))
-                        errors.correctAnswer = 'Required';
-                    else if (isEmpty(values.badAnswer1))
-                        errors.badAnswer1 = 'Required';
-                    else if (isEmpty(values.badAnswer2))
-                        errors.badAnswer2 = 'Required';
-                    else if (isEmpty(values.badAnswer3))
-                        errors.badAnswer3 = 'Required';
-                    return errors;
-                }}
-                onSubmit={async (values: CreateQuestionForm, {setSubmitting}) => {
-                    const isSuccess = await dispatch(addQuestion(values))
-
-                    setSubmitting(false);
-                    if (isSuccess) {
-                        history.push(GET_ROUTE.TECHNOLOGY(technologyId))
-                    }
-                }}
+                validate={validateFields}
+                onSubmit={onSubmit}
             >
                 {({
                       values,
@@ -94,76 +108,108 @@ const AddQuestionForm = () => {
                   }) => (
                     <form onSubmit={handleSubmit}>
                         <Grid container spacing={4}>
-                            <Grid item xs={6}>
-
+                            <Grid item xs={12}>
                                 <DifficultySliderInput
-                                    value={values.difficulty}
-                                    onChange={(value) => setFieldValue("difficulty", value)}
+                                    value={values.difficultyValue}
+                                    onChange={(value) => setFieldValue("difficultyValue", value)}
                                 />
-                                <TextField
-                                    required
-                                    className={classes.nameField}
+                            </Grid>
+                            <Grid item xs={12}>
+                                <MultilineText
                                     label="Body"
                                     name="body"
+                                    required
+                                    className={classes.nameField}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.body}
                                     helperText={errors.body}
-                                    error={touched.body && !isEmpty(errors.body)}
-                                    fullWidth
+                                    isError={touched.body && !isEmpty(errors.body)}
                                 />
                             </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    label="Correct answer"
-                                    name="correctAnswer"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.correctAnswer}
-                                    helperText={errors.correctAnswer}
-                                    error={touched.correctAnswer && !isEmpty(errors.correctAnswer)}
-                                    fullWidth
-                                />
+                            <Grid item xs={8}>
+                                <Grid container spacing={4} alignItems="center">
+                                    <Grid item xs={1}>
+                                        <CheckCircleIcon className={classes.tickIcon}/>
+                                    </Grid>
+                                    <Grid item xs={11}>
+                                        <TextField
+                                            required
+                                            label="Correct answer"
+                                            name="correctAnswer"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.correctAnswer}
+                                            helperText={errors.correctAnswer}
+                                            error={touched.correctAnswer && !isEmpty(errors.correctAnswer)}
+                                            fullWidth
+                                            multiline
+                                        />
+                                    </Grid>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    label="Bad answer (1)"
-                                    name="badAnswer1"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.badAnswer1}
-                                    helperText={errors.badAnswer1}
-                                    error={touched.badAnswer1 && !isEmpty(errors.badAnswer1)}
-                                    fullWidth
-                                />
+                            <Grid item xs={8}>
+                                <Grid container spacing={4} alignItems="center">
+                                    <Grid item xs={1}>
+                                        <HighlightOffIcon className={classes.wrongIcon}/>
+                                    </Grid>
+                                    <Grid item xs={11}>
+                                        <TextField
+                                            required
+                                            label="Bad answer"
+                                            name="badAnswer1"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.badAnswer1}
+                                            helperText={errors.badAnswer1}
+                                            error={touched.badAnswer1 && !isEmpty(errors.badAnswer1)}
+                                            multiline
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    label="Bad answer (2)"
-                                    name="badAnswer2"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.badAnswer2}
-                                    helperText={errors.badAnswer2}
-                                    error={touched.badAnswer2 && !isEmpty(errors.badAnswer2)}
-                                    fullWidth
-                                />
+                            <Grid item xs={8}>
+                                <Grid container spacing={4} alignItems="center">
+                                    <Grid item xs={1}>
+                                        <HighlightOffIcon className={classes.wrongIcon}/>
+                                    </Grid>
+                                    <Grid item xs={11}>
+                                        <TextField
+                                            required
+                                            label="Bad answer"
+                                            name="badAnswer2"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.badAnswer2}
+                                            helperText={errors.badAnswer2}
+                                            error={touched.badAnswer2 && !isEmpty(errors.badAnswer2)}
+                                            multiline
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    label="Bad answer (3)"
-                                    name="badAnswer3"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.badAnswer3}
-                                    helperText={errors.badAnswer3}
-                                    error={touched.badAnswer3 && !isEmpty(errors.badAnswer3)}
-                                    fullWidth
-                                />
+                            <Grid item xs={8}>
+                                <Grid container spacing={4} alignItems="center">
+                                    <Grid item xs={1}>
+                                        <HighlightOffIcon className={classes.wrongIcon}/>
+                                    </Grid>
+                                    <Grid item xs={11}>
+                                        <TextField
+                                            required
+                                            label="Bad answer"
+                                            name="badAnswer3"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.badAnswer3}
+                                            helperText={errors.badAnswer3}
+                                            error={touched.badAnswer3 && !isEmpty(errors.badAnswer3)}
+                                            multiline
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                </Grid>
                             </Grid>
                             <Grid item className={classes.buttons} xs={12}>
                                 <Button

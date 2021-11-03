@@ -1,7 +1,7 @@
 export interface CreateQuestionModel {
     body: string,
     technologyId: number,
-    difficulty: number,
+    difficultyValue: number,
     correctAnswer: string,
     badAnswers: string[],
 }
