@@ -7,10 +7,18 @@ import {useSelector} from "react-redux";
 import {selectAnswerResult} from "../../../../store/quiz/quiz.slice";
 import {useDispatch} from "../../../../store/store";
 import {isNil} from "lodash-es";
+import {selectHasNext} from "../../../../store/shared/game/game.slice";
+import GameFinishedMessage from "./GameFinishedMessage";
+import {useHistory} from "react-router-dom";
+import {useRequireUserAttempt} from "../../../../hooks/useRequireUserAttempt";
+import {GET_ROUTE} from "../../../../route/routes";
 
 const AnswerResult = () => {
     const answerResult = useSelector(selectAnswerResult)
+    const hasNext = useSelector(selectHasNext)
+    const history = useHistory()
     let dispatch = useDispatch();
+    const attemptId: string = useRequireUserAttempt()
 
 
     if (isNil(answerResult)) {
@@ -24,13 +32,31 @@ const AnswerResult = () => {
                     ? <SuccessAnswerMessage/>
                     : <WrongAnswerMessage/>}
             </Grid>
-            <Grid item>
-                <Button
-                    variant="outlined"
-                    onClick={() => dispatch(loadNextQuestionAction())}
-                >
-                    Next Question
-                </Button>
+            <Grid item xs={6}>
+                {hasNext
+                    ? (
+                        <Button
+                            variant="outlined"
+                            onClick={() => dispatch(loadNextQuestionAction())}
+                        >
+                            Next Question
+                        </Button>
+                    )
+                    : (
+                        <Grid container spacing={4} direction="column">
+                            <Grid item>
+                                <GameFinishedMessage/>
+                            </Grid>
+                            <Grid item>
+                                <Button
+                                    variant="outlined"
+                                    onClick={() => history.push(GET_ROUTE.GAME_ATTEMPT_SUMMARY(attemptId))}
+                                >
+                                    View summary
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    )}
             </Grid>
         </Grid>
     )

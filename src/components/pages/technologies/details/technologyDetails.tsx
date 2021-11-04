@@ -22,13 +22,9 @@ import Chip from '@material-ui/core/Chip';
 import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
-        display: "flex",
-        flexDirection: "column",
-        width: "70vw",
-        height: "80vh",
-        padding: "3em",
+        padding: theme.spacing(4),
     },
     title: {
         fontSize: 14,
@@ -48,7 +44,7 @@ const useStyles = makeStyles({
         marginTop: "auto",
 
     },
-});
+}));
 
 const TechnologyDetails = () => {
     const classes = useStyles();

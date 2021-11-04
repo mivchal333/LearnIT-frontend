@@ -10,6 +10,7 @@ export enum Routes {
 
     QUIZ_STARTED = 'QUIZ_STARTED',
     CARDS_STARTED = 'CARDS_STARTED',
+    GAME_ATTEMPT_SUMMARY = 'GAME_ATTEMPT_SUMMARY',
 
     STATISTICS = 'STATISTICS',
 
@@ -22,21 +23,22 @@ type RoutesMeta = {
 }
 
 const NumberRegex = "[^\\\\d+$]"
-const IdParamPath = `:id(${NumberRegex})`
+const IdNumberParamPath = `:id(${NumberRegex})`
 
 export const ROUTE_META: RoutesMeta = {
     HOME: "",
     TECHNOLOGIES: "/technology",
-    TECHNOLOGY: `/technology/${IdParamPath}`,
+    TECHNOLOGY: `/technology/${IdNumberParamPath}`,
     TECHNOLOGY_ADD: '/technology/add',
     TECHNOLOGY_EDIT: '/technology/:id/edit',
-    TECHNOLOGY_QUESTION_ADD: `/technology/${IdParamPath}/add`,
+    TECHNOLOGY_QUESTION_ADD: `/technology/${IdNumberParamPath}/add`,
 
-    QUIZ_STARTED: `/quiz/${IdParamPath}/start`,
+    QUIZ_STARTED: `/quiz/${IdNumberParamPath}/start`,
 
-    CARDS_STARTED: `/cards/${IdParamPath}/start`,
+    CARDS_STARTED: `/cards/${IdNumberParamPath}/start`,
 
     STATISTICS: '/stats',
+    GAME_ATTEMPT_SUMMARY: `/attempt/:id`,
 
     LOG_IN: "/login",
     ACCOUNT: "/account"
@@ -57,6 +59,7 @@ export const GET_ROUTE: GetRoute = {
     CARDS_STARTED: (id: ReactText) => `/cards/${id}/start`,
 
     STATISTICS: () => '/stats',
+    GAME_ATTEMPT_SUMMARY: (id: string) => `/attempt/${id}`,
 
     LOG_IN: () => "/login",
     ACCOUNT: () => '/account'

@@ -5,16 +5,11 @@ import {selectCurrentCard, setCurrentCard} from "./cards.slice";
 import QuestionRepository from "../../api/repository/questions.repository";
 import {errorFlag} from "../../service/flag.service";
 import {addFlag} from "../shared/page/page.slice";
-import {finishGame, selectProgress, selectUserAttemptId, setIsLoading, setProgress} from "../shared/game/game.slice";
+import {selectUserAttemptId, setIsLoading, setProgress} from "../shared/game/game.slice";
 
 
 export const loadCard = (): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
     dispatch(setIsLoading(true))
-    const progress = selectProgress(getState());
-    if (progress.actual === progress.total - 1) {
-        dispatch(finishGame())
-        return;
-    }
 
     const userAttemptId = selectUserAttemptId(getState());
 

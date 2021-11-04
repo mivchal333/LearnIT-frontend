@@ -4,11 +4,10 @@ import {CircularProgress, makeStyles, Paper, Typography} from "@material-ui/core
 import KnownButton from "./KnownButton";
 import NextCardButton from "./NextCardButton";
 import ProgressTracker from "../common/ProgressTracker";
-import GameFinishedCard from "../common/GameFinishedCard";
 import {resetCurrentCard, selectCurrentCard, selectIsFlipped, setIsFlipped} from "../../../../store/cards/cards.slice";
 import {useDispatch} from "../../../../store/store";
 import {loadCard, notKnowItAction} from "../../../../store/cards/card.actions";
-import {resetGameState, selectIsFinished, selectIsLoading} from "../../../../store/shared/game/game.slice";
+import {resetGameState, selectIsLoading} from "../../../../store/shared/game/game.slice";
 import {useTechnologyPathContext} from "./useTechnologyPathContext";
 import {useRequireUserAttempt} from "../../../../hooks/useRequireUserAttempt";
 
@@ -39,7 +38,6 @@ const CardsGameWrapper = () => {
     const card = useSelector(selectCurrentCard);
     const isLoading = useSelector(selectIsLoading);
     const isFlipped = useSelector(selectIsFlipped);
-    const isFinished = useSelector(selectIsFinished);
 
     useTechnologyPathContext()
     useRequireUserAttempt()
@@ -71,10 +69,6 @@ const CardsGameWrapper = () => {
     if (isLoading) {
         return <CircularProgress/>
     }
-    if (isFinished) {
-        return <GameFinishedCard/>
-    }
-
 
     return (
         <div>

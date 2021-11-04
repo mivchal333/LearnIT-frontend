@@ -14,4 +14,5 @@ export const useRequireUserAttempt = () => {
             history.push(GET_ROUTE.HOME())
         }
     }, [history, userAttemptId])
+    return userAttemptId
 }

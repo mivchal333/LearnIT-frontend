@@ -1,16 +1,15 @@
 import React from "react";
 import MuiAlert from "@material-ui/lab/Alert";
 
-const SuccessAnswerMessage = () => {
+const GameFinishedMessage = () => {
 
     return (
         <MuiAlert
-            variant="filled"
             severity="success"
         >
-            Success! Correct answer
+            Game finished
         </MuiAlert>
 
     )
 }
-export default SuccessAnswerMessage
+export default GameFinishedMessage

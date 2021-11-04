@@ -19,6 +19,7 @@ import FlagWrapper from "./components/FlagWrapper";
 import ModalWrapper from "./components/ModalWrapper";
 import AddQuestionPage from "./components/pages/technologies/addQuestion/AddQuestionPage";
 import EditTechnologyPage from "./components/pages/technologies/technologyForm/EditTechnologyPage";
+import GameAttemptSummaryPage from "./components/pages/attempt/GameAttemptSummaryPage";
 
 
 type RouteContentType = {
@@ -37,7 +38,9 @@ const RouteContent: RouteContentType = {
 
     LOG_IN: <LoginPage/>,
     ACCOUNT: <MyAccountPage/>,
+
     STATISTICS: <StatisticsPage/>,
+    GAME_ATTEMPT_SUMMARY: <GameAttemptSummaryPage/>,
 
     // default one
     HOME: <HomePage/>

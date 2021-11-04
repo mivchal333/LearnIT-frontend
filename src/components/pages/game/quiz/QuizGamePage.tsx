@@ -5,9 +5,8 @@ import {useDispatch} from "../../../../store/store";
 import {loadQuestion} from "../../../../store/quiz/quiz.actions";
 import AnswerButtons from "./ActionButtons";
 import {CircularProgress, Grid, Paper, Typography} from "@material-ui/core";
-import GameFinishedCard from "../common/GameFinishedCard";
 import ProgressTracker from "../common/ProgressTracker";
-import {resetGameState, selectIsFinished} from "../../../../store/shared/game/game.slice";
+import {resetGameState} from "../../../../store/shared/game/game.slice";
 import {makeStyles} from "@material-ui/core/styles";
 import {useTechnologyContext} from "../../../../hooks/useTechnologyContext";
 import {isNil} from "lodash-es";
@@ -37,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
 
 const QuizGamePage = () => {
     const classes = useStyles();
-    const isFinished = useSelector(selectIsFinished)
     const question = useSelector(selectQuestion);
     let dispatch = useDispatch();
 
@@ -54,9 +52,6 @@ const QuizGamePage = () => {
     }, [])
 
 
-    if (isFinished) {
-        return <GameFinishedCard/>
-    }
     if (isNil(question)) {
         return <CircularProgress/>
     }

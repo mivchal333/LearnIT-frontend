@@ -5,7 +5,7 @@ const WrongAnswerMessage = () => {
 
     return (
         <MuiAlert
-            elevation={6}
+            elevation={2}
             variant="filled"
             severity="error"
         >

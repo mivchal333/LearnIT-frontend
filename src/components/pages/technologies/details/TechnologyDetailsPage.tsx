@@ -1,7 +1,7 @@
 import React from "react";
 import UserHistory from "../../history/UserHistory";
 import TechnologyDetails from "./technologyDetails";
-import {makeStyles} from "@material-ui/core";
+import {Grid, makeStyles} from "@material-ui/core";
 
 
 const useStyles = makeStyles({
@@ -15,10 +15,14 @@ const TechnologyDetailsPage = () => {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
-            <TechnologyDetails/>
-            <UserHistory/>
-        </div>
+        <Grid container justifyContent="space-between" spacing={5}>
+            <Grid item xs={8}>
+                <TechnologyDetails/>
+            </Grid>
+            <Grid item xs={4}>
+                <UserHistory/>
+            </Grid>
+        </Grid>
     )
 }
 export default TechnologyDetailsPage
