@@ -64,6 +64,7 @@ const StartQuizModal = () => {
                     <Button
                         startIcon={<PlayArrowIcon/>}
                         onClick={onSubmit}
+                        variant="outlined"
                     >
                         Play
                     </Button>

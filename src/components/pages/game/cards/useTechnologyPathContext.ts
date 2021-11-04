@@ -8,7 +8,7 @@ import {useEffect, useState} from "react";
 import {fetchTechnology} from "../../../../store/technologies/actions";
 import {Technology} from "../../../../api/model/technology.model";
 
-export const useTechnologyContext = (): [Technology, number] => {
+export const useTechnologyPathContext = (): [Technology | null, number] => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [isFetching, setIsFetching] = useState(false)

@@ -1,7 +1,16 @@
 import React, {useEffect} from "react";
 import {useParams} from "react-router-dom";
-import {isEmpty, toNumber} from "lodash-es";
-import {Button, Card, CardActions, CardContent, CardMedia, makeStyles, Typography} from "@material-ui/core";
+import {isEmpty, isNil, toNumber} from "lodash-es";
+import {
+    Button,
+    Card,
+    CardActions,
+    CardContent,
+    CardMedia,
+    CircularProgress,
+    makeStyles,
+    Typography
+} from "@material-ui/core";
 import {useDispatch, useSelector} from "../../../../store/store";
 import {selectTechnology, setTechnologyContextId} from "../../../../store/technologies/technologies.slice";
 import {TechnologyRouteParam} from "../../../../route/route.model";
@@ -57,8 +66,8 @@ const TechnologyDetails = () => {
         }
     }, [technologyId, technology])
 
-    if (isEmpty(technology)) {
-        return <h1>Loading...</h1>
+    if (isNil(technology)) {
+        return <CircularProgress/>
     }
 
     const showConfirm = (modal: Modal) => {

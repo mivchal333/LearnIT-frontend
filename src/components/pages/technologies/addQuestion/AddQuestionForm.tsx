@@ -9,7 +9,7 @@ import {Theme} from "@material-ui/core/styles";
 import {GET_ROUTE} from "../../../../route/routes";
 import {Link, useHistory} from "react-router-dom";
 import {selectTechnologyContextId} from "../../../../store/technologies/technologies.slice";
-import {useTechnologyContext} from "../../game/cards/useTechnologyContext";
+import {useTechnologyPathContext} from "../../game/cards/useTechnologyPathContext";
 import DifficultySliderInput from "./inputs/DifficultySliderInput";
 import MultilineText from "./inputs/MultilineText";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
@@ -57,7 +57,7 @@ const AddQuestionForm = () => {
     const dispatch = useDispatch();
     const history = useHistory()
     const technologyId = useSelector(selectTechnologyContextId);
-    useTechnologyContext()
+    useTechnologyPathContext()
 
     const initialValues: CreateQuestionForm = {
         body: "", correctAnswer: "", difficultyValue: 1, badAnswer1: "", badAnswer2: "", badAnswer3: ""

@@ -10,7 +10,7 @@ import {
     setProgress,
     setUserAttemptId
 } from "../shared/game/game.slice";
-import {resetAnswerResult, setAnswerResult, setQuestion} from "./quiz.slice";
+import {resetActualQuestion, setAnswerResult, setQuestion} from "./quiz.slice";
 
 export const startAttempt = (technologyId: number) => async (dispatch: Dispatch) => {
     dispatch(resetGameState())
@@ -20,6 +20,7 @@ export const startAttempt = (technologyId: number) => async (dispatch: Dispatch)
 }
 
 export const loadQuestion = (): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch, getState) => {
+    dispatch(resetActualQuestion())
     const progress = selectProgress(getState());
     if (progress.actual === progress.total - 1) {
         dispatch(finishGame())
@@ -42,8 +43,8 @@ export const submitAnswer = (answerId: number): ThunkAction<void, RootState, und
     dispatch(setAnswerResult(data))
 }
 
-export const loadNextQuestion = (): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
-    dispatch(resetAnswerResult())
+export const loadNextQuestionAction = (): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
+    dispatch(resetActualQuestion())
 
     dispatch(loadQuestion())
 }

@@ -21,6 +21,6 @@ export const {
     setUserAttempts
 } = userHistorySlice.actions
 
-export const selectUserAttempts = (state: RootState, technologyId: number) => state.userHistory[technologyId]
+export const selectUserAttempts = (state: RootState, technologyId: number | null) => technologyId ? state.userHistory[technologyId] : []
 
 export const userHistoryReducer = userHistorySlice.reducer;

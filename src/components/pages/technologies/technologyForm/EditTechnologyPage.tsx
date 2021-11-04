@@ -2,7 +2,7 @@ import React from "react";
 import {CircularProgress, Paper, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import TechnologyForm, {TechnologyFormPayload} from "./form/TechnologyForm";
-import {useTechnologyContext} from "../../game/cards/useTechnologyContext";
+import {useTechnologyPathContext} from "../../game/cards/useTechnologyPathContext";
 import {Technology} from "../../../../api/model/technology.model";
 import {TechnologyDataPayload} from "../../../../api/model/technologyDataPayload";
 import {editTechnology} from "../../../../store/technologies/actions";
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const EditTechnologyPage = () => {
     const classes = useStyles();
-    const [technology, technologyId] = useTechnologyContext()
+    const [technology, technologyId] = useTechnologyPathContext()
     const history = useHistory()
     const dispatch = useDispatch()
 

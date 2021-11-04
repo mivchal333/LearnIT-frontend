@@ -37,6 +37,7 @@ export const addTechnology = (values: TechnologyDataPayload): ThunkAction<Promis
 export const editTechnology = (values: TechnologyDataPayload): ThunkAction<Promise<boolean>, RootState, unknown, AnyAction> => async (dispatch, getState) => {
     try {
         const technologyId = selectTechnologyContextId(getState());
+
         const {data} = await TechnologiesRepository.editTechnology(technologyId, values)
 
         dispatch(setTechnology(data))

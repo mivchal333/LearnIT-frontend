@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import HomePage from "./components/pages/main/HomePage";
 import {ROUTE_META, Routes} from "./route/routes";
 import TechnologiesList from "./components/pages/technologies/list/technologiesList";
-import QuizGame from "./components/pages/game/quiz/QuizGame";
+import QuizGamePage from "./components/pages/game/quiz/QuizGamePage";
 import {map} from "lodash-es";
 import CardsGameWrapper from "./components/pages/game/cards/CardsGameWrapper";
 import TechnologyDetailsPage from "./components/pages/technologies/details/TechnologyDetailsPage";
@@ -26,7 +26,7 @@ type RouteContentType = {
 }
 
 const RouteContent: RouteContentType = {
-    QUIZ_STARTED: <QuizGame/>,
+    QUIZ_STARTED: <QuizGamePage/>,
     TECHNOLOGIES: <TechnologiesList/>,
     TECHNOLOGY: <TechnologyDetailsPage/>,
     TECHNOLOGY_ADD: <AddTechnologyPage/>,

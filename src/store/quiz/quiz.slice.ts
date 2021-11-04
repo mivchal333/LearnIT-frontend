@@ -5,19 +5,13 @@ import {Question} from "../../api/model/Question.model";
 
 interface QuizSlice {
     answerResult: AnswerResult | null,
-    question: Question,
+    question: Question | null,
 
 }
 
 const initialState: QuizSlice = {
     answerResult: null,
-    question: {
-        id: 0,
-        body: "",
-        difficultyId: 0,
-        technologyId: 0,
-        answers: []
-    }
+    question: null,
 }
 
 const quizSlice = createSlice({
@@ -27,8 +21,9 @@ const quizSlice = createSlice({
         setAnswerResult: (state, action: PayloadAction<AnswerResult>) => {
             state.answerResult = action.payload
         },
-        resetAnswerResult: (state) => {
-            state.answerResult = null
+        resetActualQuestion: (state) => {
+            state.answerResult = null;
+            state.question = null;
         },
         setQuestion: (state, action: PayloadAction<Question>) => {
             state.question = action.payload;
@@ -37,7 +32,7 @@ const quizSlice = createSlice({
 })
 export const {
     setAnswerResult,
-    resetAnswerResult,
+    resetActualQuestion,
     setQuestion
 } = quizSlice.actions
 

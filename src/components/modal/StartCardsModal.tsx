@@ -64,6 +64,7 @@ const StartCardsModal = () => {
                     <Button
                         startIcon={<PlayArrowIcon/>}
                         onClick={onSubmit}
+                        variant="outlined"
                     >
                         Play
                     </Button>
