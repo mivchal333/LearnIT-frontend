@@ -6,6 +6,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {UserAttempt} from "../../../api/model/userAttempt.model";
 import {Timeline} from "@material-ui/lab";
 import AnswerTimelineItem from "./AnswerTimelineItem";
+import {isEmpty, size} from "lodash-es";
+import {formatRelative} from 'date-fns'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -23,8 +25,12 @@ interface PropsTypes {
 const AttemptSection = (props: PropsTypes) => {
     const classes = useStyles();
 
-    const startDate = new Date(props.attempt.startDate);
+    if (isEmpty(props.attempt.history)) {
+        return <></>
+    }
 
+    const {attempt: {history}} = props
+    const relativeDate = formatRelative(props.attempt.startDate, new Date());
     return (
         <ListItem>
             <Accordion>
@@ -33,19 +39,24 @@ const AttemptSection = (props: PropsTypes) => {
                     aria-controls="panel1a-content"
                     id={`attempt-section-${props.attempt.id}`}
                 >
-                    <Typography className={classes.heading}>Started
-                        on {startDate.toLocaleDateString()} at {startDate.toLocaleTimeString()}</Typography>
+                    <Typography
+                        className={classes.heading}>{relativeDate}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Timeline>
-                        {props.attempt.history.map(entry => (
-                            <AnswerTimelineItem entry={entry}/>
-                        ))}
+                        {history.map((entry, index) => {
+                            const isLastItem = index === size(history) - 1;
+                            return (
+                                <AnswerTimelineItem
+                                    entry={entry}
+                                    index={index + 1}
+                                    isLast={isLastItem}/>
+                            );
+                        })}
                     </Timeline>
                 </AccordionDetails>
             </Accordion>
         </ListItem>
-
     )
 }
 export default AttemptSection

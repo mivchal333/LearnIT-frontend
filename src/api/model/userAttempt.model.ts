@@ -8,7 +8,7 @@ enum GameType {
 export interface UserAttempt {
     id: string,
     history: HistoryEntry[],
-    startDate: string,
-    endDate: string,
+    startDate: number,
+    endDate: number,
     gameType: GameType,
 }

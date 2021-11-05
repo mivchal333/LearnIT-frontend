@@ -1,33 +1,63 @@
 import React from "react";
-import {TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator} from "@material-ui/lab";
+import {
+    TimelineConnector,
+    TimelineContent,
+    TimelineItem,
+    TimelineOppositeContent,
+    TimelineSeparator
+} from "@material-ui/lab";
 import {HistoryEntry} from "../../../api/model/historyEntry.model";
 import {makeStyles} from "@material-ui/core/styles";
+import {colors, Paper, Typography} from "@material-ui/core";
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
-
-const useStyles = makeStyles<undefined, HistoryEntry>(({
-        root: {
-            backgroundColor: props => props.answerResult ? "green" : "red",
+const useStyles = makeStyles((theme) => ({
+        greenDot: {
+            color: colors.green["400"],
         },
+        redDot: {
+            color: colors.red["400"]
+        },
+        paper: {
+            padding: theme.spacing(1)
+        }
     }),
 );
 
 interface PropsType {
     entry: HistoryEntry,
+    isLast?: boolean,
+    index: number,
 }
 
-const AnswerTimelineItem = ({entry}: PropsType) => {
-    const classes = useStyles(entry);
+const AnswerTimelineItem = (props: PropsType) => {
+    const classes = useStyles();
 
 
     return (
         <TimelineItem>
+            <TimelineOppositeContent>
+                <Typography color="textSecondary">{props.index}</Typography>
+            </TimelineOppositeContent>
             <TimelineSeparator>
-                <TimelineDot className={classes.root}/>
-                <TimelineConnector/>
+                {props.entry.answerResult
+                    ? (
+                        <CheckCircleOutlineIcon className={classes.greenDot}/>
+                    )
+                    : (
+                        <HighlightOffIcon className={classes.redDot}/>
+                    )}
+                {!props.isLast && <TimelineConnector/>}
             </TimelineSeparator>
-            <TimelineContent>{entry.question.body}</TimelineContent>
+            <TimelineContent>
+                <Paper elevation={2} className={classes.paper}>
+                    <Typography>{props.entry.question.body}</Typography>
+                </Paper>
+                <Typography>
+                </Typography>
+            </TimelineContent>
         </TimelineItem>
-
     )
 }
 export default AnswerTimelineItem

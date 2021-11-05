@@ -42,12 +42,12 @@ const UserHistory = () => {
     return (
         <Card className={classes.root}>
             <CardContent>
-                <Typography variant="h5" component="h2">
-                    Attempts
+                <Typography variant="h6">
+                    Last attempts
                 </Typography>
                 <List>
                     {map(userAttempts, userAttempt => (
-                        <AttemptSection attempt={userAttempt}/>
+                        <AttemptSection attempt={userAttempt} key={userAttempt.id}/>
                     ))}
                 </List>
             </CardContent>
