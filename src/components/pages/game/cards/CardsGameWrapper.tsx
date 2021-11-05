@@ -8,8 +8,8 @@ import {resetCurrentCard, selectCurrentCard, selectIsFlipped, setIsFlipped} from
 import {useDispatch} from "../../../../store/store";
 import {loadCard, notKnowItAction} from "../../../../store/cards/card.actions";
 import {resetGameState, selectIsLoading} from "../../../../store/shared/game/game.slice";
-import {useTechnologyPathContext} from "./useTechnologyPathContext";
 import {useRequireUserAttempt} from "../../../../hooks/useRequireUserAttempt";
+import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
 
 
 const useStyles = makeStyles((theme: any) => ({
@@ -39,7 +39,7 @@ const CardsGameWrapper = () => {
     const isLoading = useSelector(selectIsLoading);
     const isFlipped = useSelector(selectIsFlipped);
 
-    useTechnologyPathContext()
+    usePathTechnologyContext()
     useRequireUserAttempt()
 
     const [isAnswerShowed, setIsAnswerShowed] = useState(false)

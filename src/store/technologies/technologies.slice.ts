@@ -3,6 +3,11 @@ import {Technology} from "../../api/model/technology.model";
 import {RootState} from "../store";
 import {keyBy} from 'lodash-es'
 
+
+const emptyTechnology: Technology = {
+    description: "", id: 0, image: {fileUrl: "", filename: ""}, name: "", questionCount: 0
+}
+
 interface TechnologiesSlice {
     technologies: {
         [key: number]: Technology
@@ -40,6 +45,6 @@ export const {
 } = technologiesSlice.actions
 
 export const selectTechnologies = (state: RootState) => state.technologies.technologies
-export const selectTechnology = (state: RootState, id: number | null) => id ? state.technologies.technologies[id] : null
+export const selectTechnology = (state: RootState, id: number | null) => id ? state.technologies.technologies[id] : emptyTechnology
 export const selectTechnologyContextId = (state: RootState) => state.technologies.technologyContextId || -1
 export default technologiesSlice.reducer;

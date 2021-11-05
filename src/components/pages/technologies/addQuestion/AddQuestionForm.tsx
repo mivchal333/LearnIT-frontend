@@ -9,12 +9,12 @@ import {Theme} from "@material-ui/core/styles";
 import {GET_ROUTE} from "../../../../route/routes";
 import {Link, useHistory} from "react-router-dom";
 import {selectTechnologyContextId} from "../../../../store/technologies/technologies.slice";
-import {useTechnologyPathContext} from "../../game/cards/useTechnologyPathContext";
 import DifficultySliderInput from "./inputs/DifficultySliderInput";
 import MultilineText from "./inputs/MultilineText";
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import {FormikHelpers} from "formik/dist/types";
+import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
 
 export type CreateQuestionForm = {
     body: string,
@@ -57,7 +57,7 @@ const AddQuestionForm = () => {
     const dispatch = useDispatch();
     const history = useHistory()
     const technologyId = useSelector(selectTechnologyContextId);
-    useTechnologyPathContext()
+    usePathTechnologyContext()
 
     const initialValues: CreateQuestionForm = {
         body: "", correctAnswer: "", difficultyValue: 1, badAnswer1: "", badAnswer2: "", badAnswer3: ""

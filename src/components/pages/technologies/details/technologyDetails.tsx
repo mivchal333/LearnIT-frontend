@@ -1,6 +1,5 @@
-import React, {useEffect} from "react";
-import {useParams} from "react-router-dom";
-import {isEmpty, isNil, toNumber} from "lodash-es";
+import React from "react";
+import {isNil} from "lodash-es";
 import {
     Button,
     Card,
@@ -11,16 +10,14 @@ import {
     makeStyles,
     Typography
 } from "@material-ui/core";
-import {useDispatch, useSelector} from "../../../../store/store";
-import {selectTechnology, setTechnologyContextId} from "../../../../store/technologies/technologies.slice";
-import {TechnologyRouteParam} from "../../../../route/route.model";
-import {fetchTechnology} from "../../../../store/technologies/actions";
+import {useDispatch} from "../../../../store/store";
 import {Modal} from "../../../../store/shared/page/modal.model";
 import {showModal} from "../../../../store/shared/page/page.slice";
 import ActionButtonGroup from "./ActionButtonGroup";
 import Chip from '@material-ui/core/Chip';
 import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,8 +31,9 @@ const useStyles = makeStyles((theme) => ({
         wordBreak: "break-word"
     },
     cardMedia: {
-        width: '300px',
-        height: '300px',
+        margin: theme.spacing(2),
+        width: '250px',
+        height: '250px',
         display: "flex",
     },
     footer: {
@@ -50,17 +48,7 @@ const TechnologyDetails = () => {
     const classes = useStyles();
 
     const dispatch = useDispatch()
-    const {id: technologyId} = useParams<TechnologyRouteParam>()
-    const technologyContextId = toNumber(technologyId);
-
-    const technology = useSelector((state) => selectTechnology(state, technologyContextId));
-
-    useEffect(() => {
-        dispatch(setTechnologyContextId(technologyContextId))
-        if (isEmpty(technology)) {
-            dispatch(fetchTechnology(technologyContextId))
-        }
-    }, [technologyId, technology])
+    const [technology] = usePathTechnologyContext()
 
     if (isNil(technology)) {
         return <CircularProgress/>
@@ -68,6 +56,7 @@ const TechnologyDetails = () => {
 
     const showConfirm = (modal: Modal) => {
         dispatch(showModal(modal))
+
     }
 
     return (

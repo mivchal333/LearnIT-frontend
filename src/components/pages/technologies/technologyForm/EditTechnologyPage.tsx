@@ -2,7 +2,6 @@ import React from "react";
 import {CircularProgress, Paper, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import TechnologyForm, {TechnologyFormPayload} from "./form/TechnologyForm";
-import {useTechnologyPathContext} from "../../game/cards/useTechnologyPathContext";
 import {Technology} from "../../../../api/model/technology.model";
 import {TechnologyDataPayload} from "../../../../api/model/technologyDataPayload";
 import {editTechnology} from "../../../../store/technologies/actions";
@@ -10,6 +9,7 @@ import {GET_ROUTE} from "../../../../route/routes";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "../../../../store/store";
 import {FormikHelpers} from "formik/dist/types";
+import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const EditTechnologyPage = () => {
     const classes = useStyles();
-    const [technology, technologyId] = useTechnologyPathContext()
+    const [technology, technologyId] = usePathTechnologyContext()
     const history = useHistory()
     const dispatch = useDispatch()
 
