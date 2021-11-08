@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: theme.typography.pxToRem(15),
             fontWeight: theme.typography.fontWeightRegular,
         },
+        listItem: {
+            width: '30vw'
+        }
     }),
 );
 
@@ -33,7 +36,7 @@ const AttemptSection = (props: PropsTypes) => {
     const relativeDate = formatRelative(props.attempt.startDate, new Date());
     return (
         <ListItem>
-            <Accordion>
+            <Accordion className={classes.listItem}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon/>}
                     aria-controls="panel1a-content"

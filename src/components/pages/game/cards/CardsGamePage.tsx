@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
-import {CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
+import {Grid, makeStyles, Paper} from "@material-ui/core";
 import ProgressTracker from "../common/ProgressTracker";
 import {useDispatch} from "../../../../store/store";
 import {loadCard} from "../../../../store/cards/card.actions";
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: any) => ({
 }));
 
 
-const CardsGameWrapper = () => {
+const CardsGamePage = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const isLoading = useSelector(selectIsLoading);
@@ -48,9 +48,7 @@ const CardsGameWrapper = () => {
         }
     }, [dispatch])
 
-    if (isLoading) {
-        return <CircularProgress/>
-    }
+
 
     return (
         <div>
@@ -77,4 +75,4 @@ const CardsGameWrapper = () => {
     )
 
 }
-export default CardsGameWrapper
+export default CardsGamePage

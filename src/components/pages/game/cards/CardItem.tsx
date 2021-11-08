@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
-import {makeStyles, Typography} from "@material-ui/core";
+import {CircularProgress, makeStyles, Typography} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {selectCurrentCard} from "../../../../store/cards/cards.slice";
 import ReactCardFlip from 'react-card-flip';
 import FlippingCardWrapper from "./FlippingCardWrapper";
+import {selectIsLoading} from "../../../../store/shared/game/game.slice";
+import {isNil} from "lodash-es";
 
 
 const useStyles = makeStyles((theme: any) => ({
@@ -24,12 +26,16 @@ const useStyles = makeStyles((theme: any) => ({
 const CardItem = () => {
     const classes = useStyles();
     const card = useSelector(selectCurrentCard);
+    const isLoading = useSelector(selectIsLoading);
     const [isFlipped, setIsFlipped] = useState(false)
 
     const onFlip = () => {
         setIsFlipped(!isFlipped)
     }
 
+    if (isLoading || isNil(card)) {
+        return <CircularProgress/>
+    }
     return (
         <ReactCardFlip isFlipped={isFlipped} containerClassName={classes.cardContainer}>
             <FlippingCardWrapper onFlip={onFlip}>

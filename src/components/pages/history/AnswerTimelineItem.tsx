@@ -21,6 +21,13 @@ const useStyles = makeStyles((theme) => ({
         },
         paper: {
             padding: theme.spacing(1)
+        },
+        timelineOppositeContent: {
+            flex: 0,
+            minHeight: "100px",
+        },
+        timelineSeparator: {
+            marginTop: "5px",
         }
     }),
 );
@@ -37,10 +44,10 @@ const AnswerTimelineItem = (props: PropsType) => {
 
     return (
         <TimelineItem>
-            <TimelineOppositeContent>
+            <TimelineOppositeContent className={classes.timelineOppositeContent}>
                 <Typography color="textSecondary">{props.index}</Typography>
             </TimelineOppositeContent>
-            <TimelineSeparator>
+            <TimelineSeparator className={classes.timelineSeparator}>
                 {props.entry.answerResult
                     ? (
                         <CheckCircleOutlineIcon className={classes.greenDot}/>

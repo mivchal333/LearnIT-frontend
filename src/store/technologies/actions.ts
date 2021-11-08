@@ -61,6 +61,7 @@ export const addQuestion = (values: CreateQuestionForm): ThunkAction<Promise<boo
     try {
         await QuestionService.createQuestion(values, technologyId)
         dispatch(addFlag(successFlag("Question saved successfully.")))
+        dispatch(fetchTechnology(technologyId))
         return true;
     } catch (e) {
         console.log(e)
@@ -72,5 +73,11 @@ export const addQuestion = (values: CreateQuestionForm): ThunkAction<Promise<boo
 
 export const deleteTechnology = (): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch, getState) => {
     const technologyId = selectTechnologyContextId(getState())
-    await TechnologiesRepository.remove(technologyId)
+    try {
+        await TechnologiesRepository.remove(technologyId)
+    } catch (e) {
+        console.log(e)
+        dispatch(addFlag(errorFlag("Cannot delete technology")))
+        throw e;
+    }
 }

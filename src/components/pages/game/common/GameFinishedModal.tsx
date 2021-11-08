@@ -1,7 +1,7 @@
 import React from 'react'
 import {useDispatch} from "../../../../store/store";
-import {Button, DialogActions, DialogContent, DialogTitle, makeStyles} from "@material-ui/core";
-import ModalBodyWrapper from "../../../modal/ModalBodyWrapper";
+import {Button, makeStyles} from "@material-ui/core";
+import ModalWrapper from "../../../modal/ModalWrapper";
 import {useHistory} from "react-router-dom";
 import {GET_ROUTE} from "../../../../route/routes";
 import {Theme} from "@material-ui/core/styles";
@@ -11,7 +11,7 @@ import {useRequireUserAttempt} from "../../../../hooks/useRequireUserAttempt";
 import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
 
 const useStyles = makeStyles((theme: Theme) => ({
-        footer: {
+    footer: {
             display: "flex",
             justifyContent: "flex-end",
             paddingTop: theme.spacing(2),
@@ -42,35 +42,33 @@ const GameFinishedModal = () => {
         history.push(GET_ROUTE.GAME_ATTEMPT_SUMMARY(attemptId))
     }
 
+    const Actions = () => (
+        <>
+            <Button
+                variant="outlined"
+                onClick={onSubmit}
+            >
+                View Summary
+            </Button>
+            <Button onClick={onClose}>
+                Close
+            </Button>
+        </>
+    )
     return (
-        <ModalBodyWrapper>
-            <>
-                <DialogTitle>Success</DialogTitle>
-                <DialogContent>
-                    <Alert
-                        severity="success"
-                    >
-                        <AlertTitle>
-                            Success
-                        </AlertTitle>
-                        Cards game finished. See summary for details
-                    </Alert>
-                </DialogContent>
-                <DialogActions>
-                    <div className={classes.footer}>
-                        <Button
-                            variant="outlined"
-                            onClick={onSubmit}
-                        >
-                            View Summary
-                        </Button>
-                        <Button onClick={onClose}>
-                            Close
-                        </Button>
-                    </div>
-                </DialogActions>
-            </>
-        </ModalBodyWrapper>
+        <ModalWrapper
+            Actions={Actions()}
+            Title="Success"
+        >
+            <Alert
+                severity="success"
+            >
+                <AlertTitle>
+                    Success
+                </AlertTitle>
+                Cards game finished. See summary for details
+            </Alert>
+        </ModalWrapper>
     )
 }
 export default GameFinishedModal

@@ -5,7 +5,7 @@ import {ROUTE_META, Routes} from "./route/routes";
 import TechnologiesList from "./components/pages/technologies/list/technologiesList";
 import QuizGamePage from "./components/pages/game/quiz/QuizGamePage";
 import {map} from "lodash-es";
-import CardsGameWrapper from "./components/pages/game/cards/CardsGameWrapper";
+import CardsGamePage from "./components/pages/game/cards/CardsGamePage";
 import TechnologyDetailsPage from "./components/pages/technologies/details/TechnologyDetailsPage";
 import AddTechnologyPage from "./components/pages/technologies/technologyForm/AddTechnologyPage";
 import AppBar from "./components/appbar/AppBar";
@@ -34,7 +34,7 @@ const RouteContent: RouteContentType = {
     TECHNOLOGY_EDIT: <EditTechnologyPage/>,
     TECHNOLOGY_QUESTION_ADD: <AddQuestionPage/>,
 
-    CARDS_STARTED: <CardsGameWrapper/>,
+    CARDS_STARTED: <CardsGamePage/>,
 
     LOG_IN: <LoginPage/>,
     ACCOUNT: <MyAccountPage/>,

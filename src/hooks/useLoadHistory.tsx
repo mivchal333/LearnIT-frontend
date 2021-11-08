@@ -14,6 +14,6 @@ const useLoadHistory = () => {
         if (isEmpty(useAttempt)) {
             dispatch(loadUserHistory())
         }
-    }, [technologyId])
+    }, [])
 }
 export default useLoadHistory
