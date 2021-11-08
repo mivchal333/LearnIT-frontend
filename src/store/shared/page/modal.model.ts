@@ -1,4 +1,5 @@
 export enum Modal {
     START_QUIZ = 'START_QUIZ',
     START_CARDS = 'START_CARDS',
+    GAME_FINISHED = 'GAME_FINISHED',
 }

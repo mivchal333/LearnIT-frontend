@@ -8,10 +8,10 @@ import {CircularProgress, Grid, Paper, Typography} from "@material-ui/core";
 import ProgressTracker from "../common/ProgressTracker";
 import {resetGameState} from "../../../../store/shared/game/game.slice";
 import {makeStyles} from "@material-ui/core/styles";
-import {useTechnologyContext} from "../../../../hooks/useTechnologyContext";
 import {isNil} from "lodash-es";
 import AnswerResult from "./AnswerResult";
 import {useRequireUserAttempt} from "../../../../hooks/useRequireUserAttempt";
+import TechnologyHeader from "../common/TechnologyHeader";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,8 +41,6 @@ const QuizGamePage = () => {
 
     useRequireUserAttempt()
 
-    const technology = useTechnologyContext();
-
     useEffect(() => {
         dispatch(loadQuestion())
         return () => {
@@ -58,11 +56,7 @@ const QuizGamePage = () => {
 
     return (
         <div>
-            <Paper>
-                <Typography component="h1" variant="h4" className={classes.title}>
-                    {technology?.name}
-                </Typography>
-            </Paper>
+            <TechnologyHeader/>
             <Paper className={classes.paper}>
                 <Grid container justifyContent="space-between" direction="row-reverse" spacing={4}>
                     <Grid item>

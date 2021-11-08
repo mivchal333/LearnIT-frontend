@@ -1,25 +1,24 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
-import {CircularProgress, makeStyles, Paper, Typography} from "@material-ui/core";
-import KnownButton from "./KnownButton";
-import NextCardButton from "./NextCardButton";
+import {CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
 import ProgressTracker from "../common/ProgressTracker";
-import {resetCurrentCard, selectCurrentCard, selectIsFlipped, setIsFlipped} from "../../../../store/cards/cards.slice";
 import {useDispatch} from "../../../../store/store";
-import {loadCard, notKnowItAction} from "../../../../store/cards/card.actions";
+import {loadCard} from "../../../../store/cards/card.actions";
 import {resetGameState, selectIsLoading} from "../../../../store/shared/game/game.slice";
 import {useRequireUserAttempt} from "../../../../hooks/useRequireUserAttempt";
 import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
+import TechnologyHeader from "../common/TechnologyHeader";
+import CardItem from "./CardItem";
+import KnowButton from "./button/KnowButton";
+import ForgotButton from "./button/ForgotButton";
+import {resetCurrentCard} from "../../../../store/cards/cards.slice";
 
 
 const useStyles = makeStyles((theme: any) => ({
     paper: {
-        width: '30em',
-        height: '30em',
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        cursor: "pointer"
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
+        padding: theme.spacing(2),
     },
     cardBody: {
         fontSize: theme.typography.pxToRem(22),
@@ -35,36 +34,19 @@ const useStyles = makeStyles((theme: any) => ({
 const CardsGameWrapper = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const card = useSelector(selectCurrentCard);
     const isLoading = useSelector(selectIsLoading);
-    const isFlipped = useSelector(selectIsFlipped);
 
     usePathTechnologyContext()
     useRequireUserAttempt()
 
-    const [isAnswerShowed, setIsAnswerShowed] = useState(false)
     useEffect(() => {
         dispatch(loadCard())
+
         return () => {
             dispatch(resetCurrentCard())
             dispatch(resetGameState())
         }
     }, [dispatch])
-
-    useEffect(() => {
-        setIsAnswerShowed(false)
-    }, [card])
-
-    const onClick = () => {
-        const targetIsFlipped = !isFlipped
-        dispatch(setIsFlipped(targetIsFlipped))
-        const isFirstFlip = targetIsFlipped && !isAnswerShowed;
-        if (isFirstFlip) {
-            setIsAnswerShowed(true)
-            dispatch(notKnowItAction())
-        }
-    }
-
 
     if (isLoading) {
         return <CircularProgress/>
@@ -72,18 +54,25 @@ const CardsGameWrapper = () => {
 
     return (
         <div>
-            <ProgressTracker/>
-            <Paper elevation={3} className={classes.paper} onClick={onClick}>
-                {!isFlipped
-                    ? <Typography className={classes.cardBody}>{card.body}</Typography>
-                    : <Typography className={classes.cardAnswer}>{card.answer.body}</Typography>
-                }
+            <TechnologyHeader/>
+            <Paper elevation={3} className={classes.paper}>
+                <Grid container justifyContent="space-between" direction="row-reverse" spacing={4}>
+                    <Grid item>
+                        <ProgressTracker/>
+                    </Grid>
+                    <Grid item>
+                        <CardItem/>
+                        <Grid container justifyContent="space-between">
+                            <Grid item>
+                                <KnowButton/>
+                            </Grid>
+                            <Grid item>
+                                <ForgotButton/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Paper>
-            {!isAnswerShowed
-                ? <KnownButton/>
-                : <NextCardButton/>
-            }
-
         </div>
     )
 

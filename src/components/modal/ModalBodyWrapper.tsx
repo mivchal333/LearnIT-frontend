@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme: Theme) => ({
             transform: 'translate(-50%, -50%)',
             position: 'absolute',
             backgroundColor: theme.palette.background.paper,
-            padding: theme.spacing(2, 4, 3),
+            padding: theme.spacing(2, 3, 1, 3),
+            borderRadius: "15px"
         },
     }),
 );
@@ -29,11 +30,8 @@ const ModalBodyWrapper = (props: PropsType) => {
         <Modal
             open
             onClose={() => dispatch(closeModal())}
-            aria-labelledby="modal-title"
-            aria-describedby=""
         >
             <div className={classes.paper}>
-
                 {props.children}
             </div>
         </Modal>

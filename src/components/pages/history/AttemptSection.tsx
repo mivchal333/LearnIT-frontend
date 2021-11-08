@@ -48,6 +48,7 @@ const AttemptSection = (props: PropsTypes) => {
                             const isLastItem = index === size(history) - 1;
                             return (
                                 <AnswerTimelineItem
+                                    key={entry.id}
                                     entry={entry}
                                     index={index + 1}
                                     isLast={isLastItem}/>
