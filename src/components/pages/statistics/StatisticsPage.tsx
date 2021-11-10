@@ -4,6 +4,7 @@ import LatestAttemptSection from "./LatestAttemptSection";
 import {useDispatch} from "../../../store/store";
 import {loadUserHistory} from "../../../store/history/actions";
 import ActivitySection from "./ActivitySection";
+import RequestTechnologySection from "./FrequentTechnologySection";
 
 const StatisticsPage = () => {
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const StatisticsPage = () => {
             <PageHeader/>
             <LatestAttemptSection/>
             <ActivitySection/>
+            <RequestTechnologySection/>
         </>
     )
 }
