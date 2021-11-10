@@ -1,18 +1,23 @@
 import React from "react";
 import {Formik} from 'formik';
 import {Button, createStyles, Grid, makeStyles, TextField} from "@material-ui/core";
-import {isEmpty, size} from "lodash-es";
+import {isEmpty} from "lodash-es";
 import AddIcon from '@material-ui/icons/Add';
 import {Theme} from "@material-ui/core/styles";
 import ImageField from "./field/ImageField";
 import {UploadedFile} from "../../../../../api/model/uploadedFile.model";
 import {useHistory} from "react-router-dom";
 import {FormikHelpers} from "formik/dist/types";
+import SaveIcon from '@material-ui/icons/Save';
 
 export interface TechnologyFormPayload {
     name: string,
     description: string,
     image?: UploadedFile,
+}
+
+export enum FormType {
+    ADD, EDIT
 }
 
 interface FormErrorState {
@@ -43,13 +48,14 @@ export const initialFormState = {name: '', description: ''};
 interface PropsType {
     initialValues?: TechnologyFormPayload,
     onSubmit: (values: TechnologyFormPayload, formikHelpers: FormikHelpers<TechnologyFormPayload>) => void | Promise<any>,
+    type: FormType,
 }
 
 const TechnologyForm = (props: PropsType) => {
     const classes = useStyles();
     const history = useHistory()
 
-    const {initialValues = initialFormState} = props
+    const {initialValues = initialFormState, type} = props
 
     return (
         <>
@@ -61,8 +67,6 @@ const TechnologyForm = (props: PropsType) => {
                         errors.name = 'Required';
                     } else if (isEmpty(values.description))
                         errors.description = 'Required';
-                    else if (size(values.description) > 255)
-                        errors.description = 'Too long';
                     return errors;
                 }}
                 onSubmit={props.onSubmit}
@@ -96,6 +100,7 @@ const TechnologyForm = (props: PropsType) => {
                                     onBlur={handleBlur}
                                     value={values.name}
                                     error={touched.name && !isEmpty(errors.name)}
+                                    helperText={errors.name}
                                     fullWidth
                                 />
                             </Grid>
@@ -108,6 +113,7 @@ const TechnologyForm = (props: PropsType) => {
                                     onBlur={handleBlur}
                                     value={values.description}
                                     error={touched.description && !isEmpty(errors.description)}
+                                    helperText={errors.description}
                                     multiline
                                     minRows={5}
                                     fullWidth
@@ -124,9 +130,9 @@ const TechnologyForm = (props: PropsType) => {
                                     type="submit"
                                     disabled={isSubmitting}
                                     color="primary"
-                                    startIcon={<AddIcon/>}
+                                    startIcon={type == FormType.ADD ? <AddIcon/> : <SaveIcon/>}
                                 >
-                                    Add
+                                    {type == FormType.ADD ? 'ADD' : 'SAVE'}
                                 </Button>
                             </Grid>
                         </Grid>

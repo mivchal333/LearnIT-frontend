@@ -9,7 +9,8 @@ const useStyles = makeStyles((theme: any) => ({
         height: "404px",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        padding: theme.spacing(2),
     },
 }));
 

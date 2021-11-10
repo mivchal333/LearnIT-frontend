@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 const QuizGamePage = () => {
     const classes = useStyles();
     const question = useSelector(selectQuestion);
-    let dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     useRequireUserAttempt()
 

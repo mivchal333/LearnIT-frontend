@@ -1,7 +1,7 @@
 import React from "react";
 import {Paper, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
-import TechnologyForm, {TechnologyFormPayload} from "./form/TechnologyForm";
+import TechnologyForm, {FormType, TechnologyFormPayload} from "./form/TechnologyForm";
 import {FormikHelpers} from "formik/dist/types";
 import {TechnologyDataPayload} from "../../../../api/model/technologyDataPayload";
 import {useDispatch} from "../../../../store/store";
@@ -52,7 +52,7 @@ const AddTechnologyPage = () => {
                 Add Technology
             </Typography>
             <div>
-                <TechnologyForm onSubmit={onSubmit}/>
+                <TechnologyForm onSubmit={onSubmit} type={FormType.ADD}/>
             </div>
         </Paper>
     </>

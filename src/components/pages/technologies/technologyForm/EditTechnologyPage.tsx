@@ -1,7 +1,7 @@
 import React from "react";
 import {CircularProgress, Paper, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
-import TechnologyForm, {TechnologyFormPayload} from "./form/TechnologyForm";
+import TechnologyForm, {FormType, TechnologyFormPayload} from "./form/TechnologyForm";
 import {Technology} from "../../../../api/model/technology.model";
 import {TechnologyDataPayload} from "../../../../api/model/technologyDataPayload";
 import {editTechnology} from "../../../../store/technologies/actions";
@@ -62,7 +62,8 @@ const EditTechnologyPage = () => {
             </Typography>
             <div>
                 {technology
-                    ? <TechnologyForm initialValues={mapToFormValues(technology)} onSubmit={onSubmit}/>
+                    ? <TechnologyForm initialValues={mapToFormValues(technology)} onSubmit={onSubmit}
+                                      type={FormType.EDIT}/>
                     : <CircularProgress/>
                 }
             </div>
