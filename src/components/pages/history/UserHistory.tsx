@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import {Card, CardContent, List, Typography} from "@material-ui/core";
 import {useDispatch, useSelector} from "../../../store/store";
-import {selectUserAttempts} from "../../../store/history/history.slice";
+import {selectUserAttemptsByTechnologyId} from "../../../store/history/history.slice";
 import useLoadHistory from "../../../hooks/useLoadHistory";
 import AttemptSection from "./AttemptSection";
 import {isEmpty, map} from "lodash-es";
 import {selectTechnologyContextId} from "../../../store/technologies/technologies.slice";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {loadUserHistory} from "../../../store/history/actions";
+import {loadUserCurrentHistory} from "../../../store/history/actions";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -35,12 +35,12 @@ const UserHistory = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadUserHistory())
+        dispatch(loadUserCurrentHistory())
     }, [])
 
     const technologyId = useSelector(selectTechnologyContextId);
     useLoadHistory()
-    const userAttempts = useSelector((state) => selectUserAttempts(state, technologyId))
+    const userAttempts = useSelector((state) => selectUserAttemptsByTechnologyId(state, technologyId))
 
     if (isEmpty(userAttempts)) {
         return null

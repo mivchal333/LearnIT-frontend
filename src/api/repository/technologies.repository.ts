@@ -3,7 +3,7 @@ import {Technology} from "../model/technology.model";
 import {FileUploadedMessage} from "../model/fileUploadedMessage.model";
 import {TechnologyDataPayload} from "../model/technologyDataPayload";
 
-const fetchTechnologies = () => axios.get("/technology")
+const fetchTechnologies = (): Promise<AxiosResponse<Technology[]>> => axios.get("/technology")
 
 const fetchTechnology = (id: number) => axios.get(`/technology/${id}`)
 
