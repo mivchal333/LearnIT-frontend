@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme: any) => ({
     },
 }));
 
-
 interface PropsType {
     children: ReactNode,
     onFlip: () => void,

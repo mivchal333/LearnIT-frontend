@@ -48,8 +48,6 @@ const CardsGamePage = () => {
         }
     }, [dispatch])
 
-
-
     return (
         <div>
             <TechnologyHeader/>
