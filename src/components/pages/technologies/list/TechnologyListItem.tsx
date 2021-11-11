@@ -3,6 +3,7 @@ import {Button, Card, CardActions, CardContent, CardMedia, makeStyles, Typograph
 import {Technology} from "../../../../api/model/technology.model";
 import {GET_ROUTE} from "../../../../route/routes";
 import {Link} from "react-router-dom";
+import {EMPTY_IMAGE_PATH, getStaticImageUrl} from "../../../../service/staticProvider";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -35,15 +36,15 @@ interface PropsType {
 const TechnologyListItem = (props: PropsType) => {
     const classes = useStyles();
 
+    const imageUrl = props.technology.image?.fileUrl || getStaticImageUrl(EMPTY_IMAGE_PATH)
+
     const {technology} = props
     return (
         <Card className={classes.root}>
-            {props.technology.image && (
-                <CardMedia
-                    className={classes.cardMedia}
-                    image={props.technology.image?.fileUrl}
-                />
-            )}
+            <CardMedia
+                className={classes.cardMedia}
+                image={imageUrl}
+            />
             <CardContent>
                 <Typography variant="h5" component="h2">
                     {technology.name}

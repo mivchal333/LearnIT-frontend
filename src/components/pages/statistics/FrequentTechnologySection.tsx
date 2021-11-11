@@ -60,22 +60,22 @@ const RequestTechnologySection = () => {
 
         const data: ChartData[] = [];
         for (const [key, value] of Object.entries(mapData)) {
-            const technologyId = toNumber(key);
-            const technology = await dispatch(getTechnology(technologyId));
-            console.log({technology});
-            data.push({
-                name: technology.name,
-                count: value,
-                technologyId: technologyId,
-            });
-
+            if (value > 0) {
+                const technologyId = toNumber(key);
+                const technology = await dispatch(getTechnology(technologyId));
+                data.push({
+                    name: technology.name,
+                    count: value,
+                    technologyId: technologyId,
+                });
+            }
         }
         setData(data)
     }
 
     return (
         <Paper className={classes.paper}>
-            <Typography variant="subtitle2">Udzielone odpowiedzi</Typography>
+            <Typography variant="subtitle2">Udział technologii</Typography>
             <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                     <Pie

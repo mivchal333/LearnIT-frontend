@@ -18,6 +18,7 @@ import Chip from '@material-ui/core/Chip';
 import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
+import {EMPTY_IMAGE_PATH, getStaticImageUrl} from "../../../../service/staticProvider";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,16 +60,15 @@ const TechnologyDetails = () => {
 
     }
 
+    const imageUrl = technology.image?.fileUrl || getStaticImageUrl(EMPTY_IMAGE_PATH)
+
     return (
         <Card className={classes.root}>
             <ActionButtonGroup/>
-
-            {technology.image && (
-                <CardMedia
-                    className={classes.cardMedia}
-                    image={technology.image?.fileUrl}
-                />
-            )}
+            <CardMedia
+                className={classes.cardMedia}
+                image={imageUrl}
+            />
             <CardContent>
                 <Typography variant="h5" component="h2">
                     {technology.name}

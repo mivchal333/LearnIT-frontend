@@ -58,8 +58,8 @@ const AnswerTimelineItem = (props: PropsType) => {
                 {!props.isLast && <TimelineConnector/>}
             </TimelineSeparator>
             <TimelineContent>
-                <Paper elevation={2} className={classes.paper}>
-                    <Typography>{props.entry.question.body}</Typography>
+                <Paper elevation={1} className={classes.paper}>
+                    <Typography variant="body2">{props.entry.question.body}</Typography>
                 </Paper>
                 <Typography>
                 </Typography>
