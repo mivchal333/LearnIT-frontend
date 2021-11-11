@@ -1,9 +1,12 @@
 import React from 'react';
+import LearningBanner from "./LearningBanner";
 
 const HomePage = () => {
 
     return (
-        <h1>Welcome in LearnIT app!</h1>
+        <div>
+            <LearningBanner/>
+        </div>
     );
 }
 
