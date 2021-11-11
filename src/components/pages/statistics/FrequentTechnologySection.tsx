@@ -1,11 +1,12 @@
-import React, {useMemo} from 'react'
-import {Cell, Pie, PieChart, ResponsiveContainer} from 'recharts';
+import React, {useEffect, useState} from 'react'
+import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip} from 'recharts';
 import {makeStyles} from "@material-ui/core/styles";
-import {Paper, Typography} from "@material-ui/core";
+import {colors, Paper, Typography} from "@material-ui/core";
 import {selectUserAttempts, UserHistoryEntries} from "../../../store/history/history.slice";
-import {useSelector} from "../../../store/store";
+import {useDispatch, useSelector} from "../../../store/store";
 import {size, toNumber} from "lodash-es";
 import {UserAttempt} from "../../../api/model/userAttempt.model";
+import {getTechnology} from "../../../store/technologies/actions";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -21,14 +22,26 @@ interface ChartData {
     count: number,
 }
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = [
+    colors.blue["400"],
+    colors.green["400"],
+    colors.orange["400"],
+    colors.red["400"],
+    colors.purple["400"],
+    colors.pink["400"],
+];
 
 const RequestTechnologySection = () => {
     const classes = useStyles();
     const userHistoryEntries = useSelector(selectUserAttempts)
+    const dispatch = useDispatch();
+    const [data, setData] = useState<ChartData[]>([])
 
+    useEffect(() => {
+        loadData(userHistoryEntries)
+    }, [userHistoryEntries])
 
-    const getData = (userHistoryEntries: UserHistoryEntries) => {
+    const loadData = async (userHistoryEntries: UserHistoryEntries) => {
         let mapData: { [technologyId: number]: number } = {}
 
 
@@ -46,19 +59,19 @@ const RequestTechnologySection = () => {
 
 
         const data: ChartData[] = [];
-        Object.entries(mapData).forEach(([key, value]) => {
+        for (const [key, value] of Object.entries(mapData)) {
             const technologyId = toNumber(key);
+            const technology = await dispatch(getTechnology(technologyId));
+            console.log({technology});
             data.push({
-                name: 'TechnologyId',
+                name: technology.name,
                 count: value,
                 technologyId: technologyId,
-            })
+            });
 
-        })
-        return data;
+        }
+        setData(data)
     }
-
-    const data = useMemo(() => getData(userHistoryEntries), [userHistoryEntries]);
 
     return (
         <Paper className={classes.paper}>
@@ -71,13 +84,17 @@ const RequestTechnologySection = () => {
                         cx="50%"
                         cy="50%"
                         outerRadius={120}
-                        fill="#8884d8"
+                        isAnimationActive={false}
+                        label={(lab: any) => lab.name}
+
                     >
                         {data.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]}/>
                         ))}
-
                     </Pie>
+                    <Legend/>
+                    <Tooltip/>
+
                 </PieChart>
             </ResponsiveContainer>
         </Paper>

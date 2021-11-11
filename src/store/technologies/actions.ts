@@ -1,5 +1,5 @@
 import {Dispatch, RootState} from "../store";
-import {selectTechnologyContextId, setTechnologies, setTechnology} from "./technologies.slice";
+import {selectTechnology, selectTechnologyContextId, setTechnologies, setTechnology} from "./technologies.slice";
 import TechnologiesRepository from '../../api/repository/technologies.repository'
 import {AnyAction, ThunkAction} from "@reduxjs/toolkit";
 import {TechnologyDataPayload} from "../../api/model/technologyDataPayload";
@@ -8,6 +8,7 @@ import {errorFlag, successFlag} from "../../service/flag.service";
 import {CreateQuestionForm} from "../../components/pages/technologies/addQuestion/AddQuestionForm";
 import {QuestionService} from "../../service/question.service";
 import {Technology} from "../../api/model/technology.model";
+import {isNil} from "lodash-es";
 
 export const fetchTechnologies = () => async (dispatch: Dispatch) => {
     const {data} = await TechnologiesRepository.fetchTechnologies();
@@ -80,4 +81,11 @@ export const deleteTechnology = (): ThunkAction<void, RootState, unknown, AnyAct
         dispatch(addFlag(errorFlag("Cannot delete technology")))
         throw e;
     }
+}
+export const getTechnology = (technologyId: number): ThunkAction<Promise<Technology>, RootState, unknown, AnyAction> => async (dispatch, getState) => {
+    const technology = selectTechnology(getState(), technologyId);
+    if (isNil(technology)) {
+        await dispatch(fetchTechnology(technologyId))
+    }
+    return selectTechnology(getState(), technologyId);
 }
