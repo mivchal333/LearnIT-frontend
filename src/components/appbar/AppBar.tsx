@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from 'clsx';
-import {Button, Container, makeStyles} from "@material-ui/core";
+import {Button, Container, Grid, makeStyles} from "@material-ui/core";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -88,13 +88,28 @@ const AppBarWrapper = (props: PropsType) => {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         Dashboard
                     </Typography>
-                    <Button
-                        to={GET_ROUTE.LOG_IN()}
-                        component={Link}
-                        color="inherit"
-                    >
-                        Log in
-                    </Button>
+                    <Grid container spacing={2} justify="flex-end">
+                        <Grid item>
+                            <Button
+                                to={GET_ROUTE.LOGIN()}
+                                component={Link}
+                                color="inherit"
+                            >
+                                Zaloguj się
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                to={GET_ROUTE.REGISTER()}
+                                component={Link}
+                                color="inherit"
+                                variant="outlined"
+
+                            >
+                                Zarejestruj się
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </Toolbar>
             </AppBar>
             <AppDrawer isOpen={open} setOpen={setOpen}/>

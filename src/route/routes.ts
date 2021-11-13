@@ -14,7 +14,8 @@ export enum Routes {
 
     STATISTICS = 'STATISTICS',
 
-    LOG_IN = 'LOG_IN',
+    LOGIN = 'LOGIN',
+    REGISTER = 'REGISTER',
     ACCOUNT = 'ACCOUNT',
 }
 
@@ -40,7 +41,8 @@ export const ROUTE_META: RoutesMeta = {
     STATISTICS: '/stats',
     GAME_ATTEMPT_SUMMARY: `/attempt/:id`,
 
-    LOG_IN: "/login",
+    LOGIN: "/login",
+    REGISTER: "/register",
     ACCOUNT: "/account"
 }
 
@@ -61,6 +63,7 @@ export const GET_ROUTE: GetRoute = {
     STATISTICS: () => '/stats',
     GAME_ATTEMPT_SUMMARY: (id: string) => `/attempt/${id}`,
 
-    LOG_IN: () => "/login",
+    LOGIN: () => "/login",
+    REGISTER: () => "/register",
     ACCOUNT: () => '/account'
 }

@@ -9,7 +9,7 @@ import CardsGamePage from "./components/pages/game/cards/CardsGamePage";
 import TechnologyDetailsPage from "./components/pages/technologies/details/TechnologyDetailsPage";
 import AddTechnologyPage from "./components/pages/technologies/technologyForm/AddTechnologyPage";
 import AppBar from "./components/appbar/AppBar";
-import LoginPage from "./components/pages/account/LoginPage";
+import LoginPage from "./components/pages/login/LoginPage";
 import MyAccountPage from "./components/pages/account/MyAccountPage";
 import StatisticsPage from "./components/pages/statistics/StatisticsPage";
 import StickyFooter from "./components/footer/StickyFooter";
@@ -20,6 +20,7 @@ import ModalWrapper from "./components/ModalWrapper";
 import AddQuestionPage from "./components/pages/technologies/addQuestion/AddQuestionPage";
 import EditTechnologyPage from "./components/pages/technologies/technologyForm/EditTechnologyPage";
 import GameAttemptSummaryPage from "./components/pages/attempt/GameAttemptSummaryPage";
+import RegisterPage from "./components/pages/register/RegisterPage";
 
 
 type RouteContentType = {
@@ -36,7 +37,8 @@ const RouteContent: RouteContentType = {
 
     CARDS_STARTED: <CardsGamePage/>,
 
-    LOG_IN: <LoginPage/>,
+    LOGIN: <LoginPage/>,
+    REGISTER: <RegisterPage/>,
     ACCOUNT: <MyAccountPage/>,
 
     STATISTICS: <StatisticsPage/>,
