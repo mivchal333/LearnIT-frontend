@@ -11,8 +11,13 @@ import {Technology} from "../../api/model/technology.model";
 import {isNil} from "lodash-es";
 
 export const fetchTechnologies = () => async (dispatch: Dispatch) => {
-    const {data} = await TechnologiesRepository.fetchTechnologies();
-    dispatch(setTechnologies(data))
+    try {
+        const {data} = await TechnologiesRepository.fetchTechnologies();
+        dispatch(setTechnologies(data))
+    } catch (e) {
+        console.error(e)
+        dispatch(addFlag(errorFlag("Failed to load technologies.")))
+    }
 }
 
 export const fetchTechnology = (id: number) => async (dispatch: Dispatch) => {
@@ -20,8 +25,6 @@ export const fetchTechnology = (id: number) => async (dispatch: Dispatch) => {
         const {data} = await TechnologiesRepository.fetchTechnology(id);
         dispatch(setTechnology(data))
     } catch (e) {
-        console.error(e)
-        dispatch(addFlag(errorFlag("Failed to load technology.")))
     }
 }
 

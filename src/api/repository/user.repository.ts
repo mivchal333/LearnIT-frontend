@@ -1,8 +1,14 @@
 import axios, {AxiosResponse} from "axios";
-import {UserDto} from "../model/userDto";
+import {UserRegisterModel} from "../model/userRegisterModel";
 
-const postResisterUser = (data: UserDto): Promise<AxiosResponse> => axios.post('/user/registration', data)
+const postRegisterUser = (data: UserRegisterModel): Promise<AxiosResponse> => axios.post('/user/register', data)
+const postLoginUser = (data: FormData): Promise<AxiosResponse> => axios.post('/user/login', data)
+const getUserDetails = (): Promise<AxiosResponse> => axios.get('/user/myAccount')
+const postLogout = (): Promise<AxiosResponse> => axios.get('/user/logout')
 
 export const UserRepository = {
-    postResisterUser
+    postRegisterUser,
+    postLoginUser,
+    getUserDetails,
+    postLogout,
 }

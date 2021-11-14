@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import HomePage from "./components/pages/main/HomePage";
 import {ROUTE_META, Routes} from "./route/routes";
@@ -21,6 +21,8 @@ import AddQuestionPage from "./components/pages/technologies/addQuestion/AddQues
 import EditTechnologyPage from "./components/pages/technologies/technologyForm/EditTechnologyPage";
 import GameAttemptSummaryPage from "./components/pages/attempt/GameAttemptSummaryPage";
 import RegisterPage from "./components/pages/register/RegisterPage";
+import {useDispatch} from "./store/store";
+import {loadUserDetails} from "./store/user/actions";
 
 
 type RouteContentType = {
@@ -59,6 +61,11 @@ const useStyles = makeStyles((theme) => ({
 
 const App = () => {
     const classes = useStyles();
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(loadUserDetails())
+    }, [])
     return (
         <Router>
             <FlagWrapper/>

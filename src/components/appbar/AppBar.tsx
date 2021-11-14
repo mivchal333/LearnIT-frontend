@@ -1,14 +1,13 @@
 import React from "react";
 import clsx from 'clsx';
-import {Button, Container, Grid, makeStyles} from "@material-ui/core";
+import {Container, makeStyles} from "@material-ui/core";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AppDrawer from "./drawer/AppDrawer";
-import {GET_ROUTE} from "../../route/routes";
-import {Link} from "react-router-dom";
+import HeaderActionSection from "./headerActions/HeaderActionSection";
 
 const drawerWidth = 240;
 
@@ -88,28 +87,7 @@ const AppBarWrapper = (props: PropsType) => {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         Dashboard
                     </Typography>
-                    <Grid container spacing={2} justify="flex-end">
-                        <Grid item>
-                            <Button
-                                to={GET_ROUTE.LOGIN()}
-                                component={Link}
-                                color="inherit"
-                            >
-                                Zaloguj się
-                            </Button>
-                        </Grid>
-                        <Grid item>
-                            <Button
-                                to={GET_ROUTE.REGISTER()}
-                                component={Link}
-                                color="inherit"
-                                variant="outlined"
-
-                            >
-                                Zarejestruj się
-                            </Button>
-                        </Grid>
-                    </Grid>
+                    <HeaderActionSection/>
                 </Toolbar>
             </AppBar>
             <AppDrawer isOpen={open} setOpen={setOpen}/>

@@ -6,6 +6,7 @@ import gameReducer from './shared/game/game.slice';
 import {cardsReducer} from "./cards/cards.slice";
 import {userHistoryReducer} from "./history/history.slice";
 import {pageReducer} from "./shared/page/page.slice";
+import {userReducer} from "./user/user.slice";
 
 const store = configureStore({
     reducer: {
@@ -14,7 +15,8 @@ const store = configureStore({
         game: gameReducer,
         cards: cardsReducer,
         userHistory: userHistoryReducer,
-        page: pageReducer
+        page: pageReducer,
+        user: userReducer,
     },
 })
 export type RootState = ReturnType<typeof store.getState>
