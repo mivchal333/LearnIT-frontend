@@ -7,6 +7,7 @@ import {values} from "lodash-es";
 import TechnologyListItem from "./TechnologyListItem";
 import AddTechnologyButton from "./AddTechnologyButton";
 import {makeStyles} from "@material-ui/core";
+import {selectUserLoggedIn} from "../../../../store/user/user.slice";
 
 
 const useStyles = makeStyles(theme => ({
@@ -23,9 +24,9 @@ const useStyles = makeStyles(theme => ({
 
 const TechnologiesList = () => {
     const classes = useStyles();
-
-    let dispatch = useDispatch();
+    const dispatch = useDispatch();
     const technologies = useSelector(selectTechnologies)
+    const isLoggedIn = useSelector(selectUserLoggedIn)
 
 
     useEffect(() => {
@@ -34,7 +35,9 @@ const TechnologiesList = () => {
 
 
     return <div className={classes.root}>
-        <AddTechnologyButton/>
+        {isLoggedIn && (
+            <AddTechnologyButton/>
+        )}
         <div className={classes.listWrapper}>
             {values(technologies).map((technology) => (
                 <TechnologyListItem technology={technology} key={technology.id}/>
