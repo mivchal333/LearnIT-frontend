@@ -25,6 +25,8 @@ export const fetchTechnology = (id: number) => async (dispatch: Dispatch) => {
         const {data} = await TechnologiesRepository.fetchTechnology(id);
         dispatch(setTechnology(data))
     } catch (e) {
+        console.error(e)
+        dispatch(addFlag(errorFlag("Failed to load technology.")))
     }
 }
 

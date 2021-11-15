@@ -15,9 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
         selectEmpty: {
             marginTop: theme.spacing(2),
         },
-        codeSection: {
-            border: 'solid 2px rgb(130, 130, 130)'
-        }
     }),
 );
 
@@ -31,9 +28,10 @@ interface PropsType {
 const CodeAttachment = (props: PropsType) => {
     const classes = useStyles();
 
+    const {codeMode = "text"} = props
     return (
         <Grid container justifyContent="space-between" xs={12} spacing={1}>
-            <Grid item xs={10} className={classes.codeSection}>
+            <Grid item xs={10}>
                 <CodeEditor
                     codeMode={props.codeMode}
                     value={props.codeValue}
@@ -43,7 +41,7 @@ const CodeAttachment = (props: PropsType) => {
             <Grid item xs={2}>
                 <FormControl className={classes.formControl}>
                     <InputLabel>Code format</InputLabel>
-                    <Select onChange={props.onCodeLangChange} value={props.codeMode} name="codeLang">
+                    <Select onChange={props.onCodeLangChange} value={codeMode} name="codeLang">
                         {Object.entries(CodeLanguagesLabels).map(([langValue, langLabel]) => (
                             <MenuItem value={langValue}>{langLabel}</MenuItem>
                         ))}

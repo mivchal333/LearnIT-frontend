@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Grid} from "@material-ui/core";
+import {Button} from "@material-ui/core";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
 
@@ -19,7 +19,6 @@ const CodeAttachmentButton = (props: PropsType) => {
         : "Dodaj kod"
 
     return (
-        <Grid item alignItems="flex-end" alignContent={"flex-end"}>
             <Button
                 variant="outlined"
                 startIcon={getIcon()}
@@ -28,8 +27,6 @@ const CodeAttachmentButton = (props: PropsType) => {
             >
                 {getLabel()}
             </Button>
-        </Grid>
-
     )
 }
 export default CodeAttachmentButton

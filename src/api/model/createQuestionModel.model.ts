@@ -1,9 +1,11 @@
+import {AnswerPayloadModel} from "./answerPayload.model";
+
 export interface CreateQuestionModel {
     body: string,
     technologyId: number,
     difficultyValue: number,
-    correctAnswer: string,
-    badAnswers: string[],
+    correctAnswer: AnswerPayloadModel,
+    badAnswers: AnswerPayloadModel[],
     codeLag?: string,
     codeAttachment?: string,
 }

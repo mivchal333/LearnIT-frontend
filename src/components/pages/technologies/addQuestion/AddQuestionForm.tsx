@@ -1,8 +1,7 @@
 import React from "react";
 import {Formik} from 'formik';
-import {Button, createStyles, Grid, makeStyles, TextField} from "@material-ui/core";
+import {Button, createStyles, Grid, makeStyles} from "@material-ui/core";
 import {isEmpty} from "lodash-es";
-import AddIcon from '@material-ui/icons/Add';
 import {useDispatch, useSelector} from "../../../../store/store";
 import {addQuestion} from "../../../../store/technologies/actions";
 import {Theme} from "@material-ui/core/styles";
@@ -11,24 +10,26 @@ import {Link, useHistory} from "react-router-dom";
 import {selectTechnologyContextId} from "../../../../store/technologies/technologies.slice";
 import DifficultySliderInput from "./inputs/DifficultySliderInput";
 import MultilineText from "./inputs/MultilineText";
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import {FormikHelpers} from "formik/dist/types";
 import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
 import CodeAttachment from "./inputs/CodeAttachment";
 import CodeAttachmentButton from "./CodeAttachmentButton";
 import {CodeLanguage} from "../../../../constant/codeLanguages";
+import AddIcon from "@material-ui/icons/Add";
+import AnswerSection, {AnswerType} from "./inputs/AnswerSection";
+import {CreateQuestionAnswerModel} from "../../../../model/createQuestionAnswer.model";
 
 export type CreateQuestionForm = {
     body: string,
     difficultyValue: number,
-    correctAnswer: string,
-    badAnswer1: string,
-    badAnswer2: string,
-    badAnswer3: string,
+    correctAnswer: CreateQuestionAnswerModel,
     addCodeAttachment: boolean,
-    codeLang?: CodeLanguage,
     codeAttachment?: string,
+    codeLang?: CodeLanguage,
+
+    badAnswer1: CreateQuestionAnswerModel,
+    badAnswer2: CreateQuestionAnswerModel,
+    badAnswer3: CreateQuestionAnswerModel,
 }
 
 type FormErrorState = {
@@ -42,19 +43,19 @@ const useStyles = makeStyles((theme: Theme) =>
                 margin: theme.spacing(1),
             },
         },
-
         buttons: {
             display: 'flex',
             justifyContent: 'flex-end',
         },
-        tickIcon: {
-            color: theme.palette.success.main,
-        },
-        wrongIcon: {
-            color: theme.palette.error.main,
-        }
     }),
 );
+type AnswerName = "correctAnswer" | "badAnswer1" | "badAnswer2" | "badAnswer3";
+
+interface Answer {
+    label: string,
+    name: AnswerName,
+    type: AnswerType,
+}
 
 const AddQuestionForm = () => {
     const classes = useStyles();
@@ -65,11 +66,23 @@ const AddQuestionForm = () => {
 
     const initialValues: CreateQuestionForm = {
         body: "",
-        correctAnswer: "",
+        correctAnswer: {
+            addCode: false,
+            body: '',
+        },
         difficultyValue: 1,
-        badAnswer1: "",
-        badAnswer2: "",
-        badAnswer3: "",
+        badAnswer1: {
+            body: '',
+            addCode: false,
+        },
+        badAnswer2: {
+            body: '',
+            addCode: false,
+        },
+        badAnswer3: {
+            body: '',
+            addCode: false,
+        },
         addCodeAttachment: false,
     }
 
@@ -91,7 +104,6 @@ const AddQuestionForm = () => {
     };
 
     const onSubmit = async (values: CreateQuestionForm, {setSubmitting}: FormikHelpers<CreateQuestionForm>) => {
-        console.log('submit')
         const isSuccess = await dispatch(addQuestion(values))
 
         setSubmitting(false);
@@ -99,6 +111,29 @@ const AddQuestionForm = () => {
             history.push(GET_ROUTE.TECHNOLOGY(technologyId))
         }
     };
+
+    const answers: Answer[] = [
+        {
+            label: "Poprawna odpowiedź",
+            name: "correctAnswer",
+            type: AnswerType.CORRECT,
+        },
+        {
+            label: "Zła odpowiedź",
+            name: "badAnswer1",
+            type: AnswerType.WRONG,
+        },
+        {
+            label: "Zła odpowiedź",
+            name: "badAnswer2",
+            type: AnswerType.WRONG,
+        },
+        {
+            label: "Zła odpowiedź",
+            name: "badAnswer3",
+            type: AnswerType.WRONG,
+        },
+    ]
     return (
         <>
             <Formik
@@ -117,6 +152,8 @@ const AddQuestionForm = () => {
                       setFieldValue
                   }) => (
                     <form onSubmit={handleSubmit}>
+                        {console.log({values})
+                        }
                         <Grid container spacing={4}>
                             <Grid item xs={12}>
                                 <DifficultySliderInput
@@ -150,90 +187,33 @@ const AddQuestionForm = () => {
                                         codeValue={values.codeAttachment}
                                         onCodeLangChange={handleChange}
                                         onCodeValueChange={code => setFieldValue("codeAttachment", code)}
-
                                     />
                                 </Grid>
                             )}
-                            <Grid item xs={8}>
-                                <Grid container spacing={4} alignItems="center">
-                                    <Grid item xs={1}>
-                                        <CheckCircleIcon className={classes.tickIcon}/>
-                                    </Grid>
-                                    <Grid item xs={11}>
-                                        <TextField
-                                            required
-                                            label="Correct answer"
-                                            name="correctAnswer"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.correctAnswer}
-                                            error={touched.correctAnswer && !isEmpty(errors.correctAnswer)}
-                                            fullWidth
-                                            multiline
-                                        />
-                                    </Grid>
+
+                            {answers.map(({name, type, label}) => (
+                                <Grid item xs={12} key={name}>
+                                    <AnswerSection
+                                        textAnswer={{
+                                            name: `${name}.body`,
+                                            label,
+                                            value: values[name].body,
+                                            touched: touched[name]?.body,
+                                            error: errors[name]?.body,
+                                            handleChange,
+                                            handleBlur
+                                        }}
+                                        codeAnswer={{
+                                            codeLang: values.codeLang,
+                                            codeValue: values[name].codeValue,
+                                            addCode: values[name].addCode,
+                                            onCodeValueChange: (value: string) => setFieldValue(`${name}.codeValue`, value),
+                                            onAddCodeChange: (value: boolean) => setFieldValue(`${name}.addCode`, value)
+                                        }}
+                                        type={type}
+                                    />
                                 </Grid>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Grid container spacing={4} alignItems="center">
-                                    <Grid item xs={1}>
-                                        <HighlightOffIcon className={classes.wrongIcon}/>
-                                    </Grid>
-                                    <Grid item xs={11}>
-                                        <TextField
-                                            required
-                                            label="Bad answer"
-                                            name="badAnswer1"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.badAnswer1}
-                                            error={touched.badAnswer1 && !isEmpty(errors.badAnswer1)}
-                                            multiline
-                                            fullWidth
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Grid container spacing={4} alignItems="center">
-                                    <Grid item xs={1}>
-                                        <HighlightOffIcon className={classes.wrongIcon}/>
-                                    </Grid>
-                                    <Grid item xs={11}>
-                                        <TextField
-                                            required
-                                            label="Bad answer"
-                                            name="badAnswer2"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.badAnswer2}
-                                            error={touched.badAnswer2 && !isEmpty(errors.badAnswer2)}
-                                            multiline
-                                            fullWidth
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Grid container spacing={4} alignItems="center">
-                                    <Grid item xs={1}>
-                                        <HighlightOffIcon className={classes.wrongIcon}/>
-                                    </Grid>
-                                    <Grid item xs={11}>
-                                        <TextField
-                                            required
-                                            label="Bad answer"
-                                            name="badAnswer3"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            value={values.badAnswer3}
-                                            error={touched.badAnswer3 && !isEmpty(errors.badAnswer3)}
-                                            multiline
-                                            fullWidth
-                                        />
-                                    </Grid>
-                                </Grid>
-                            </Grid>
+                            ))}
                             <Grid item className={classes.buttons} xs={12}>
                                 <Button
                                     to={GET_ROUTE.TECHNOLOGY(technologyId)}
