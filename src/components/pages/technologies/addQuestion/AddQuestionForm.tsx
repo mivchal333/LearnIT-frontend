@@ -15,6 +15,9 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import {FormikHelpers} from "formik/dist/types";
 import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
+import CodeAttachment from "./inputs/CodeAttachment";
+import CodeAttachmentButton from "./CodeAttachmentButton";
+import {CodeLanguage} from "../../../../constant/codeLanguages";
 
 export type CreateQuestionForm = {
     body: string,
@@ -23,6 +26,9 @@ export type CreateQuestionForm = {
     badAnswer1: string,
     badAnswer2: string,
     badAnswer3: string,
+    addCodeAttachment: boolean,
+    codeLang?: CodeLanguage,
+    codeAttachment?: string,
 }
 
 type FormErrorState = {
@@ -36,9 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 margin: theme.spacing(1),
             },
         },
-        nameField: {
-            display: 'flex',
-        },
+
         buttons: {
             display: 'flex',
             justifyContent: 'flex-end',
@@ -60,7 +64,13 @@ const AddQuestionForm = () => {
     usePathTechnologyContext()
 
     const initialValues: CreateQuestionForm = {
-        body: "", correctAnswer: "", difficultyValue: 1, badAnswer1: "", badAnswer2: "", badAnswer3: ""
+        body: "",
+        correctAnswer: "",
+        difficultyValue: 1,
+        badAnswer1: "",
+        badAnswer2: "",
+        badAnswer3: "",
+        addCodeAttachment: false,
     }
 
     const validateFields = (values: CreateQuestionForm) => {
@@ -115,17 +125,35 @@ const AddQuestionForm = () => {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <MultilineText
-                                    label="Body"
-                                    name="body"
-                                    required
-                                    className={classes.nameField}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.body}
-                                    isError={touched.body && !isEmpty(errors.body)}
-                                />
+                                <Grid container alignItems={"center"} justifyContent="space-between">
+                                    <Grid item xs={9}>
+                                        <MultilineText
+                                            label="Body"
+                                            name="body"
+                                            required
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.body}
+                                            isError={touched.body && !isEmpty(errors.body)}
+                                        />
+                                    </Grid>
+                                    <CodeAttachmentButton
+                                        value={values.addCodeAttachment}
+                                        onChange={(value) => setFieldValue("addCodeAttachment", value)}
+                                    />
+                                </Grid>
                             </Grid>
+                            {values.addCodeAttachment && (
+                                <Grid item xs={12}>
+                                    <CodeAttachment
+                                        codeMode={values.codeLang}
+                                        codeValue={values.codeAttachment}
+                                        onCodeLangChange={handleChange}
+                                        onCodeValueChange={code => setFieldValue("codeAttachment", code)}
+
+                                    />
+                                </Grid>
+                            )}
                             <Grid item xs={8}>
                                 <Grid container spacing={4} alignItems="center">
                                     <Grid item xs={1}>

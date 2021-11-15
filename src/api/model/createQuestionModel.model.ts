@@ -4,4 +4,6 @@ export interface CreateQuestionModel {
     difficultyValue: number,
     correctAnswer: string,
     badAnswers: string[],
+    codeLag?: string,
+    codeAttachment?: string,
 }

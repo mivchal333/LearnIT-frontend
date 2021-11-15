@@ -26,9 +26,8 @@ const MultilineText = (props: PropsType) => {
             helperText={helperText}
             error={isError}
             multiline
-            minRows={5}
-            fullWidth
             className={className}
+            fullWidth
         />
     )
 }
