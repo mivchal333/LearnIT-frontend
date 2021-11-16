@@ -17,22 +17,22 @@ interface MenuPosition {
 
 const menuListItems: MenuPosition[] = [
     {
-        title: "Dashboard",
+        title: "LearnIT",
         href: GET_ROUTE.HOME(),
         icon: <DashboardIcon/>
     },
     {
-        title: "Technologies",
+        title: "Technologie",
         href: GET_ROUTE.TECHNOLOGIES(),
         icon: <ListIcon/>
     },
     {
-        title: "Statistics",
+        title: "Statystyki",
         href: GET_ROUTE.STATISTICS(),
         icon: <BarChartIcon/>
     },
     {
-        title: "Account",
+        title: "Moje konto",
         href: GET_ROUTE.ACCOUNT(),
         icon: <AccountBoxIcon/>
     }

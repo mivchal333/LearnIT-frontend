@@ -5,7 +5,7 @@ import {isNil, size} from "lodash-es";
 import AnswerTimelineItem from "../history/AnswerTimelineItem";
 import {Timeline} from "@material-ui/lab";
 import {UserAttempt} from "../../../api/model/userAttempt.model";
-import {CircularProgress, makeStyles, Paper} from "@material-ui/core";
+import {CircularProgress, makeStyles, Paper, Typography} from "@material-ui/core";
 import {SummaryPageRouteParam} from "../../../route/route.model";
 
 const useStyles = makeStyles((theme: any) => ({
@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme: any) => ({
         marginTop: theme.spacing(3),
         marginBottom: theme.spacing(3),
         padding: theme.spacing(2),
+    },
+    title: {
+        padding: theme.spacing(3)
     },
 }));
 const SummaryPage = () => {
@@ -40,19 +43,27 @@ const SummaryPage = () => {
 
     const {history = []} = attempt
     return (
-        <Paper className={classes.paper}>
-            <Timeline>
-                {history.map((entry, index) => {
-                    const isLastItem = index === size(history) - 1;
-                    return (
-                        <AnswerTimelineItem
-                            key={entry.id}
-                            entry={entry}
-                            index={index + 1}
-                            isLast={isLastItem}/>
-                    );
-                })}
-            </Timeline></Paper>
+        <>
+            <Paper>
+                <Typography variant="h4" className={classes.title}>
+                    Podsumowanie
+                </Typography>
+            </Paper>
+
+            <Paper className={classes.paper}>
+                <Timeline>
+                    {history.map((entry, index) => {
+                        const isLastItem = index === size(history) - 1;
+                        return (
+                            <AnswerTimelineItem
+                                key={entry.id}
+                                entry={entry}
+                                index={index + 1}
+                                isLast={isLastItem}/>
+                        );
+                    })}
+                </Timeline></Paper>
+        </>
     )
 }
 export default SummaryPage

@@ -85,7 +85,7 @@ const AppBarWrapper = (props: PropsType) => {
                         <MenuIcon/>
                     </IconButton>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                        Dashboard
+                        LearnIT
                     </Typography>
                     <HeaderActionSection/>
                 </Toolbar>
