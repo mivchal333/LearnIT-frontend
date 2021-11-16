@@ -20,11 +20,11 @@ const GameFinishedMessage = () => {
                     variant="outlined"
                     onClick={() => history.push(GET_ROUTE.GAME_ATTEMPT_SUMMARY(attemptId))}
                 >
-                    View Summary
+                    Zobacz Podsumowanie
                 </Button>
             }
         >
-            Incorrect answer. Game finished
+            Niepoprawna odpowiedź. Gra skończona.
         </MuiAlert>
 
     )

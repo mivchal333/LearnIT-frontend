@@ -25,7 +25,7 @@ const AddTechnologyButton = () => {
         startIcon={<AddIcon/>}
 
     >
-        Create new
+        Dodaj Nową
     </Button>
 }
 

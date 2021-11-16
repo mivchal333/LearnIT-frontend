@@ -51,7 +51,7 @@ const TechnologyListItem = (props: PropsType) => {
                 </Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button to={GET_ROUTE.TECHNOLOGY(technology.id)} component={Link}>View</Button>
+                <Button to={GET_ROUTE.TECHNOLOGY(technology.id)} component={Link}>Zobacz</Button>
             </CardActions>
         </Card>
     )

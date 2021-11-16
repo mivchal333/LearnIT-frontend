@@ -48,10 +48,10 @@ const GameFinishedModal = () => {
                 variant="outlined"
                 onClick={onSubmit}
             >
-                View Summary
+                Zobacz podsumowanie
             </Button>
             <Button onClick={onClose}>
-                Close
+                Zamknij
             </Button>
         </>
     )
@@ -64,9 +64,9 @@ const GameFinishedModal = () => {
                 severity="success"
             >
                 <AlertTitle>
-                    Success
+                    Brawo
                 </AlertTitle>
-                Cards game finished. See summary for details
+                Gra skończona. Zobacz podsumowanie
             </Alert>
         </ModalWrapper>
     )
