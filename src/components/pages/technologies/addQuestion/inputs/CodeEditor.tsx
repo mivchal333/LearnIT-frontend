@@ -51,6 +51,7 @@ const CodeEditor = (props: PropsType) => {
                 tabSize: 4,
             }}
             debounceChangePeriod={300}
+            wrapEnabled
         />
     )
 }

@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
 import {AnswerResult} from "../../api/model/answerResult.model";
-import {Question} from "../../api/model/Question.model";
+import {QuestionModel} from "../../api/model/question.model";
 
 interface QuizSlice {
     answerResult: AnswerResult | null,
-    question: Question | null,
+    question: QuestionModel | null,
 
 }
 
@@ -25,7 +25,7 @@ const quizSlice = createSlice({
             state.answerResult = null;
             state.question = null;
         },
-        setQuestion: (state, action: PayloadAction<Question>) => {
+        setQuestion: (state, action: PayloadAction<QuestionModel>) => {
             state.question = action.payload;
         },
     }

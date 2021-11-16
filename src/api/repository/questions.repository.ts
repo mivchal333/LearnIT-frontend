@@ -1,10 +1,10 @@
 import axios, {AxiosResponse} from "axios";
 import {AnswerResult} from "../model/answerResult.model";
 import {GameProgress} from "../model/gameProgress.model";
-import {Question} from "../model/Question.model";
+import {QuestionModel} from "../model/question.model";
 import {CreateQuestionModel} from "../model/createQuestionModel.model";
 
-const fetchQuestion = (attemptId: string): Promise<AxiosResponse<GameProgress<Question>>> => axios.get("/question", {
+const fetchQuestion = (attemptId: string): Promise<AxiosResponse<GameProgress<QuestionModel>>> => axios.get("/question", {
     params: {
         attemptId
     }
@@ -15,7 +15,7 @@ const submitAnswer = (attemptId: string, answerId?: number): Promise<AxiosRespon
     answerId,
 })
 
-const createQuestion = (data: CreateQuestionModel): Promise<AxiosResponse<Question>> => axios.post("/question", data)
+const createQuestion = (data: CreateQuestionModel): Promise<AxiosResponse<QuestionModel>> => axios.post("/question", data)
 
 export const QuestionRepository = {
     fetchQuestion,

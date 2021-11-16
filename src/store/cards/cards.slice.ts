@@ -7,10 +7,11 @@ interface CardsSlice {
     isFlipped: boolean,
 }
 
-const emptyCard = {
+const emptyCard: Card = {
     answer: {
         id: 0,
-        body: ""
+        body: "",
+        code: ""
     },
     body: " a "
 };

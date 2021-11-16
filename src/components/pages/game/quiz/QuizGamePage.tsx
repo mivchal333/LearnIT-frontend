@@ -1,17 +1,16 @@
 import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
-import {resetActualQuestion, selectQuestion} from "../../../../store/quiz/quiz.slice";
+import {selectQuestion} from "../../../../store/quiz/quiz.slice";
 import {useDispatch} from "../../../../store/store";
 import {loadQuestion} from "../../../../store/quiz/quiz.actions";
 import AnswerButtons from "./ActionButtons";
 import {CircularProgress, Grid, Paper, Typography} from "@material-ui/core";
 import ProgressTracker from "../common/ProgressTracker";
-import {resetGameState} from "../../../../store/shared/game/game.slice";
 import {makeStyles} from "@material-ui/core/styles";
 import {isNil} from "lodash-es";
 import AnswerResult from "./AnswerResult";
 import {useRequireUserAttempt} from "../../../../hooks/useRequireUserAttempt";
-import TechnologyHeader from "../common/TechnologyHeader";
+import CodePreview from "../common/CodePreview";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,8 +43,8 @@ const QuizGamePage = () => {
     useEffect(() => {
         dispatch(loadQuestion())
         return () => {
-            dispatch(resetGameState())
-            dispatch(resetActualQuestion())
+            // dispatch(resetGameState())
+            // dispatch(resetActualQuestion())
         }
     }, [])
 
@@ -56,15 +55,23 @@ const QuizGamePage = () => {
 
     return (
         <div>
-            <TechnologyHeader/>
             <Paper className={classes.paper}>
                 <Grid container justifyContent="space-between" direction="row-reverse" spacing={4}>
                     <Grid item>
                         <ProgressTracker/>
                     </Grid>
                     <Grid item>
-                        <Typography variant="subtitle2">Question</Typography>
+                        <Typography variant="subtitle2">Pytanie</Typography>
                         <Typography variant="h4">{question.body}</Typography>
+                        {question.codeAttachment && (
+                            <>
+                                <Typography variant="subtitle2">Kod</Typography>
+                                <CodePreview
+                                    code={question.codeAttachment}
+                                    lang={question.codeLang}
+                                />
+                            </>
+                        )}
                     </Grid>
                 </Grid>
                 <div className={classes.answersSection}>
