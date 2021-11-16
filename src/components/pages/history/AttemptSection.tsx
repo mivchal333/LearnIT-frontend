@@ -8,6 +8,8 @@ import {Timeline} from "@material-ui/lab";
 import AnswerTimelineItem from "./AnswerTimelineItem";
 import {isEmpty, size} from "lodash-es";
 import {formatRelative} from 'date-fns'
+import pl from 'date-fns/locale/pl';
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -33,7 +35,7 @@ const AttemptSection = (props: PropsTypes) => {
     }
 
     const {attempt: {history}} = props
-    const relativeDate = formatRelative(props.attempt.startDate, new Date());
+    const relativeDate = formatRelative(props.attempt.startDate, new Date(), {locale: pl});
     return (
         <ListItem>
             <Accordion className={classes.listItem}>

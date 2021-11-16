@@ -42,7 +42,7 @@ const CardItem = () => {
             <FlippingCardWrapper onFlip={onFlip}>
                 <Grid container direction="column" spacing={2}>
                     <Grid item>
-                        <Typography className={classes.cardBody}>{card.body}</Typography>
+                        f<Typography className={classes.cardBody}>{card.body}</Typography>
                     </Grid>
                     {card.codeAttachment && (
                         <Grid item>

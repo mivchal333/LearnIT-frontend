@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
-import {selectQuestion} from "../../../../store/quiz/quiz.slice";
+import {resetActualQuestion, selectQuestion} from "../../../../store/quiz/quiz.slice";
 import {useDispatch} from "../../../../store/store";
 import {loadQuestion} from "../../../../store/quiz/quiz.actions";
 import AnswerButtons from "./ActionButtons";
@@ -11,6 +11,7 @@ import {isNil} from "lodash-es";
 import AnswerResult from "./AnswerResult";
 import {useRequireUserAttempt} from "../../../../hooks/useRequireUserAttempt";
 import CodePreview from "../common/CodePreview";
+import {resetGameState} from "../../../../store/shared/game/game.slice";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,8 +44,8 @@ const QuizGamePage = () => {
     useEffect(() => {
         dispatch(loadQuestion())
         return () => {
-            // dispatch(resetGameState())
-            // dispatch(resetActualQuestion())
+            dispatch(resetGameState())
+            dispatch(resetActualQuestion())
         }
     }, [])
 

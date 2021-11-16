@@ -5,3 +5,7 @@ export interface TechnologyRouteParam {
 export interface StartGameRouteParam {
     id: string
 }
+
+export interface SummaryPageRouteParam {
+    id: string
+}

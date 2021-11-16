@@ -19,7 +19,7 @@ import FlagWrapper from "./components/FlagWrapper";
 import ModalWrapper from "./components/ModalWrapper";
 import AddQuestionPage from "./components/pages/technologies/addQuestion/AddQuestionPage";
 import EditTechnologyPage from "./components/pages/technologies/technologyForm/EditTechnologyPage";
-import GameAttemptSummaryPage from "./components/pages/attempt/GameAttemptSummaryPage";
+import SummaryPage from "./components/pages/attempt/SummaryPage";
 import RegisterPage from "./components/pages/register/RegisterPage";
 import {useDispatch} from "./store/store";
 import {loadUserDetails} from "./store/user/actions";
@@ -44,7 +44,7 @@ const RouteContent: RouteContentType = {
     ACCOUNT: <MyAccountPage/>,
 
     STATISTICS: <StatisticsPage/>,
-    GAME_ATTEMPT_SUMMARY: <GameAttemptSummaryPage/>,
+    GAME_ATTEMPT_SUMMARY: <SummaryPage/>,
 
     // default one
     HOME: <HomePage/>
