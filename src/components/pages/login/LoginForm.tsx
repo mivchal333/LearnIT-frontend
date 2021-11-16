@@ -112,11 +112,6 @@ const LoginForm = () => {
                         Zaloguj się
                     </Button>
                     <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Zapomniałeś hasła?
-                            </Link>
-                        </Grid>
                         <Grid item>
                             <Link component={HrefLink} to={GET_ROUTE.REGISTER()} variant="body2">
                                 Nie masz konta? Zarejestruj się

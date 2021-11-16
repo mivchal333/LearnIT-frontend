@@ -24,7 +24,7 @@ export const loginUser = (loginPayload: LoginFormType) => async (dispatch: Dispa
     try {
         await UserService.loginUser(loginPayload)
         dispatch(loadUserDetails())
-        dispatch(addFlag(successFlag("Login successful.")))
+        dispatch(addFlag(successFlag("Zalogowano")))
     } catch (e) {
         console.error(e)
         dispatch(addFlag(errorFlag("Failed to load user details.")))
@@ -35,7 +35,7 @@ export const logout = () => async (dispatch: Dispatch) => {
     try {
         await UserService.logout()
         dispatch(resetUserDetails())
-        dispatch(addFlag(successFlag("Logout successful.")))
+        dispatch(addFlag(successFlag("Wylogowano")))
     } catch (e) {
         console.error(e)
         dispatch(addFlag(errorFlag("Failed to logout.")))

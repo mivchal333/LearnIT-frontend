@@ -1,7 +1,7 @@
 import React from 'react'
 import {CardMedia, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import {getStaticImageUrl, LEARNING_PROGRESS_IMAGE_PATH} from "../../../service/staticProvider";
+import {getStaticImageUrl, ONLINE_LEARNING_IMAGE_PATH} from "../../../service/staticProvider";
 
 const useStyles = makeStyles((theme) => ({
     wrapper: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const AdvantageCard = () => {
+const AdvantageCard3 = () => {
     const classes = useStyles();
     return (
         <div className={classes.wrapper}>
@@ -26,15 +26,13 @@ const AdvantageCard = () => {
                     <Grid container spacing={3}>
                         <Grid item>
                             <Typography variant="h5">
-                                Miejcie otwarte umysły, my zatroszczymy się o całą resztę.
+                                Nauka online
                             </Typography>
                         </Grid>
                         <Grid item>
                             <Typography>
-                                Możesz korzystać z przeróżnych narzędzi, stawiając w ten sposób czoła każdemu wyzwaniu.
-                                Począwszy od fiszek, które są niezwykle pomocne w nauce języka angielskiego, po gry,
-                                które
-                                ułatwiają zrozumienie historii.
+                                Korzystaj z aplikacji kiedy chcesz! Ucz się w dowolnej chwili, nie czekaj na trenera
+                                lub rozpoczęcie kursu. Zacznij od razu po wybraniu technologii.
                             </Typography>
                         </Grid>
                     </Grid>
@@ -42,11 +40,11 @@ const AdvantageCard = () => {
                 <Grid item xs={6}>
                     <CardMedia
                         className={classes.cardMedia}
-                        image={getStaticImageUrl(LEARNING_PROGRESS_IMAGE_PATH)}
+                        image={getStaticImageUrl(ONLINE_LEARNING_IMAGE_PATH)}
                     />
                 </Grid>
             </Grid>
         </div>
     )
 }
-export default AdvantageCard
+export default AdvantageCard3

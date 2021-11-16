@@ -63,10 +63,10 @@ const LearningBanner = () => {
                             <Grid item>
                                 <Typography component="h2" variant="h4" color="inherit" gutterBottom
                                             className={classes.title}>
-                                    Sprawimy, że będziesz nie do zatrzymania!
+                                    Sprawimy, że będziesz prawdziwym mistrzem!
                                 </Typography>
                                 <Typography variant="body1" color="inherit" paragraph className={classes.subtitle}>
-                                    Opanuj każdy przedmiot, osiągaj sukcesy na każdym polu
+                                    Opanuj każdą technologie, osiągaj sukcesy na każdym polu
                                 </Typography>
                             </Grid>
                             <Grid item>

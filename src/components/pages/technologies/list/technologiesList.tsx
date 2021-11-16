@@ -8,6 +8,7 @@ import TechnologyListItem from "./TechnologyListItem";
 import AddTechnologyButton from "./AddTechnologyButton";
 import {makeStyles} from "@material-ui/core";
 import {selectUserLoggedIn} from "../../../../store/user/user.slice";
+import TechnologiesBanner from "./TechnologiesBanner";
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,6 +39,7 @@ const TechnologiesList = () => {
         {isLoggedIn && (
             <AddTechnologyButton/>
         )}
+        <TechnologiesBanner/>
         <div className={classes.listWrapper}>
             {values(technologies).map((technology) => (
                 <TechnologyListItem technology={technology} key={technology.id}/>
