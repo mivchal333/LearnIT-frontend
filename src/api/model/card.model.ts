@@ -6,4 +6,5 @@ export interface Card {
     codeAttachment?: string,
     codeLang?: CodeLanguage,
     answer: Answer,
+    difficultyValue: number,
 }

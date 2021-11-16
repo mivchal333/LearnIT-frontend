@@ -7,6 +7,7 @@ import FlippingCardWrapper from "./FlippingCardWrapper";
 import {selectIsLoading} from "../../../../store/shared/game/game.slice";
 import {isNil} from "lodash-es";
 import CodePreview from "../common/CodePreview";
+import DifficultyLevelIndicator from "../common/DifficultyLevelIndicator";
 
 
 const useStyles = makeStyles((theme: any) => ({
@@ -15,13 +16,9 @@ const useStyles = makeStyles((theme: any) => ({
         marginBottom: theme.spacing(3),
         padding: theme.spacing(2),
     },
-    cardBody: {
+    cardTextContent: {
         fontSize: theme.typography.pxToRem(22),
         fontWeight: theme.typography.fontWeightRegular,
-    },
-    cardAnswer: {
-        fontSize: theme.typography.pxToRem(16),
-        fontWeight: theme.typography.fontWeightMedium,
     },
 }));
 const CardItem = () => {
@@ -40,9 +37,19 @@ const CardItem = () => {
     return (
         <ReactCardFlip isFlipped={isFlipped} containerClassName={classes.cardContainer}>
             <FlippingCardWrapper onFlip={onFlip}>
-                <Grid container direction="column" spacing={2}>
+                <Grid container direction="column" spacing={3}>
                     <Grid item>
-                        f<Typography className={classes.cardBody}>{card.body}</Typography>
+                        <Grid container justifyContent="space-between">
+                            <Grid item>
+                                <Typography variant="subtitle2">Pytanie</Typography>
+                            </Grid>
+                            <Grid item>
+                                {!isFlipped && (
+                                    <DifficultyLevelIndicator value={card.difficultyValue}/>
+                                )}
+                            </Grid>
+                        </Grid>
+                        <Typography className={classes.cardTextContent}>{card.body}</Typography>
                     </Grid>
                     {card.codeAttachment && (
                         <Grid item>
@@ -57,7 +64,8 @@ const CardItem = () => {
             <FlippingCardWrapper onFlip={onFlip}>
                 <Grid container direction="column" spacing={2}>
                     <Grid item>
-                        <Typography className={classes.cardAnswer}>{card.answer.body}</Typography>
+                        <Typography variant="subtitle2">Odpowiedź</Typography>
+                        <Typography className={classes.cardTextContent}>{card.answer.body}</Typography>
                     </Grid>
                     <Grid item>
                         {card.answer.code && (

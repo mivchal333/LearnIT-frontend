@@ -11,7 +11,7 @@ const WrongAnswerMessage = () => {
             severity="error"
             action={<NextQuestionButton/>}
         >
-            Incorrect answer
+            Niepoprawna odpowiedź
         </MuiAlert>
 
     )

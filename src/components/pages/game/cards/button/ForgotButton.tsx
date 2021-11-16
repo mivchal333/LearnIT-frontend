@@ -25,7 +25,7 @@ const ForgotButton = () => {
             onClick={() => dispatch(notKnowItAction())}
 
         >
-            I forgot it
+            Nie wiem
         </Button>
     )
 }

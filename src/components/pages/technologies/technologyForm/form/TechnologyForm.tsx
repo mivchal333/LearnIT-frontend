@@ -64,9 +64,9 @@ const TechnologyForm = (props: PropsType) => {
                 validate={(values: TechnologyFormPayload) => {
                     const errors: FormErrorState = {};
                     if (isEmpty(values.name)) {
-                        errors.name = 'Required';
+                        errors.name = 'Wymagane';
                     } else if (isEmpty(values.description))
-                        errors.description = 'Required';
+                        errors.description = 'Wymagane';
                     return errors;
                 }}
                 onSubmit={props.onSubmit}
@@ -94,7 +94,7 @@ const TechnologyForm = (props: PropsType) => {
                                 <TextField
                                     required
                                     className={classes.nameField}
-                                    label="Name"
+                                    label="Nazwa"
                                     name="name"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
@@ -107,7 +107,7 @@ const TechnologyForm = (props: PropsType) => {
                             <Grid item xs={12}>
                                 <TextField
                                     required
-                                    label="Description"
+                                    label="Opis"
                                     name="description"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
@@ -123,7 +123,7 @@ const TechnologyForm = (props: PropsType) => {
                                 <Button
                                     onClick={() => history.goBack()}
                                 >
-                                    Back
+                                    Wróć
                                 </Button>
                                 <Button
                                     variant="contained"
@@ -132,7 +132,7 @@ const TechnologyForm = (props: PropsType) => {
                                     color="primary"
                                     startIcon={type == FormType.ADD ? <AddIcon/> : <SaveIcon/>}
                                 >
-                                    {type == FormType.ADD ? 'ADD' : 'SAVE'}
+                                    {type == FormType.ADD ? 'Dodaj' : 'Zapisz'}
                                 </Button>
                             </Grid>
                         </Grid>

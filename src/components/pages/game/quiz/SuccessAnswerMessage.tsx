@@ -10,7 +10,7 @@ const SuccessAnswerMessage = () => {
             severity="success"
             action={<NextQuestionButton/>}
         >
-            Correct answer
+            Poprawna odpowiedź
         </MuiAlert>
 
     )

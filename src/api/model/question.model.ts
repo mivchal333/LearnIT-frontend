@@ -7,6 +7,6 @@ export interface QuestionModel {
     codeAttachment?: string,
     codeLang?: CodeLanguage,
     technologyId: number,
-    difficultyId: number,
+    difficultyValue: number,
     answers: Answer[],
 }

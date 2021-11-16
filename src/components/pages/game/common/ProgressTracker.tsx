@@ -11,7 +11,7 @@ const ProgressTracker = () => {
         return <></>
     }
     return (
-        <Chip label={`${progress.actual + 1} of ${progress.total}`}/>
+        <Chip label={`${progress.actual + 1} z ${progress.total}`}/>
     )
 }
 export default ProgressTracker

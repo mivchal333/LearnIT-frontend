@@ -12,7 +12,7 @@ import AnswerResult from "./AnswerResult";
 import {useRequireUserAttempt} from "../../../../hooks/useRequireUserAttempt";
 import CodePreview from "../common/CodePreview";
 import {resetGameState} from "../../../../store/shared/game/game.slice";
-
+import DifficultyLevelIndicator from "../common/DifficultyLevelIndicator";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     answersSection: {
         paddingTop: theme.spacing(3),
         paddingBottom: theme.spacing(3)
-    }
+    },
 }));
 
 const QuizGamePage = () => {
@@ -63,7 +63,10 @@ const QuizGamePage = () => {
                     </Grid>
                     <Grid item>
                         <Typography variant="subtitle2">Pytanie</Typography>
-                        <Typography variant="h4">{question.body}</Typography>
+                        <Typography variant="h4">
+                            {question.body}
+                            <DifficultyLevelIndicator value={question.difficultyValue}/>
+                        </Typography>
                         {question.codeAttachment && (
                             <>
                                 <Typography variant="subtitle2">Kod</Typography>

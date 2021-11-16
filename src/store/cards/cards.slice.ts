@@ -11,9 +11,11 @@ const emptyCard: Card = {
     answer: {
         id: 0,
         body: "",
-        code: ""
+        code: "",
     },
-    body: " a "
+    body: " a ",
+    codeAttachment: "",
+    difficultyValue: 0
 };
 const initialState: CardsSlice = {
     currentCard: emptyCard,

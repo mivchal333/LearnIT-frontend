@@ -49,7 +49,7 @@ const UserHistory = () => {
         <Card className={classes.root}>
             <CardContent>
                 <Typography variant="h6">
-                    Last attempts
+                    Ostatnia historia
                 </Typography>
                 <List>
                     {map(userAttempts, userAttempt => (

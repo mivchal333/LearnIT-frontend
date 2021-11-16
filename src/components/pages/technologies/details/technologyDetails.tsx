@@ -76,15 +76,17 @@ const TechnologyDetails = () => {
                 <Typography className={classes.description} color="textSecondary">
                     {technology.description}
                 </Typography>
-                <Chip label={`${technology.questionCount} Questions`}/>
+                <Chip label={`${technology.questionCount} Pytania`}/>
 
             </CardContent>
             {technology.questionCount > 0 && (
                 <CardActions className={classes.footer}>
-                    <Button onClick={() => showConfirm(Modal.START_QUIZ)} startIcon={<RadioButtonCheckedIcon/>}>PLAY
-                        QUIZ!</Button>
-                    <Button onClick={() => showConfirm(Modal.START_CARDS)} startIcon={<ViewCarouselIcon/>}>PLAY
-                        CARDS!</Button>
+                    <Button onClick={() => showConfirm(Modal.START_QUIZ)} startIcon={<RadioButtonCheckedIcon/>}>
+                        Zacznij Quiz
+                    </Button>
+                    <Button onClick={() => showConfirm(Modal.START_CARDS)} startIcon={<ViewCarouselIcon/>}>
+                        Zacznij Ficzki
+                    </Button>
                 </CardActions>
             )}
         </Card>

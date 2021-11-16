@@ -53,7 +53,7 @@ const ActionButtonGroup = (props: PropsType) => {
                 variant="outlined"
                 startIcon={<AddIcon/>}
             >
-                Add Question
+                Dodaj pytanie
             </Button>
             <Button
                 to={GET_ROUTE.TECHNOLOGY_EDIT(technologyId)}
@@ -61,14 +61,14 @@ const ActionButtonGroup = (props: PropsType) => {
                 variant="outlined"
                 startIcon={<EditIcon/>}
             >
-                Edit
+                Edytuj
             </Button>
             <Button
                 className={classes.deleteButton}
                 onClick={onDeleteClick}
                 startIcon={<DeleteIcon/>}
             >
-                Delete
+                Usuń
             </Button>
         </ButtonGroup>
     )

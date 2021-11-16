@@ -15,7 +15,7 @@ const NextQuestionButton = (props: PropsType) => {
             onClick={() => dispatch(loadNextQuestionAction())}
             color="inherit"
         >
-            Next Question
+            Następne pytanie
         </Button>
     )
 }

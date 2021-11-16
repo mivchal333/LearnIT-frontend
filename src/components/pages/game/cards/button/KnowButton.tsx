@@ -24,7 +24,7 @@ const KnowButton = () => {
             className={classes.button}
             onClick={() => dispatch(knowItAction())}
         >
-            I know it
+            Wiem
         </Button>
     )
 }

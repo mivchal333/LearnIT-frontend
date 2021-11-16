@@ -57,8 +57,8 @@ const EditTechnologyPage = () => {
     }
     return <>
         <Paper className={classes.paper}>
-            <Typography component="h1" variant="h4" align="center" className={classes.title}>
-                Edit Technology
+            <Typography variant="h4" className={classes.title}>
+                Edytuj
             </Typography>
             <div>
                 {technology
