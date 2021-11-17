@@ -17,6 +17,8 @@ export enum Routes {
     LOGIN = 'LOGIN',
     REGISTER = 'REGISTER',
     ACCOUNT = 'ACCOUNT',
+
+    ADMIN_ACCOUNTS = 'ADMIN_ACCOUNTS',
 }
 
 type RoutesMeta = {
@@ -43,7 +45,9 @@ export const ROUTE_META: RoutesMeta = {
 
     LOGIN: "/login",
     REGISTER: "/register",
-    ACCOUNT: "/account"
+    ACCOUNT: "/account",
+
+    ADMIN_ACCOUNTS: "/admin/accounts"
 }
 
 type GetRoute = {
@@ -65,5 +69,7 @@ export const GET_ROUTE: GetRoute = {
 
     LOGIN: () => "/login",
     REGISTER: () => "/register",
-    ACCOUNT: () => '/account'
+    ACCOUNT: () => '/account',
+
+    ADMIN_ACCOUNTS: () => '/admin/accounts'
 }

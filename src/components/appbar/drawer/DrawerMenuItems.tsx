@@ -7,7 +7,9 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import {GET_ROUTE} from "../../../route/routes";
 import LinkListItem from "./LinkListItem";
-
+import {useSelector} from "../../../store/store";
+import {selectIsAdmin, selectUserLoggedIn} from "../../../store/user/user.slice";
+import PeopleIcon from '@material-ui/icons/People';
 
 interface MenuPosition {
     title: string,
@@ -15,7 +17,24 @@ interface MenuPosition {
     icon: React.ReactNode,
 }
 
-const menuListItems: MenuPosition[] = [
+const statistics = {
+    title: "Statystyki",
+    href: GET_ROUTE.STATISTICS(),
+    icon: <BarChartIcon/>
+};
+
+const account = {
+    title: "Moje konto",
+    href: GET_ROUTE.ACCOUNT(),
+    icon: <AccountBoxIcon/>
+};
+const configureUsers = {
+    title: "Konfiguracja",
+    href: GET_ROUTE.ADMIN_ACCOUNTS(),
+    icon: <PeopleIcon/>
+};
+
+const basicItems: MenuPosition[] = [
     {
         title: "LearnIT",
         href: GET_ROUTE.HOME(),
@@ -26,28 +45,34 @@ const menuListItems: MenuPosition[] = [
         href: GET_ROUTE.TECHNOLOGIES(),
         icon: <ListIcon/>
     },
-    {
-        title: "Statystyki",
-        href: GET_ROUTE.STATISTICS(),
-        icon: <BarChartIcon/>
-    },
-    {
-        title: "Moje konto",
-        href: GET_ROUTE.ACCOUNT(),
-        icon: <AccountBoxIcon/>
-    }
 ]
 
-const DrawerMenuItems = () => (
-    <List>
-        {menuListItems.map(listItem => (
-            <LinkListItem href={listItem.href} key={listItem.title}>
-                <ListItemIcon>
-                    {listItem.icon}
-                </ListItemIcon>
-                <ListItemText primary={listItem.title}/>
-            </LinkListItem>
-        ))}
-    </List>
-)
+const DrawerMenuItems = () => {
+    const showList = [...basicItems];
+
+    const userLoggedIn = useSelector(selectUserLoggedIn);
+    const isAdmin = useSelector(selectIsAdmin);
+
+    if (userLoggedIn) {
+        showList.push(account, statistics)
+    }
+
+    if (isAdmin) {
+        showList.push(configureUsers)
+    }
+
+
+    return (
+        <List>
+            {showList.map(listItem => (
+                <LinkListItem href={listItem.href} key={listItem.title}>
+                    <ListItemIcon>
+                        {listItem.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={listItem.title}/>
+                </LinkListItem>
+            ))}
+        </List>
+    )
+}
 export default DrawerMenuItems

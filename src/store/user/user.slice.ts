@@ -1,8 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
-import {UserDetails} from "../../api/model/userDetails";
+import {Role, UserDetails} from "../../api/model/userDetails";
+import {includes} from "lodash-es";
 
-const emptyUserDetails: UserDetails = {email: "", firstName: "", lastName: ""}
+const emptyUserDetails: UserDetails = {roles: [], email: "", firstName: "", lastName: ""}
 
 interface UserSlice {
     loggedIn: boolean,
@@ -36,4 +37,6 @@ export const {
 
 export const selectUserDetails = (state: RootState) => state.user.userDetails || emptyUserDetails
 export const selectUserLoggedIn = (state: RootState) => state.user.loggedIn
+export const selectIsAdmin = (state: RootState) => includes(state.user.userDetails?.roles, Role.ADMIN)
+
 export const userReducer = userSlice.reducer;

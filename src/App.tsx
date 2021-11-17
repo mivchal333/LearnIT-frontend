@@ -23,6 +23,7 @@ import SummaryPage from "./components/pages/attempt/SummaryPage";
 import RegisterPage from "./components/pages/register/RegisterPage";
 import {useDispatch} from "./store/store";
 import {loadUserDetails} from "./store/user/actions";
+import AdminAccountsPage from "./components/pages/admin/accounts/AdminAccountsPage";
 
 
 type RouteContentType = {
@@ -46,8 +47,12 @@ const RouteContent: RouteContentType = {
     STATISTICS: <StatisticsPage/>,
     GAME_ATTEMPT_SUMMARY: <SummaryPage/>,
 
+    ADMIN_ACCOUNTS: <AdminAccountsPage/>,
+
     // default one
-    HOME: <HomePage/>
+    HOME: <HomePage/>,
+
+
 }
 
 const useStyles = makeStyles((theme) => ({
