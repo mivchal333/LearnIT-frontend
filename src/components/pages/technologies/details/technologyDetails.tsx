@@ -10,7 +10,7 @@ import {
     makeStyles,
     Typography
 } from "@material-ui/core";
-import {useDispatch} from "../../../../store/store";
+import {useDispatch, useSelector} from "../../../../store/store";
 import {Modal} from "../../../../store/shared/page/modal.model";
 import {showModal} from "../../../../store/shared/page/page.slice";
 import ActionButtonGroup from "./ActionButtonGroup";
@@ -19,6 +19,7 @@ import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
 import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
 import {EMPTY_IMAGE_PATH, getStaticImageUrl} from "../../../../service/staticProvider";
+import {selectUserLoggedIn} from "../../../../store/user/user.slice";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 const TechnologyDetails = () => {
     const classes = useStyles();
-
+    const isUserLogged = useSelector(selectUserLoggedIn);
     const dispatch = useDispatch()
     const [technology] = usePathTechnologyContext()
 
@@ -64,7 +65,9 @@ const TechnologyDetails = () => {
 
     return (
         <Card className={classes.root}>
-            <ActionButtonGroup/>
+            {isUserLogged && (
+                <ActionButtonGroup/>
+            )}
             <CardMedia
                 className={classes.cardMedia}
                 image={imageUrl}

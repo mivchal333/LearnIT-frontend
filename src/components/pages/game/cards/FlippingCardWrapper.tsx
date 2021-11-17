@@ -5,12 +5,13 @@ import {makeStyles, Paper} from "@material-ui/core";
 const useStyles = makeStyles((theme: any) => ({
     paper: {
         cursor: "pointer",
-        width: "404px",
-        height: "404px",
+        width: "40rem",
+        height: "30rem",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         padding: theme.spacing(2),
+        wordBreak: "break-word"
     },
 }));
 

@@ -47,7 +47,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     },
     title: {
         fontSize: '2.4rem',
-        fontWeight: 'bold',
+        fontWeight: 450,
+        color: theme.palette.grey["700"],
+        padding: theme.spacing(1)
     }
 }));
 
@@ -62,7 +64,7 @@ const RegisterPage = () => {
             <Grid item xs={false} sm={4} md={7} className={classes.image}>
                 <div className={classes.titleWrapper}>
                     <Typography variant="h4" color="textPrimary" className={classes.title}>
-                        Wyeliminuj zgadywanie w trakcie rozwiązywania zadań domowych. Zarejestruj się już
+                        Wyeliminuj zgadywanie na rozmowach rekrutacyjnych. Zarejestruj się już
                         dziś.
                     </Typography>
                 </div>

@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
-import {Grid, makeStyles, Paper} from "@material-ui/core";
+import {CircularProgress, Grid, makeStyles, Paper} from "@material-ui/core";
 import ProgressTracker from "../common/ProgressTracker";
 import {useDispatch} from "../../../../store/store";
 import {loadCard} from "../../../../store/cards/card.actions";
@@ -11,7 +11,8 @@ import TechnologyHeader from "../common/TechnologyHeader";
 import CardItem from "./CardItem";
 import KnowButton from "./button/KnowButton";
 import ForgotButton from "./button/ForgotButton";
-import {resetCurrentCard} from "../../../../store/cards/cards.slice";
+import {resetCurrentCard, selectCurrentCard} from "../../../../store/cards/cards.slice";
+import {isNil} from "lodash-es";
 
 
 const useStyles = makeStyles((theme: any) => ({
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme: any) => ({
 const CardsGamePage = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const card = useSelector(selectCurrentCard);
     const isLoading = useSelector(selectIsLoading);
 
     usePathTechnologyContext()
@@ -48,6 +50,9 @@ const CardsGamePage = () => {
         }
     }, [dispatch])
 
+    if (isLoading || isNil(card)) {
+        return <CircularProgress/>
+    }
     return (
         <div>
             <TechnologyHeader/>

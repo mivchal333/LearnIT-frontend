@@ -1,11 +1,9 @@
 import React, {useState} from 'react'
-import {CircularProgress, Grid, makeStyles, Typography} from "@material-ui/core";
+import {Grid, makeStyles, Typography} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {selectCurrentCard} from "../../../../store/cards/cards.slice";
 import ReactCardFlip from 'react-card-flip';
 import FlippingCardWrapper from "./FlippingCardWrapper";
-import {selectIsLoading} from "../../../../store/shared/game/game.slice";
-import {isNil} from "lodash-es";
 import CodePreview from "../common/CodePreview";
 import DifficultyLevelIndicator from "../common/DifficultyLevelIndicator";
 
@@ -24,16 +22,12 @@ const useStyles = makeStyles((theme: any) => ({
 const CardItem = () => {
     const classes = useStyles();
     const card = useSelector(selectCurrentCard);
-    const isLoading = useSelector(selectIsLoading);
     const [isFlipped, setIsFlipped] = useState(false)
 
     const onFlip = () => {
         setIsFlipped(!isFlipped)
     }
 
-    if (isLoading || isNil(card)) {
-        return <CircularProgress/>
-    }
     return (
         <ReactCardFlip isFlipped={isFlipped} containerClassName={classes.cardContainer}>
             <FlippingCardWrapper onFlip={onFlip}>
