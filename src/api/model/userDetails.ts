@@ -4,6 +4,12 @@ export enum Role {
     MOD = "ROLE_MOD",
 }
 
+export const RoleLabel: Record<Role, string> = {
+    ROLE_ADMIN: "Administrator",
+    ROLE_MOD: "Moderator",
+    ROLE_USER: "Użytkownik"
+}
+
 export interface UserDetails {
     firstName: string,
     lastName: string,

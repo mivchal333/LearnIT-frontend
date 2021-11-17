@@ -45,9 +45,14 @@ const LoginForm = () => {
 
     const onSubmit = async (values: LoginFormType, formikHelpers: FormikHelpers<LoginFormType>) => {
         formikHelpers.setSubmitting(true)
-        await dispatch(loginUser(values))
-        formikHelpers.setSubmitting(false)
-        history.push(GET_ROUTE.HOME())
+        try {
+            await dispatch(loginUser(values))
+            formikHelpers.setSubmitting(false)
+            history.push(GET_ROUTE.HOME())
+        } catch (e) {
+            formikHelpers.setSubmitting(false)
+            formikHelpers.setFieldError('password', "Niepoprawne dane")
+        }
     }
 
 
@@ -101,6 +106,8 @@ const LoginForm = () => {
                         autoComplete="current-password"
                         value={values.password}
                         onChange={handleChange}
+                        error={!isEmpty(errors.password)}
+                        helperText={errors.password}
                     />
                     <Button
                         type="submit"
