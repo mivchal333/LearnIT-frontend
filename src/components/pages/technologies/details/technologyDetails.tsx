@@ -1,25 +1,13 @@
 import React from "react";
 import {isNil} from "lodash-es";
-import {
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    CardMedia,
-    CircularProgress,
-    makeStyles,
-    Typography
-} from "@material-ui/core";
-import {useDispatch, useSelector} from "../../../../store/store";
-import {Modal} from "../../../../store/shared/page/modal.model";
-import {showModal} from "../../../../store/shared/page/page.slice";
+import {Card, CardContent, CardMedia, CircularProgress, makeStyles, Typography} from "@material-ui/core";
+import {useSelector} from "../../../../store/store";
 import ActionButtonGroup from "./ActionButtonGroup";
 import Chip from '@material-ui/core/Chip';
-import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
 import {EMPTY_IMAGE_PATH, getStaticImageUrl} from "../../../../service/staticProvider";
 import {selectIsModerator, selectUserLoggedIn} from "../../../../store/user/user.slice";
+import StartGameSection from "./StartGameSection";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,29 +26,18 @@ const useStyles = makeStyles((theme) => ({
         height: '250px',
         display: "flex",
     },
-    footer: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        marginTop: "auto",
-
-    },
 }));
 
 const TechnologyDetails = () => {
     const classes = useStyles();
     const isUserLogged = useSelector(selectUserLoggedIn);
     const isModerator = useSelector(selectIsModerator)
-    const dispatch = useDispatch()
     const [technology] = usePathTechnologyContext()
 
     if (isNil(technology)) {
         return <CircularProgress/>
     }
 
-    const showConfirm = (modal: Modal) => {
-        dispatch(showModal(modal))
-
-    }
 
     const imageUrl = technology.image?.fileUrl || getStaticImageUrl(EMPTY_IMAGE_PATH)
 
@@ -81,18 +58,8 @@ const TechnologyDetails = () => {
                     {technology.description}
                 </Typography>
                 <Chip label={`${technology.questionCount} Pytania`}/>
-
+                <StartGameSection/>
             </CardContent>
-            {technology.questionCount > 0 && (
-                <CardActions className={classes.footer}>
-                    <Button onClick={() => showConfirm(Modal.START_QUIZ)} startIcon={<RadioButtonCheckedIcon/>}>
-                        Zacznij Quiz
-                    </Button>
-                    <Button onClick={() => showConfirm(Modal.START_CARDS)} startIcon={<ViewCarouselIcon/>}>
-                        Zacznij Ficzki
-                    </Button>
-                </CardActions>
-            )}
         </Card>
     )
 }
