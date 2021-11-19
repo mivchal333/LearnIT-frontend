@@ -2,10 +2,10 @@ import React from 'react'
 import {createStyles, IconButton, MenuItem, Paper, Popover, Select, Typography} from "@material-ui/core";
 import {makeStyles, Theme} from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
-import {Role, RoleLabel} from "../../../../api/model/userDetails";
 import {includes} from "lodash-es";
 import {useDispatch} from "../../../../store/store";
 import {editUserPermission} from "../../../../store/admin/admin.actions";
+import {Role, RoleLabel} from "../../../../api/model/user.model";
 
 
 const useStyles = makeStyles((theme: Theme) =>

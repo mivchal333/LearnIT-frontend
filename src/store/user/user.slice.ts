@@ -1,13 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
-import {Role, UserDetails} from "../../api/model/userDetails";
+import {Role, UserModel} from "../../api/model/user.model";
 import {includes} from "lodash-es";
 
-const emptyUserDetails: UserDetails = {roles: [], email: "", firstName: "", lastName: ""}
+const emptyUserDetails: UserModel = {roles: [], email: "", firstName: "", lastName: "", points: 0}
 
 interface UserSlice {
     loggedIn: boolean,
-    userDetails: UserDetails | null
+    userDetails: UserModel | null
 }
 
 const initialState: UserSlice = {
@@ -19,7 +19,7 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUserDetails: (state, action: PayloadAction<UserDetails>) => {
+        setUserDetails: (state, action: PayloadAction<UserModel>) => {
             state.userDetails = action.payload;
             state.loggedIn = true
         },

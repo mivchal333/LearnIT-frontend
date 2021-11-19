@@ -1,7 +1,7 @@
 import React from 'react'
 import {DataGrid, GridColDef} from '@material-ui/data-grid';
 import RoleCell from "./RoleCell";
-import {UserDetails} from "../../../../api/model/userDetails";
+import {UserModel} from "../../../../api/model/user.model";
 
 const columns: GridColDef[] = [
     {
@@ -37,7 +37,7 @@ const columns: GridColDef[] = [
 ];
 
 interface PropsType {
-    rows: UserDetails[]
+    rows: UserModel[]
 }
 
 const AccountsTable = (props: PropsType) => {

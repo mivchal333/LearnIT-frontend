@@ -1,9 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from "../store";
-import {UserDetails} from "../../api/model/userDetails";
+import {UserModel} from "../../api/model/user.model";
 
 interface AdminSlice {
-    users: UserDetails[]
+    users: UserModel[]
 }
 
 const initialState: AdminSlice = {
@@ -14,7 +14,7 @@ const adminSlice = createSlice({
     name: 'admin',
     initialState,
     reducers: {
-        setUsers: (state, action: PayloadAction<UserDetails[]>) => {
+        setUsers: (state, action: PayloadAction<UserModel[]>) => {
             state.users = action.payload;
         },
     }

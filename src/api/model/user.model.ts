@@ -10,9 +10,10 @@ export const RoleLabel: Record<Role, string> = {
     ROLE_USER: "Użytkownik"
 }
 
-export interface UserDetails {
+export interface UserModel {
     firstName: string,
     lastName: string,
     email: string,
+    points: number,
     roles: Role[],
 }

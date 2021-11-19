@@ -1,9 +1,9 @@
 import React from 'react'
-import {UserDetails} from "../../../../api/model/userDetails";
 import {Avatar, ListItem, ListItemAvatar, ListItemText} from "@material-ui/core";
+import {UserModel} from "../../../../api/model/user.model";
 
 interface PropsType {
-    user: UserDetails
+    user: UserModel
 }
 
 const AccountListItem = (props: PropsType) => {
@@ -19,4 +19,5 @@ const AccountListItem = (props: PropsType) => {
         </ListItem>
     )
 }
+
 export default AccountListItem

@@ -4,7 +4,7 @@ import {UserRepository} from "../../api/repository/user.repository";
 import {addFlag} from "../shared/page/page.slice";
 import {errorFlag} from "../../service/flag.service";
 import {setUsers} from "./admin.slice";
-import {Role} from "../../api/model/userDetails";
+import {Role} from "../../api/model/user.model";
 
 export const loadUsers = (): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
     try {

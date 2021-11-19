@@ -1,11 +1,11 @@
 import React from 'react'
 import {GridCellParams} from "@material-ui/data-grid";
 import {includes, size} from "lodash-es";
-import {Role, RoleLabel} from "../../../../api/model/userDetails";
 import {Chip} from "@material-ui/core";
 import {editUserPermission} from "../../../../store/admin/admin.actions";
 import {useDispatch} from "../../../../store/store";
 import AddRolePopover from "./AddRolePopover";
+import {Role, RoleLabel} from "../../../../api/model/user.model";
 
 
 interface PropsType {
