@@ -3,7 +3,7 @@ import {RootState} from "../store";
 import {Role, UserModel} from "../../api/model/user.model";
 import {includes} from "lodash-es";
 
-const emptyUserDetails: UserModel = {roles: [], email: "", firstName: "", lastName: "", points: 0}
+const emptyUserDetails: UserModel = {roles: [], email: "", firstName: "", lastName: "", points: 0, createDate: 0,}
 
 interface UserSlice {
     loggedIn: boolean,

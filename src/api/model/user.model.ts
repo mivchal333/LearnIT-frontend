@@ -16,4 +16,5 @@ export interface UserModel {
     email: string,
     points: number,
     roles: Role[],
+    createDate: number,
 }
