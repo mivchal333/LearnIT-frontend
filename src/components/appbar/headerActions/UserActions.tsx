@@ -8,6 +8,7 @@ import {selectUserDetails} from "../../../store/user/user.slice";
 import {deepOrange} from "@material-ui/core/colors";
 import UserListItem from "./UserListItem";
 import LogoutListItem from "./LogoutListItem";
+import PointsListItem from "./PointsListItem";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -62,6 +63,7 @@ const UserActions = () => {
             >
                 <List component="nav" aria-label="main mailbox folders">
                     <UserListItem onClick={handleClose}/>
+                    <PointsListItem onClick={handleClose}/>
                     <Divider/>
                     <LogoutListItem onClick={handleClose}/>
                 </List>

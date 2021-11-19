@@ -26,7 +26,7 @@ const MyAccountDetails = () => {
         <Paper className={classes.paper}>
             <Grid container spacing={2} xs={12}>
                 <Field title="Imie" value={user.firstName}/>
-                <Field title="Email" value={user.lastName}/>
+                <Field title="Email" value={user.email}/>
                 <Field title="Data utworzenia" value={relativeCreateDate}/>
                 <Field title="Punkty" value={<Chip label={user.points} icon={<StarIcon/>}/>}/>
                 <Field title="Role" value={<RolesField roles={user.roles}/>}/>
