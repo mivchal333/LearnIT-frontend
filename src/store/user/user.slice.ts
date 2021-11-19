@@ -38,5 +38,6 @@ export const {
 export const selectUserDetails = (state: RootState) => state.user.userDetails || emptyUserDetails
 export const selectUserLoggedIn = (state: RootState) => state.user.loggedIn
 export const selectIsAdmin = (state: RootState) => includes(state.user.userDetails?.roles, Role.ADMIN)
+export const selectIsModerator = (state: RootState) => includes(state.user.userDetails?.roles, Role.MOD) || includes(state.user.userDetails?.roles, Role.MOD)
 
 export const userReducer = userSlice.reducer;
