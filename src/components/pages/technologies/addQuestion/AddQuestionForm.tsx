@@ -219,7 +219,7 @@ const AddQuestionForm = () => {
                                     to={GET_ROUTE.TECHNOLOGY(technologyId)}
                                     component={Link}
                                 >
-                                    Back
+                                    Anuluj
                                 </Button>
                                 <Button
                                     variant="contained"
@@ -228,7 +228,7 @@ const AddQuestionForm = () => {
                                     color="primary"
                                     startIcon={<AddIcon/>}
                                 >
-                                    Add
+                                    Dodaj
                                 </Button>
                             </Grid>
                         </Grid>

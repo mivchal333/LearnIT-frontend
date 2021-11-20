@@ -40,7 +40,7 @@ const CodeAttachment = (props: PropsType) => {
             </Grid>
             <Grid item xs={2}>
                 <FormControl className={classes.formControl}>
-                    <InputLabel>Code format</InputLabel>
+                    <InputLabel>Wybierz format</InputLabel>
                     <Select onChange={props.onCodeLangChange} value={codeMode} name="codeLang">
                         {Object.entries(CodeLanguagesLabels).map(([langValue, langLabel]) => (
                             <MenuItem value={langValue}>{langLabel}</MenuItem>
