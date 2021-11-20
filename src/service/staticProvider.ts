@@ -5,6 +5,7 @@ export const GIRL_LEARNING_LAPTOP_IMAGE_PATH = 'girl-learning-laptop.jpg'
 export const SOCIAL_MEDIA_BANNER_IMAGE_PATH = 'social-media-banner.png'
 export const QUESTION_HEAD_IMAGE_PATH = 'question-head.jpg'
 export const ONLINE_LEARNING_IMAGE_PATH = 'online-learning.png'
+export const PB_LOGO_IMAGE_PATH = 'pb_logo.png'
 
 export const getStaticImageUrl = (imagePath: string) => {
     return process.env.PUBLIC_URL + '/img/' + imagePath

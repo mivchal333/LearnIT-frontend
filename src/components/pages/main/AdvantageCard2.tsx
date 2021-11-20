@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     cardMedia: {
         width: '100%',
         height: '20vw',
-        maxHeight: "64rem",
+        maxHeight: "21rem",
         borderRadius: "25px",
     }
 }));

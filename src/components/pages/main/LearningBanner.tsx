@@ -66,7 +66,7 @@ const LearningBanner = () => {
                                     Sprawimy, że będziesz prawdziwym mistrzem!
                                 </Typography>
                                 <Typography variant="body1" color="inherit" paragraph className={classes.subtitle}>
-                                    Opanuj każdą technologie, osiągaj sukcesy na każdym polu
+                                    Opanuj różne technologie, osiągaj sukcesy na każdym polu
                                 </Typography>
                             </Grid>
                             <Grid item>
