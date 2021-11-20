@@ -21,11 +21,13 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 12,
     },
     cardMedia: {
-        paddingTop: '56.25%', // 16:9
+        height: 140, // 16:9
+        backgroundSize: "contain",
+        backgroundColor: 'white',
     },
     cardActions: {
         marginTop: "auto",
-        alignSelf: "center"
+        alignSelf: "flex-end"
     }
 }));
 
@@ -46,12 +48,12 @@ const TechnologyListItem = (props: PropsType) => {
                 image={imageUrl}
             />
             <CardContent>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h5" component="h2" align="center">
                     {technology.name}
                 </Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button to={GET_ROUTE.TECHNOLOGY(technology.id)} component={Link}>Zobacz</Button>
+                <Button to={GET_ROUTE.TECHNOLOGY(technology.id)} component={Link}>Wybierz</Button>
             </CardActions>
         </Card>
     )
