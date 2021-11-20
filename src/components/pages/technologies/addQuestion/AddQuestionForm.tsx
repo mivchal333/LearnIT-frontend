@@ -165,7 +165,7 @@ const AddQuestionForm = () => {
                                 <Grid container alignItems={"center"} justifyContent="space-between">
                                     <Grid item xs={9}>
                                         <MultilineText
-                                            label="Body"
+                                            label="Treść"
                                             name="body"
                                             required
                                             onChange={handleChange}

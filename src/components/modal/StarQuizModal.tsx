@@ -35,14 +35,14 @@ const StartQuizModal = () => {
             <Button
                 onClick={onCancel}
             >
-                Cancel
+                Anuluj
             </Button>
             <Button
                 startIcon={<PlayArrowIcon/>}
                 onClick={onSubmit}
                 variant="outlined"
             >
-                Play
+                Start
             </Button>
         </>
 
@@ -50,11 +50,11 @@ const StartQuizModal = () => {
 
     return (
         <ModalWrapper
-            Title="Play Quiz"
+            Title="Zacznij quiz!"
             Actions={Actions()}
         >
             <Typography variant="subtitle1" id="simple-modal-description">
-                You are you sure you want to start quiz game?
+                Czy na pewno chcesz rozpocząć quiz?
             </Typography>
         </ModalWrapper>
     )

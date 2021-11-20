@@ -25,7 +25,7 @@ const AddQuestionPage = () => {
     return <>
         <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center" className={classes.title}>
-                Add Question
+                Dodaj pytanie
             </Typography>
             <div>
                 <AddQuestionForm/>

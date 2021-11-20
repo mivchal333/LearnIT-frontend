@@ -35,14 +35,14 @@ const StartCardsModal = () => {
             <Button
                 onClick={onCancel}
             >
-                Cancel
+                Anuluj
             </Button>
             <Button
                 startIcon={<PlayArrowIcon/>}
                 onClick={onSubmit}
                 variant="outlined"
             >
-                Play
+                Start
             </Button>
         </>
     )
@@ -50,10 +50,10 @@ const StartCardsModal = () => {
     return (
         <ModalWrapper
             Actions={Actions()}
-            Title={"Play Cards"}
+            Title="Zacznij fiszki"
         >
             <Typography variant="subtitle1" id="simple-modal-description">
-                You are you sure you want to start cards game?
+                Czy na pewno chcesz rozpocząć fiszki?
             </Typography>
         </ModalWrapper>
     )

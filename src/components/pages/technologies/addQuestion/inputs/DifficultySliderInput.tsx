@@ -8,23 +8,23 @@ import {Theme} from "@material-ui/core/styles";
 const DIFFICULTIES = [
     {
         value: 1,
-        label: "Beginner"
+        label: "Początkujący"
     },
     {
         value: 2,
-        label: "Easy"
+        label: "Łatwy"
     },
     {
         value: 3,
-        label: "Medium"
+        label: "Średni"
     },
     {
         value: 4,
-        label: "Hard"
+        label: "Trudny"
     },
     {
         value: 5,
-        label: "Expert"
+        label: "Ekspert"
     },
 ]
 
@@ -34,7 +34,9 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             alignItems: 'center'
         },
-
+        starIcon: {
+            color: 'gold',
+        }
     }),
 );
 
@@ -49,13 +51,13 @@ const DifficultySliderInput = (props: PropsType) => {
     return (
         <>
             <Typography id="continuous-slider" gutterBottom>
-                Difficulty
+                Stopień trudności
             </Typography>
-            <Grid container spacing={6} className={classes.inputContainer}>
+            <Grid container spacing={7}>
                 <Grid item>
-                    <StarIcon fontSize="small"/>
+                    <StarIcon className={classes.starIcon}/>
                 </Grid>
-                <Grid item xs>
+                <Grid item xs={8}>
                     <Slider
                         value={props.value}
                         onChange={(event, value) => props.onChange(toNumber(value))}
@@ -66,7 +68,7 @@ const DifficultySliderInput = (props: PropsType) => {
                     />
                 </Grid>
                 <Grid item>
-                    <StarIcon fontSize="large"/>
+                    <StarIcon fontSize="large" className={classes.starIcon}/>
                 </Grid>
             </Grid>
         </>)
