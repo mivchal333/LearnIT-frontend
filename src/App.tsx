@@ -17,13 +17,15 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import {makeStyles} from "@material-ui/core";
 import FlagWrapper from "./components/FlagWrapper";
 import ModalWrapper from "./components/ModalWrapper";
-import AddQuestionPage from "./components/pages/technologies/addQuestion/AddQuestionPage";
+import AddQuestionPage from "./components/pages/technologies/questionForm/QuestionFormPage";
+import QuestionFormPage from "./components/pages/technologies/questionForm/QuestionFormPage";
 import EditTechnologyPage from "./components/pages/technologies/technologyForm/EditTechnologyPage";
 import SummaryPage from "./components/pages/attempt/SummaryPage";
 import RegisterPage from "./components/pages/register/RegisterPage";
 import {useDispatch} from "./store/store";
 import {loadUserDetails} from "./store/user/actions";
 import AdminAccountsPage from "./components/pages/admin/accounts/AdminAccountsPage";
+import EditQuestionsPage from "./components/pages/technologies/listQuestions/ListQuestionsPage";
 
 
 type RouteContentType = {
@@ -37,6 +39,9 @@ const RouteContent: RouteContentType = {
     TECHNOLOGY_ADD: <AddTechnologyPage/>,
     TECHNOLOGY_EDIT: <EditTechnologyPage/>,
     TECHNOLOGY_QUESTION_ADD: <AddQuestionPage/>,
+    TECHNOLOGY_QUESTION_LIST: <EditQuestionsPage/>,
+
+    TECHNOLOGY_QUESTION_EDIT: <QuestionFormPage/>,
 
     CARDS_STARTED: <CardsGamePage/>,
 

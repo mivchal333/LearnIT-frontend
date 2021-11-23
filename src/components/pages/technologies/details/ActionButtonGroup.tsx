@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, ButtonGroup, makeStyles} from "@material-ui/core";
+import {Button, ButtonGroup, CircularProgress, makeStyles} from "@material-ui/core";
 import {useSelector} from "../../../../store/store";
 import {selectTechnologyContextId} from "../../../../store/technologies/technologies.slice";
 import {GET_ROUTE} from "../../../../route/routes";
@@ -10,6 +10,9 @@ import {red} from "@material-ui/core/colors";
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ListIcon from "@material-ui/icons/List";
+import {useTechnologyContext} from "../../../../hooks/useTechnologyContext";
+import {isNil} from "lodash-es";
 
 
 const useStyles = makeStyles({
@@ -37,11 +40,16 @@ const ActionButtonGroup = (props: PropsType) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const technologyId = useSelector(selectTechnologyContextId)
+    const technologyId = useSelector(selectTechnologyContextId) || 0
+    const technology = useTechnologyContext();
 
     const onDeleteClick = async () => {
         await dispatch(deleteTechnology())
         history.push(GET_ROUTE.TECHNOLOGIES())
+    }
+
+    if (isNil(technology)) {
+        return <CircularProgress/>
     }
 
 
@@ -55,6 +63,17 @@ const ActionButtonGroup = (props: PropsType) => {
             >
                 Dodaj pytanie
             </Button>
+            {technology.questionCount > 0 && (
+                <Button
+                    to={GET_ROUTE.TECHNOLOGY_QUESTION_LIST(technologyId)}
+                    component={Link}
+                    variant="outlined"
+                    startIcon={<ListIcon/>}
+                >
+                    Edytuj pytania
+                </Button>
+
+            )}
             <Button
                 to={GET_ROUTE.TECHNOLOGY_EDIT(technologyId)}
                 component={Link}

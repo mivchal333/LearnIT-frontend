@@ -7,6 +7,8 @@ export enum Routes {
     TECHNOLOGY_ADD = 'TECHNOLOGY_ADD',
     TECHNOLOGY_EDIT = 'TECHNOLOGY_EDIT',
     TECHNOLOGY_QUESTION_ADD = 'TECHNOLOGY_QUESTION_ADD',
+    TECHNOLOGY_QUESTION_LIST = 'TECHNOLOGY_QUESTION_LIST',
+    TECHNOLOGY_QUESTION_EDIT = 'TECHNOLOGY_QUESTION_EDIT',
 
     QUIZ_STARTED = 'QUIZ_STARTED',
     CARDS_STARTED = 'CARDS_STARTED',
@@ -35,6 +37,8 @@ export const ROUTE_META: RoutesMeta = {
     TECHNOLOGY_ADD: '/technology/add',
     TECHNOLOGY_EDIT: '/technology/:id/edit',
     TECHNOLOGY_QUESTION_ADD: `/technology/${IdNumberParamPath}/add`,
+    TECHNOLOGY_QUESTION_LIST: `/technology/${IdNumberParamPath}/questions`,
+    TECHNOLOGY_QUESTION_EDIT: `/technology/${IdNumberParamPath}/edit/:questionId`,
 
     QUIZ_STARTED: `/quiz/${IdNumberParamPath}/start`,
 
@@ -51,7 +55,7 @@ export const ROUTE_META: RoutesMeta = {
 }
 
 type GetRoute = {
-    [route in Routes]: (arg?: any) => string
+    [route in Routes]: Function
 }
 export const GET_ROUTE: GetRoute = {
     HOME: () => "/",
@@ -60,6 +64,8 @@ export const GET_ROUTE: GetRoute = {
     TECHNOLOGY_ADD: () => '/technology/add',
     TECHNOLOGY_EDIT: (id: ReactText) => `/technology/${id}/edit`,
     TECHNOLOGY_QUESTION_ADD: (id: ReactText) => `/technology/${id}/add`,
+    TECHNOLOGY_QUESTION_LIST: (id: ReactText) => `/technology/${id}/questions`,
+    TECHNOLOGY_QUESTION_EDIT: (technologyId: ReactText, questionId: ReactText) => `/technology/${technologyId}/edit/${questionId}`,
 
     QUIZ_STARTED: (id: ReactText) => `/quiz/${id}/start`,
     CARDS_STARTED: (id: ReactText) => `/cards/${id}/start`,

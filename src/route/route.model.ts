@@ -9,3 +9,8 @@ export interface StartGameRouteParam {
 export interface SummaryPageRouteParam {
     id: string
 }
+
+export interface QuestionFormRouteParam {
+    id: string,
+    questionId: string,
+}

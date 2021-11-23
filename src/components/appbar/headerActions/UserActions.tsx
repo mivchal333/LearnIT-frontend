@@ -51,7 +51,7 @@ const UserActions = () => {
             <Grid container alignItems="center" spacing={2}>
                 <Grid item>
 
-                    <Tooltip title={`Masz ${user.points} punkty`}>
+                    <Tooltip title={`Masz ${user.points} punktów`}>
                         <Badge badgeContent={user.points} color="secondary">
                             <StarIcon className={classes.starIcon} fontSize="large"/>
                         </Badge>

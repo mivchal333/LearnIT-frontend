@@ -7,7 +7,7 @@ import {Technology} from "../api/model/technology.model";
 export const useTechnologyContext = (): Technology | null => {
     const dispatch = useDispatch()
 
-    const technologyId = useSelector(selectTechnologyContextId);
+    const technologyId = useSelector(selectTechnologyContextId) || 0
     const technology = useSelector((state) => selectTechnology(state, technologyId))
 
     useEffect(() => {

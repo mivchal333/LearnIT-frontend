@@ -1,12 +1,12 @@
 import React from "react";
 import {Formik} from 'formik';
 import {Button, createStyles, Grid, makeStyles} from "@material-ui/core";
-import {isEmpty} from "lodash-es";
+import {isEmpty, toNumber} from "lodash-es";
 import {useDispatch, useSelector} from "../../../../store/store";
-import {addQuestion} from "../../../../store/technologies/actions";
+import {addQuestion, editQuestion} from "../../../../store/technologies/actions";
 import {Theme} from "@material-ui/core/styles";
 import {GET_ROUTE} from "../../../../route/routes";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import {selectTechnologyContextId} from "../../../../store/technologies/technologies.slice";
 import DifficultySliderInput from "./inputs/DifficultySliderInput";
 import MultilineText from "./inputs/MultilineText";
@@ -16,24 +16,27 @@ import CodeAttachment from "./inputs/CodeAttachment";
 import CodeAttachmentButton from "./CodeAttachmentButton";
 import {CodeLanguage} from "../../../../constant/codeLanguages";
 import AddIcon from "@material-ui/icons/Add";
-import AnswerSection, {AnswerType} from "./inputs/AnswerSection";
-import {CreateQuestionAnswerModel} from "../../../../model/createQuestionAnswer.model";
+import AnswerSection from "./inputs/AnswerSection";
+import {AnswerFormModel} from "../../../../model/answerFormModel";
+import {answers, initialValues} from "./form.contant";
+import SaveIcon from "@material-ui/icons/Save";
+import {QuestionFormRouteParam} from "../../../../route/route.model";
 
-export type CreateQuestionForm = {
+export type QuestionFormModel = {
     body: string,
     difficultyValue: number,
-    correctAnswer: CreateQuestionAnswerModel,
+    correctAnswer: AnswerFormModel,
     addCodeAttachment: boolean,
     codeAttachment?: string,
     codeLang?: CodeLanguage,
 
-    badAnswer1: CreateQuestionAnswerModel,
-    badAnswer2: CreateQuestionAnswerModel,
-    badAnswer3: CreateQuestionAnswerModel,
+    badAnswer1: AnswerFormModel,
+    badAnswer2: AnswerFormModel,
+    badAnswer3: AnswerFormModel,
 }
 
 type FormErrorState = {
-    [Property in keyof CreateQuestionForm]?: string
+    [Property in keyof QuestionFormModel]?: string
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -49,62 +52,53 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
-type AnswerName = "correctAnswer" | "badAnswer1" | "badAnswer2" | "badAnswer3";
 
-interface Answer {
-    label: string,
-    name: AnswerName,
-    type: AnswerType,
+export enum FormType {
+    ADD, EDIT
 }
 
-const AddQuestionForm = () => {
+interface PropsType {
+    initialData?: QuestionFormModel,
+    formType: FormType,
+}
+
+const QuestionForm = (props: PropsType) => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory()
     const technologyId = useSelector(selectTechnologyContextId);
     usePathTechnologyContext()
+    const {questionId} = useParams<QuestionFormRouteParam>();
 
-    const initialValues: CreateQuestionForm = {
-        body: "",
-        correctAnswer: {
-            addCode: false,
-            body: '',
-        },
-        difficultyValue: 1,
-        badAnswer1: {
-            body: '',
-            addCode: false,
-        },
-        badAnswer2: {
-            body: '',
-            addCode: false,
-        },
-        badAnswer3: {
-            body: '',
-            addCode: false,
-        },
-        addCodeAttachment: false,
-    }
 
-    const validateFields = (values: CreateQuestionForm) => {
+    console.error(props.initialData)
+
+    const initialData = props.initialData || initialValues
+
+    const validateFields = (values: QuestionFormModel) => {
         const errors: FormErrorState = {};
         if (isEmpty(values.body)) {
-            errors.body = 'Required';
+            errors.body = 'Wymagane';
         } else if (!values.difficultyValue)
-            errors.difficultyValue = 'Required';
+            errors.difficultyValue = 'Wymagane';
         else if (isEmpty(values.correctAnswer))
-            errors.correctAnswer = 'Required';
+            errors.correctAnswer = 'Wymagane';
         else if (isEmpty(values.badAnswer1))
-            errors.badAnswer1 = 'Required';
+            errors.badAnswer1 = 'Wymagane';
         else if (isEmpty(values.badAnswer2))
-            errors.badAnswer2 = 'Required';
+            errors.badAnswer2 = 'Wymagane';
         else if (isEmpty(values.badAnswer3))
-            errors.badAnswer3 = 'Required';
+            errors.badAnswer3 = 'Wymagane';
         return errors;
     };
 
-    const onSubmit = async (values: CreateQuestionForm, {setSubmitting}: FormikHelpers<CreateQuestionForm>) => {
-        const isSuccess = await dispatch(addQuestion(values))
+    const onSubmit = async (values: QuestionFormModel, {setSubmitting}: FormikHelpers<QuestionFormModel>) => {
+        let isSuccess;
+        if (props.formType === FormType.ADD) {
+            isSuccess = await dispatch(addQuestion(values))
+        } else {
+            isSuccess = await dispatch(editQuestion(toNumber(questionId), values))
+        }
 
         setSubmitting(false);
         if (isSuccess) {
@@ -112,32 +106,10 @@ const AddQuestionForm = () => {
         }
     };
 
-    const answers: Answer[] = [
-        {
-            label: "Poprawna odpowiedź",
-            name: "correctAnswer",
-            type: AnswerType.CORRECT,
-        },
-        {
-            label: "Zła odpowiedź",
-            name: "badAnswer1",
-            type: AnswerType.WRONG,
-        },
-        {
-            label: "Zła odpowiedź",
-            name: "badAnswer2",
-            type: AnswerType.WRONG,
-        },
-        {
-            label: "Zła odpowiedź",
-            name: "badAnswer3",
-            type: AnswerType.WRONG,
-        },
-    ]
     return (
         <>
             <Formik
-                initialValues={initialValues}
+                initialValues={initialData}
                 validate={validateFields}
                 onSubmit={onSubmit}
             >
@@ -152,8 +124,6 @@ const AddQuestionForm = () => {
                       setFieldValue
                   }) => (
                     <form onSubmit={handleSubmit}>
-                        {console.log({values})
-                        }
                         <Grid container spacing={4}>
                             <Grid item xs={12}>
                                 <DifficultySliderInput
@@ -226,9 +196,14 @@ const AddQuestionForm = () => {
                                     type="submit"
                                     disabled={isSubmitting}
                                     color="primary"
-                                    startIcon={<AddIcon/>}
+                                    startIcon={props.formType == FormType.ADD
+                                        ? <AddIcon/>
+                                        : <SaveIcon/>
+                                    }
                                 >
-                                    Dodaj
+                                    {props.formType == FormType.ADD
+                                        ? "DODAJ"
+                                        : "ZAPISZ"}
                                 </Button>
                             </Grid>
                         </Grid>
@@ -238,4 +213,4 @@ const AddQuestionForm = () => {
         </>
     )
 }
-export default AddQuestionForm
+export default QuestionForm

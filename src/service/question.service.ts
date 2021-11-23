@@ -1,11 +1,21 @@
-import {CreateQuestionForm} from "../components/pages/technologies/addQuestion/AddQuestionForm";
+import {QuestionFormModel} from "../components/pages/technologies/questionForm/QuestionFormModel";
 import QuestionRepository from "../api/repository/questions.repository";
 import {CreateQuestionModel} from "../api/model/createQuestionModel.model";
+import {AnswerFormModel} from "../model/answerFormModel";
 import {AnswerPayloadModel} from "../api/model/answerPayload.model";
-import {CreateQuestionAnswerModel} from "../model/createQuestionAnswer.model";
 
-const createQuestion = (form: CreateQuestionForm, technologyId: number) => {
-    const {correctAnswer, badAnswer1, badAnswer2, badAnswer3, body, difficultyValue} = form
+function mapToQuestionPayload(form: QuestionFormModel) {
+    const {
+        correctAnswer,
+        badAnswer1,
+        badAnswer2,
+        badAnswer3,
+        body,
+        difficultyValue,
+        codeLang,
+        codeAttachment,
+        addCodeAttachment
+    } = form
     const payload: CreateQuestionModel = {
         badAnswers: [
             mapToAnswerPayloadModel(badAnswer1),
@@ -15,16 +25,28 @@ const createQuestion = (form: CreateQuestionForm, technologyId: number) => {
         correctAnswer: mapToAnswerPayloadModel(correctAnswer),
         body,
         difficultyValue,
-        technologyId,
+        codeLang: addCodeAttachment ? codeLang : undefined,
+        codeAttachment: addCodeAttachment ? codeAttachment : undefined,
     }
-    return QuestionRepository.createQuestion(payload)
+    return payload;
 }
 
-const mapToAnswerPayloadModel = (question: CreateQuestionAnswerModel): AnswerPayloadModel => ({
-    body: question.body,
-    code: question.codeValue,
+const createQuestion = (form: QuestionFormModel, technologyId: number) => {
+    const payload = mapToQuestionPayload(form);
+    return QuestionRepository.createQuestion(technologyId, payload)
+}
+
+const editQuestion = (questionId: number, form: QuestionFormModel) => {
+    const payload = mapToQuestionPayload(form);
+    return QuestionRepository.putQuestion(questionId, payload)
+}
+
+const mapToAnswerPayloadModel = (answerFormModel: AnswerFormModel): AnswerPayloadModel => ({
+    body: answerFormModel.body,
+    code: answerFormModel.addCode ? answerFormModel.codeValue : undefined,
 })
 
 export const QuestionService = {
     createQuestion,
+    editQuestion,
 }

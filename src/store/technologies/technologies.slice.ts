@@ -45,6 +45,6 @@ export const {
 } = technologiesSlice.actions
 
 export const selectTechnologies = (state: RootState) => state.technologies.technologies
-export const selectTechnology = (state: RootState, id: number | null) => id ? state.technologies.technologies[id] : emptyTechnology
-export const selectTechnologyContextId = (state: RootState) => state.technologies.technologyContextId || -1
+export const selectTechnology = (state: RootState, id: number) => state.technologies.technologies[id] || emptyTechnology
+export const selectTechnologyContextId = (state: RootState) => state.technologies.technologyContextId
 export default technologiesSlice.reducer;

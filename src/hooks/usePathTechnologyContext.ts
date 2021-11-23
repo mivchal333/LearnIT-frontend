@@ -16,7 +16,7 @@ export const usePathTechnologyContext = (): [Technology, number] => {
     const {id: technologyIdString} = useParams<TechnologyRouteParam>()
     const technologyId = toNumber(technologyIdString);
 
-    const technologyContextId = useSelector(selectTechnologyContextId);
+    const technologyContextId = useSelector(selectTechnologyContextId) || 0;
     const technology = useSelector((state) => selectTechnology(state, technologyContextId))
 
     useEffect(() => {

@@ -6,12 +6,17 @@ import {selectTechnologyContextId} from "../technologies/technologies.slice";
 import {addFlag} from "../shared/page/page.slice";
 import {errorFlag} from "../../service/flag.service";
 import TechnologyRepository from "../../api/repository/technologies.repository";
+import {isNil} from "lodash-es";
 
 
 export const loadUserCurrentHistory = (): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
     const technologyId = selectTechnologyContextId(getState());
 
-    dispatch(loadUserHistoryByTechnology(technologyId))
+    if (!isNil(technologyId)) {
+        dispatch(loadUserHistoryByTechnology(technologyId))
+    } else {
+        console.error("Not found technology context id")
+    }
 }
 
 export const loadUserHistoryByTechnology = (technologyId: number): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
