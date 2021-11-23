@@ -63,7 +63,6 @@ const ActionButtonGroup = (props: PropsType) => {
             >
                 Dodaj pytanie
             </Button>
-            {technology.questionCount > 0 && (
                 <Button
                     to={GET_ROUTE.TECHNOLOGY_QUESTION_LIST(technologyId)}
                     component={Link}
@@ -72,8 +71,6 @@ const ActionButtonGroup = (props: PropsType) => {
                 >
                     Edytuj pytania
                 </Button>
-
-            )}
             <Button
                 to={GET_ROUTE.TECHNOLOGY_EDIT(technologyId)}
                 component={Link}

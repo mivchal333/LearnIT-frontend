@@ -4,4 +4,5 @@ export interface QuestionPreview {
     id: number,
     body: string,
     difficulty: Difficulty,
+    published: boolean,
 }

@@ -9,6 +9,7 @@ interface PropsType {
     question: QuestionPreview,
     onEdit: () => void,
     onDelete: () => void,
+    onSetPublished: () => void,
 }
 
 const QuestionListItem = (props: PropsType) => {
@@ -21,6 +22,12 @@ const QuestionListItem = (props: PropsType) => {
             </ListItemIcon>
             <ListItemText primary={question.body}/>
             <ButtonGroup>
+                <Button onClick={props.onSetPublished}>
+                    {question.published
+                        ? "Ukryj"
+                        : "Publikuj"
+                    }
+                </Button>
                 <Button startIcon={<EditIcon/>} onClick={props.onEdit}>
                     Edytuj
                 </Button>

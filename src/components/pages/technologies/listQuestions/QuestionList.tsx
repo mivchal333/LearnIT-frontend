@@ -9,7 +9,7 @@ import {isNil} from "lodash-es";
 import {makeStyles} from "@material-ui/core/styles";
 import {useHistory} from "react-router-dom";
 import {GET_ROUTE} from "../../../../route/routes";
-import {deleteQuestion} from "../../../../store/technologies/actions";
+import {deleteQuestion, setPublished} from "../../../../store/technologies/actions";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -45,6 +45,10 @@ const QuestionList = () => {
         loadQuestions()
     }
 
+    const onSetPublished = async (questionId: number, published: boolean) => {
+        await dispatch(setPublished(questionId, published))
+        loadQuestions()
+    }
     return (
         <Paper className={classes.paper}>
             <List>
@@ -54,6 +58,7 @@ const QuestionList = () => {
                         key={question.id}
                         onDelete={() => onDelete(question.id)}
                         onEdit={() => onEdit(question.id)}
+                        onSetPublished={() => onSetPublished(question.id, !question.published)}
                     />
                 ))}
             </List>

@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {UserHistoryRepository} from "../../../api/repository/userHistory.repository";
 import {isNil, size} from "lodash-es";
 import AnswerTimelineItem from "../history/AnswerTimelineItem";
 import {Timeline} from "@material-ui/lab";
 import {UserAttempt} from "../../../api/model/userAttempt.model";
-import {CircularProgress, makeStyles, Paper, Typography} from "@material-ui/core";
+import {Button, CircularProgress, makeStyles, Paper, Typography} from "@material-ui/core";
 import {SummaryPageRouteParam} from "../../../route/route.model";
+import {GET_ROUTE} from "../../../route/routes";
 
 const useStyles = makeStyles((theme: any) => ({
     paper: {
@@ -62,7 +63,11 @@ const SummaryPage = () => {
                                 isLast={isLastItem}/>
                         );
                     })}
-                </Timeline></Paper>
+                </Timeline>
+                <Button component={Link} to={GET_ROUTE.TECHNOLOGIES()} variant="outlined" color="primary">
+                    Przeglądaj
+                </Button>
+            </Paper>
         </>
     )
 }

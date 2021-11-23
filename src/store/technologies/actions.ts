@@ -107,6 +107,18 @@ export const deleteQuestion = (questionId: number): ThunkAction<Promise<boolean>
     }
 }
 
+export const setPublished = (questionId: number, published: boolean): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch, getState) => {
+
+    try {
+        await QuestionRepository.postPublishedState(questionId, published)
+        dispatch(addFlag(successFlag("Zmieniono stan")))
+    } catch (e) {
+        console.log(e)
+        dispatch(addFlag(errorFlag("Nie zmieniono stanu")))
+        return false;
+    }
+}
+
 
 export const deleteTechnology = (): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch, getState) => {
     const technologyId = selectTechnologyContextId(getState())

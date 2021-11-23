@@ -38,6 +38,8 @@ const putQuestion = (questionId: number, data: CreateQuestionModel): Promise<Axi
 })
 const deleteQuestion = (questionId: number): Promise<AxiosResponse<QuestionEntity>> => axios.delete(`/question/${questionId}`)
 
+const postPublishedState = (questionId: number, published: boolean): Promise<AxiosResponse<void>> => axios.post(`/question/${questionId}/published`, {published})
+
 export const QuestionRepository = {
     fetchQuestion,
     submitAnswer,
@@ -46,5 +48,6 @@ export const QuestionRepository = {
     fetchQuestionById,
     putQuestion,
     deleteQuestion,
+    postPublishedState,
 };
 export default QuestionRepository
