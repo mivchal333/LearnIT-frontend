@@ -5,9 +5,9 @@ import QuestionRepository from '../../api/repository/questions.repository'
 import {resetGameState, selectUserAttemptId, setProgress, setUserAttemptId} from "../shared/game/game.slice";
 import {resetActualQuestion, setAnswerResult, setQuestion} from "./quiz.slice";
 
-export const startAttempt = (technologyId: number) => async (dispatch: Dispatch) => {
+export const startAttempt = (technologiesIds: number[]) => async (dispatch: Dispatch) => {
     dispatch(resetGameState())
-    const {data} = await AttemptRepository.startAttempt(technologyId)
+    const {data} = await AttemptRepository.startAttempt(technologiesIds)
 
     await dispatch(setUserAttemptId(data.id))
 }

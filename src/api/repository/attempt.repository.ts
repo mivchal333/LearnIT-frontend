@@ -1,9 +1,13 @@
 import axios, {AxiosResponse} from "axios";
+import qs from 'querystring'
 import {UserAttempt} from "../model/userAttempt.model";
 
-const startAttempt = async (technologyId: number): Promise<AxiosResponse<UserAttempt>> => axios.post('/attempt', null, {
+const startAttempt = async (technologyIds: number[]): Promise<AxiosResponse<UserAttempt>> => axios.post('/attempt', null, {
     params: {
-        technologyId
+        technologyId: technologyIds
+    },
+    paramsSerializer: params => {
+        return qs.stringify(params)
     }
 })
 

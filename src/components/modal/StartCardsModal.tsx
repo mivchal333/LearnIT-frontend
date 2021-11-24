@@ -5,14 +5,16 @@ import ModalWrapper from "./ModalWrapper";
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import {useHistory} from "react-router-dom";
 import {GET_ROUTE} from "../../route/routes";
-import {selectTechnologyContextId} from "../../store/technologies/technologies.slice";
+import {selectSelectedTechnologiesIds, selectTechnologyContextId} from "../../store/technologies/technologies.slice";
 import {startAttempt} from "../../store/quiz/quiz.actions";
-import {toNumber} from "lodash-es";
+import {isNil} from "lodash-es";
 import {errorFlag} from "../../service/flag.service";
 import {addFlag, closeModal} from "../../store/shared/page/page.slice";
+import {setGameTechnologiesIds} from "../../store/shared/game/game.slice";
 
 const StartCardsModal = () => {
     const technologyId = useSelector(selectTechnologyContextId);
+    const selectedTechnologiesIds = useSelector(selectSelectedTechnologiesIds)
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -20,10 +22,16 @@ const StartCardsModal = () => {
         dispatch(closeModal())
     }
     const onSubmit = async () => {
+        console.error({technologyId}, {selectedTechnologiesIds})
         try {
-            await dispatch(startAttempt(toNumber(technologyId)))
+            const startTechIds = isNil(technologyId)
+                ? selectedTechnologiesIds
+                : [technologyId]
+
+            await dispatch(setGameTechnologiesIds(startTechIds))
+            await dispatch(startAttempt(startTechIds))
             dispatch(closeModal())
-            history.push(GET_ROUTE.CARDS_STARTED(technologyId))
+            history.push(GET_ROUTE.CARDS_STARTED())
         } catch (e) {
             console.error(e);
             dispatch(addFlag(errorFlag("Unable to start attempt")))

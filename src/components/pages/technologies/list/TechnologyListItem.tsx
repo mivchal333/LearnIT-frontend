@@ -4,6 +4,14 @@ import {Technology} from "../../../../api/model/technology.model";
 import {GET_ROUTE} from "../../../../route/routes";
 import {Link} from "react-router-dom";
 import {EMPTY_IMAGE_PATH, getStaticImageUrl} from "../../../../service/staticProvider";
+import Checkbox from '@material-ui/core/Checkbox';
+import {useDispatch, useSelector} from "../../../../store/store";
+import {
+    addSelectedTechnology,
+    removeSelectedTechnology,
+    selectIsSelectManyEnabled,
+    selectSelectedTechnologiesIds
+} from "../../../../store/technologies/technologies.slice";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -37,12 +45,31 @@ interface PropsType {
 
 const TechnologyListItem = (props: PropsType) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const selectedIds = useSelector(selectSelectedTechnologiesIds)
+    const isManyEnabled = useSelector(selectIsSelectManyEnabled)
+
+    const isSelected = selectedIds.includes(props.technology.id)
+
+    const onCheck = () => {
+        if (isSelected) {
+            dispatch(removeSelectedTechnology(props.technology.id))
+        } else {
+            dispatch(addSelectedTechnology(props.technology.id))
+        }
+    }
 
     const imageUrl = props.technology.image?.fileUrl || getStaticImageUrl(EMPTY_IMAGE_PATH)
 
     const {technology} = props
     return (
         <Card className={classes.root}>
+            {isManyEnabled && (
+                <Checkbox
+                    checked={isSelected}
+                    onChange={onCheck}
+                />
+            )}
             <CardMedia
                 className={classes.cardMedia}
                 image={imageUrl}

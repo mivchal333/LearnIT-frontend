@@ -1,14 +1,12 @@
 import React from 'react'
 import {Button, CardActions, makeStyles} from "@material-ui/core";
-import {Modal} from "../../../../store/shared/page/modal.model";
-import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
-import ViewCarouselIcon from "@material-ui/icons/ViewCarousel";
 import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
 import {selectUserLoggedIn} from "../../../../store/user/user.slice";
-import {useDispatch, useSelector} from "../../../../store/store";
+import {useSelector} from "../../../../store/store";
 import {GET_ROUTE} from "../../../../route/routes";
-import {showModal} from "../../../../store/shared/page/page.slice";
 import {Link} from "react-router-dom";
+import StartQuizButton from "../../common/StartQuizButton";
+import StartCardsButton from "../../common/StartCardsButton";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,15 +37,8 @@ const useStyles = makeStyles((theme) => ({
 
 const StartGameSection = () => {
     const classes = useStyles();
-    const dispatch = useDispatch()
     const [technology] = usePathTechnologyContext()
     const isLoggedIn = useSelector(selectUserLoggedIn);
-
-    const showConfirm = (modal: Modal) => {
-        dispatch(showModal(modal))
-
-    }
-
 
     if (technology.questionCount < 1) {
         return <></>
@@ -58,12 +49,8 @@ const StartGameSection = () => {
             {isLoggedIn
                 ? (
                     <>
-                        <Button onClick={() => showConfirm(Modal.START_QUIZ)} startIcon={<RadioButtonCheckedIcon/>}>
-                            Zacznij Quiz
-                        </Button>
-                        <Button onClick={() => showConfirm(Modal.START_CARDS)} startIcon={<ViewCarouselIcon/>}>
-                            Zacznij Ficzki
-                        </Button>
+                        <StartQuizButton/>
+                        <StartCardsButton/>
                     </>
                 )
                 : (

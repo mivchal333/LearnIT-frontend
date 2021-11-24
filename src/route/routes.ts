@@ -40,9 +40,9 @@ export const ROUTE_META: RoutesMeta = {
     TECHNOLOGY_QUESTION_LIST: `/technology/${IdNumberParamPath}/questions`,
     TECHNOLOGY_QUESTION_EDIT: `/technology/${IdNumberParamPath}/edit/:questionId`,
 
-    QUIZ_STARTED: `/quiz/${IdNumberParamPath}/start`,
+    QUIZ_STARTED: `/quiz`,
 
-    CARDS_STARTED: `/cards/${IdNumberParamPath}/start`,
+    CARDS_STARTED: `/cards`,
 
     STATISTICS: '/stats',
     GAME_ATTEMPT_SUMMARY: `/attempt/:id`,
@@ -67,8 +67,8 @@ export const GET_ROUTE: GetRoute = {
     TECHNOLOGY_QUESTION_LIST: (id: ReactText) => `/technology/${id}/questions`,
     TECHNOLOGY_QUESTION_EDIT: (technologyId: ReactText, questionId: ReactText) => `/technology/${technologyId}/edit/${questionId}`,
 
-    QUIZ_STARTED: (id: ReactText) => `/quiz/${id}/start`,
-    CARDS_STARTED: (id: ReactText) => `/cards/${id}/start`,
+    QUIZ_STARTED: () => `/quiz`,
+    CARDS_STARTED: () => `/cards`,
 
     STATISTICS: () => '/stats',
     GAME_ATTEMPT_SUMMARY: (id: string) => `/attempt/${id}`,

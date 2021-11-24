@@ -10,6 +10,7 @@ interface ProgressType {
 interface GameSlice {
     gameState: {
         userAttemptId: string,
+        technologiesIds: number[],
         progress: {
             actual: number | null,
             total: number | null,
@@ -21,6 +22,7 @@ interface GameSlice {
 const initialState: GameSlice = {
     gameState: {
         userAttemptId: '',
+        technologiesIds: [],
         progress: {
             actual: null,
             total: null,
@@ -47,6 +49,9 @@ const gameSlice = createSlice({
         setIsLoading: (state, action: PayloadAction<boolean>) => {
             state.isLoading = action.payload
         },
+        setGameTechnologiesIds: (state, action: PayloadAction<number[]>) => {
+            state.gameState.technologiesIds = action.payload
+        }
     }
 })
 export const {
@@ -54,6 +59,7 @@ export const {
     setProgress,
     resetGameState,
     setIsLoading,
+    setGameTechnologiesIds,
 } = gameSlice.actions
 
 export const selectUserAttemptId = (state: RootState) => state.game.gameState.userAttemptId

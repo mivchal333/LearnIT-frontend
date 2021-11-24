@@ -7,9 +7,7 @@ import AddIcon from "@material-ui/icons/Add";
 const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
-        alignSelf: "flex-end",
         width: "13em",
-        marginLeft: "auto"
     },
 }));
 

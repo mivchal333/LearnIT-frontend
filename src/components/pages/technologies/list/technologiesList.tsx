@@ -1,14 +1,21 @@
 import React, {useEffect} from "react";
 import {useDispatch} from "../../../../store/store";
 import {fetchTechnologies} from "../../../../store/technologies/actions";
-import {selectTechnologies} from "../../../../store/technologies/technologies.slice";
+import {
+    selectSelectedTechnologiesIds,
+    selectTechnologies,
+    setSelectManyEnabled
+} from "../../../../store/technologies/technologies.slice";
 import {useSelector} from "react-redux";
-import {values} from "lodash-es";
+import {isEmpty, values} from "lodash-es";
 import TechnologyListItem from "./TechnologyListItem";
 import AddTechnologyButton from "./AddTechnologyButton";
-import {makeStyles} from "@material-ui/core";
+import {ButtonGroup, makeStyles} from "@material-ui/core";
 import {selectIsModerator, selectUserLoggedIn} from "../../../../store/user/user.slice";
 import TechnologiesBanner from "./TechnologiesBanner";
+import SelectManyButton from "./SelectManyButton";
+import StartCardsButton from "../../common/StartCardsButton";
+import StartQuizButton from "../../common/StartQuizButton";
 
 
 const useStyles = makeStyles(theme => ({
@@ -20,6 +27,10 @@ const useStyles = makeStyles(theme => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
+    },
+    actionButtons: {
+        display: "flex",
+        justifyContent: "flex-end"
     }
 }))
 
@@ -29,16 +40,32 @@ const TechnologiesList = () => {
     const technologies = useSelector(selectTechnologies)
     const isLoggedIn = useSelector(selectUserLoggedIn)
     const isModerator = useSelector(selectIsModerator)
+    const selectedIds = useSelector(selectSelectedTechnologiesIds)
 
     useEffect(() => {
         dispatch(fetchTechnologies())
+
+        return () => {
+            dispatch(setSelectManyEnabled(false))
+        }
     }, [])
 
 
     return <div className={classes.root}>
         <TechnologiesBanner/>
-        {isLoggedIn && isModerator && (
-            <AddTechnologyButton/>
+        {isLoggedIn && (
+            <ButtonGroup className={classes.actionButtons}>
+                {!isEmpty(selectedIds) && (
+                    <>
+                        <StartQuizButton variant="outlined" color="primary"/>
+                        <StartCardsButton variant="outlined" color="primary"/>
+                    </>
+                )}
+                <SelectManyButton/>
+                {isModerator && (
+                    <AddTechnologyButton/>
+                )}
+            </ButtonGroup>
         )}
         <div className={classes.listWrapper}>
             {values(technologies).map((technology) => (
