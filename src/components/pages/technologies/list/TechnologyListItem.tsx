@@ -1,8 +1,8 @@
 import React from "react";
-import {Button, Card, CardActions, CardContent, CardMedia, makeStyles, Typography} from "@material-ui/core";
+import {Card, CardContent, CardMedia, makeStyles, Typography} from "@material-ui/core";
 import {Technology} from "../../../../api/model/technology.model";
 import {GET_ROUTE} from "../../../../route/routes";
-import {Link} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {EMPTY_IMAGE_PATH, getStaticImageUrl} from "../../../../service/staticProvider";
 import Checkbox from '@material-ui/core/Checkbox';
 import {useDispatch, useSelector} from "../../../../store/store";
@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "column",
         marginBottom: "2em",
         marginTop: '1em',
-        backgroundColor: theme.palette.grey[100],
         width: "15em"
     },
     title: {
@@ -29,13 +28,17 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 12,
     },
     cardMedia: {
+        margin: theme.spacing(2),
         height: 140, // 16:9
         backgroundSize: "contain",
         backgroundColor: 'white',
     },
     cardActions: {
         marginTop: "auto",
-        alignSelf: "flex-end"
+        alignSelf: "flex-end",
+    },
+    actionCardSection: {
+        cursor: "pointer",
     }
 }));
 
@@ -46,6 +49,7 @@ interface PropsType {
 const TechnologyListItem = (props: PropsType) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
     const selectedIds = useSelector(selectSelectedTechnologiesIds)
     const isManyEnabled = useSelector(selectIsSelectManyEnabled)
 
@@ -57,6 +61,9 @@ const TechnologyListItem = (props: PropsType) => {
         } else {
             dispatch(addSelectedTechnology(props.technology.id))
         }
+    }
+    const onClick = () => {
+        history.push(GET_ROUTE.TECHNOLOGY(technology.id))
     }
 
     const imageUrl = props.technology.image?.fileUrl || getStaticImageUrl(EMPTY_IMAGE_PATH)
@@ -70,18 +77,17 @@ const TechnologyListItem = (props: PropsType) => {
                     onChange={onCheck}
                 />
             )}
-            <CardMedia
-                className={classes.cardMedia}
-                image={imageUrl}
-            />
-            <CardContent>
-                <Typography variant="h5" component="h2" align="center">
-                    {technology.name}
-                </Typography>
-            </CardContent>
-            <CardActions className={classes.cardActions}>
-                <Button to={GET_ROUTE.TECHNOLOGY(technology.id)} component={Link}>Wybierz</Button>
-            </CardActions>
+            <div onClick={onClick} className={classes.actionCardSection}>
+                <CardMedia
+                    className={classes.cardMedia}
+                    image={imageUrl}
+                />
+                <CardContent>
+                    <Typography variant="h5" component="h2" align="center">
+                        {technology.name}
+                    </Typography>
+                </CardContent>
+            </div>
         </Card>
     )
 }
