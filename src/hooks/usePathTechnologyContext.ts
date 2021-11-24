@@ -9,7 +9,7 @@ import {useEffect} from "react";
 import {Technology} from "../api/model/technology.model";
 import {useParams} from "react-router-dom";
 import {TechnologyRouteParam} from "../route/route.model";
-import {isNil, isNumber, toNumber} from "lodash-es";
+import {isNumber, toNumber} from "lodash-es";
 
 export const usePathTechnologyContext = (): [Technology, number] => {
     const dispatch = useDispatch()
@@ -27,7 +27,7 @@ export const usePathTechnologyContext = (): [Technology, number] => {
 
 
     useEffect(() => {
-        if (technologyId && isNil(technology)) {
+        if (technologyId) {
             dispatch(fetchTechnology(technologyId))
         }
     }, [])

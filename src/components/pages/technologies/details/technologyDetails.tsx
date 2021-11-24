@@ -1,12 +1,10 @@
 import React from "react";
 import {isNil} from "lodash-es";
 import {Card, CardContent, CardMedia, CircularProgress, makeStyles, Typography} from "@material-ui/core";
-import {useSelector} from "../../../../store/store";
 import ActionButtonGroup from "./ActionButtonGroup";
 import Chip from '@material-ui/core/Chip';
 import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
 import {EMPTY_IMAGE_PATH, getStaticImageUrl} from "../../../../service/staticProvider";
-import {selectIsModerator, selectUserLoggedIn} from "../../../../store/user/user.slice";
 import StartGameSection from "./StartGameSection";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,8 +28,6 @@ const useStyles = makeStyles((theme) => ({
 
 const TechnologyDetails = () => {
     const classes = useStyles();
-    const isUserLogged = useSelector(selectUserLoggedIn);
-    const isModerator = useSelector(selectIsModerator)
     const [technology] = usePathTechnologyContext()
 
     if (isNil(technology)) {
@@ -43,9 +39,7 @@ const TechnologyDetails = () => {
 
     return (
         <Card className={classes.root}>
-            {isUserLogged && isModerator && (
-                <ActionButtonGroup/>
-            )}
+            <ActionButtonGroup/>
             <CardMedia
                 className={classes.cardMedia}
                 image={imageUrl}

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {List, Paper} from "@material-ui/core";
+import {Button, List, Paper} from "@material-ui/core";
 import QuestionListItem from "./QuestionListItem";
 import {useDispatch, useSelector} from "../../../../store/store";
 import {selectTechnologyContextId} from "../../../../store/technologies/technologies.slice";
@@ -7,12 +7,15 @@ import QuestionRepository from "../../../../api/repository/questions.repository"
 import {QuestionPreview} from "../../../../api/model/questionPreview.model";
 import {isNil} from "lodash-es";
 import {makeStyles} from "@material-ui/core/styles";
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {GET_ROUTE} from "../../../../route/routes";
 import {deleteQuestion, setPublished} from "../../../../store/technologies/actions";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
+        margin: theme.spacing(3)
+    },
+    backButton: {
         margin: theme.spacing(3)
     }
 }));
@@ -62,6 +65,15 @@ const QuestionList = () => {
                     />
                 ))}
             </List>
+            <Button
+                component={Link}
+                to={GET_ROUTE.TECHNOLOGY(technologyId)}
+                variant="outlined"
+                color="primary"
+                className={classes.backButton}
+            >
+                Wróć
+            </Button>
         </Paper>
     )
 }

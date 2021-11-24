@@ -49,7 +49,7 @@ const AddTechnologyPage = () => {
     return <>
         <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center" className={classes.title}>
-                Add Technology
+                Dodaj technologie
             </Typography>
             <div>
                 <TechnologyForm onSubmit={onSubmit} type={FormType.ADD}/>

@@ -57,7 +57,9 @@ const QuestionFormPage = () => {
             }
             setInitialData(questionForm)
         }
-        loadQuestion()
+        if (!isNil(questionId)) {
+            loadQuestion()
+        }
     }, [])
 
     let formType: FormType = FormType.ADD

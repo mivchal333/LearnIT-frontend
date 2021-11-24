@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         borderRadius: "30px",
-        height: "20vw",
     },
     overlay: {
         position: 'absolute',
@@ -25,27 +24,15 @@ const useStyles = makeStyles((theme) => ({
         left: 0,
         background: 'linear-gradient( rgba(0, 0, 0, 0) , rgba(0, 0, 0, 0.5) 90%)',
         borderRadius: "30px",
-
     },
     mainFeaturedPostContent: {
         position: 'relative',
+        padding: theme.spacing(3),
         [theme.breakpoints.up('md')]: {
             padding: theme.spacing(6),
-            paddingTop: theme.spacing(20),
             paddingRight: 0,
         },
     },
-    title: {
-        fontSize: '2.4rem',
-        fontWeight: 'bold',
-        textShadow: '2px 3px rgba(0, 0, 0, 0.6)'
-    },
-    subtitle: {
-        fontSize: '1.3rem',
-        fontWeight: 400,
-        textShadow: '2px 2px rgba(0, 0, 0, 0.4)'
-    },
-
 }));
 
 const TechnologiesBanner = () => {
@@ -58,26 +45,19 @@ const TechnologiesBanner = () => {
         >
             <div className={classes.overlay}/>
 
-            <div className={classes.mainFeaturedPostContent}>
-                <Grid container justifyContent="space-around" direction="row" alignItems="flex-end">
-                    <Grid item>
-                        <Typography
-                            component="h2"
-                            variant="h4"
-                            color="inherit"
-                            gutterBottom
-                            className={classes.title}
-                        >
+            <Grid container>
+                <Grid item md={6}>
+                    <div className={classes.mainFeaturedPostContent}>
+                        <Typography component="h1" variant="h3" color="inherit" gutterBottom>
                             Przeglądaj dostępne technologie
                         </Typography>
-                        <Typography variant="body1" color="inherit" paragraph className={classes.subtitle}>
-                            Możesz zdobyć wiedzę we wszystkich dostępnych technologiach. Wybierz interesującą i
-                            zacznij naukę!
+                        <Typography variant="h5" color="inherit" paragraph>
+                            Możesz zdobyć wiedzę we wszystkich dostępnych technologiach. Wybierz interesującą i zacznij
+                            naukę!
                         </Typography>
-                    </Grid>
+                    </div>
                 </Grid>
-
-            </div>
+            </Grid>
         </Paper>
     )
 }
