@@ -27,7 +27,6 @@ export const loginUser = (loginPayload: LoginFormType) => async (dispatch: Dispa
         dispatch(addFlag(successFlag("Zalogowano")))
     } catch (e) {
         console.error(e)
-        dispatch(addFlag(errorFlag("Failed to load user details.")))
         throw e;
     }
 }

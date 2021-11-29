@@ -34,7 +34,7 @@ const CodePreview = (props: PropsType) => {
                 cursor: "pointer !important"
             }}
             width="auto"
-            height="10rem"
+            height="20rem"
             className={classes.editor}
             fontSize={16}
             showGutter={false}

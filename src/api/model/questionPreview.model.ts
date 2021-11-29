@@ -5,4 +5,5 @@ export interface QuestionPreview {
     body: string,
     difficulty: Difficulty,
     published: boolean,
+    creatorEmail: string,
 }

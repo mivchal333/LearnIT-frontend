@@ -61,7 +61,7 @@ const QuizGamePage = () => {
                     <Grid item>
                         <ProgressTracker/>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={12}>
                         <Typography variant="subtitle2">Pytanie</Typography>
                         <Typography variant="h4">
                             {question.body}

@@ -8,5 +8,5 @@ export interface QuestionEntity {
     codeLang: CodeLanguage,
     correctAnswer: Answer,
     difficulty: number,
-    badAnswers: Answer[]
+    badAnswers: Answer[],
 }
