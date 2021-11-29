@@ -30,14 +30,25 @@ export const loadUserHistoryByTechnology = (technologyId: number): ThunkAction<v
     }
 }
 
-export const loadUserHistory = (): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
+export const loadUserHistoryByTechnologyAndDate = (technologyId: number, date: number): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
+
+    try {
+        const {data: userAttempts} = await UserHistoryRepository.fetchUserHistoryByTechnologyByDate(technologyId, date)
+        dispatch(setUserAttempts({technologyId, userAttempts}))
+    } catch (e) {
+        console.error(e);
+        dispatch(addFlag(errorFlag("Unable to load user history")))
+    }
+}
+
+export const loadUserHistory = (date: number): ThunkAction<void, RootState, undefined, AnyAction> => async (dispatch, getState) => {
     try {
         const {
             data: technologies = []
         } = await TechnologyRepository.fetchTechnologies()
 
         technologies.forEach(technology => {
-            dispatch(loadUserHistoryByTechnology(technology.id))
+            dispatch(loadUserHistoryByTechnologyAndDate(technology.id, date))
         })
     } catch (e) {
         console.error(e);

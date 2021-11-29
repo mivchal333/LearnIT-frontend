@@ -1,22 +1,18 @@
-import React, {useEffect} from "react";
+import React from "react";
 import PageHeader from "./PageHeader";
 import LatestAttemptSection from "./LatestAttemptSection";
 import {useDispatch} from "../../../store/store";
-import {loadUserHistory} from "../../../store/history/actions";
 import ActivitySection from "./ActivitySection";
 import RequestTechnologySection from "./FrequentTechnologySection";
+import DatePickerSection from "./DatePickerSection";
 
 const StatisticsPage = () => {
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(loadUserHistory())
-
-    }, [])
-
     return (
         <>
             <PageHeader/>
+            <DatePickerSection/>
             <LatestAttemptSection/>
             <ActivitySection/>
             <RequestTechnologySection/>

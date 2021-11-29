@@ -27,8 +27,7 @@ const ZERO_TIME = {hours: 0, minutes: 0, seconds: 0, milliseconds: 0};
 
 const LatestAttemptSection = () => {
     const classes = useStyles();
-    const userHistoryEntries = useSelector(selectUserAttempts)
-
+    const userAttempts = useSelector(selectUserAttempts)
 
     const getData = (userHistoryEntries: UserHistoryEntries) => {
         let mapData: { [date: number]: number } = {}
@@ -57,7 +56,7 @@ const LatestAttemptSection = () => {
         return takeRight(sorted, LAST_ELEMENTS_COUNT)
     }
 
-    const data = useMemo(() => getData(userHistoryEntries), [userHistoryEntries]);
+    const data = useMemo(() => getData(userAttempts), [userAttempts]);
 
     return (
         <Paper className={classes.paper}>

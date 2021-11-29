@@ -51,8 +51,8 @@ const ActionButtons = () => {
         <Grid container spacing={6}>
             {question.answers.map(answer => {
                 const answerIndicatorClassname = clsx({
-                    [classes.wrongAnswerIndicator]: answer.id === submittedAnswerId && !answerResult?.correct,
-                    [classes.correctAnswerIndicator]: answer.id === submittedAnswerId && answerResult?.correct,
+                    [classes.wrongAnswerIndicator]: answer.id === submittedAnswerId && answerResult?.correct == false,
+                    [classes.correctAnswerIndicator]: answer.id === submittedAnswerId && answerResult?.correct == true,
                     [classes.answerPaper]: true,
                 });
                 return (

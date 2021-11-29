@@ -9,7 +9,16 @@ const fetchUserHistoryByTechnology = (technologyId: number): Promise<AxiosRespon
 
 const getUserAttempt = (attemptId: string): Promise<AxiosResponse<UserAttempt>> => axios.get(`/history/${attemptId}`)
 
+const fetchUserHistoryByTechnologyByDate = (technologyId: number, date: number): Promise<AxiosResponse<UserAttempt[]>> => axios.get("/history", {
+    params: {
+        technologyId,
+        date,
+    }
+})
+
+
 export const UserHistoryRepository = {
     fetchUserHistoryByTechnology,
-    getUserAttempt
+    getUserAttempt,
+    fetchUserHistoryByTechnologyByDate,
 }
