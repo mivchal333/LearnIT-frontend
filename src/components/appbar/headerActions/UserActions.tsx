@@ -62,7 +62,7 @@ const UserActions = () => {
                         <Avatar
                             className={classes.avatar}
                         >
-                            {toUpper(user?.firstName[0])}
+                            {toUpper(user.firstName[0])}
                         </Avatar>
                     </IconButton>
                 </Grid>
