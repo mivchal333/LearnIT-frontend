@@ -35,6 +35,7 @@ const UserActions = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const user = useSelector(selectUserDetails)
 
+    console.error('user', user)
     // @ts-ignore
     const handleClick = (event: MouseEvent<HTMLDivElement>) => {
         setAnchorEl(event.currentTarget);
