@@ -53,7 +53,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://learnit-backend.herokuapp.com:8080",
+  "proxy": "https://learnit-backend.herokuapp.com",
   "devDependencies": {
     "@types/jest": "^26.0.24",
     "@types/lodash-es": "^4.17.4",
