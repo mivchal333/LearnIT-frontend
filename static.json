@@ -1,6 +1,6 @@
 {
   "proxies": {
-    "*": {
+    "/**": {
       "origin": "https://learnit-backend.herokuapp.com"
     }
   }
