@@ -1,6 +1,10 @@
 {
+  "root": "build/",
+  "routes": {
+    "/**": "index.html"
+  },
   "proxies": {
-    "/**": {
+    "/api/": {
       "origin": "https://learnit-backend.herokuapp.com"
     }
   }

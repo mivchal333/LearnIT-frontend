@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from "axios";
 import qs from 'querystring'
 import {UserAttempt} from "../model/userAttempt.model";
 
-const startAttempt = async (technologyIds: number[]): Promise<AxiosResponse<UserAttempt>> => axios.post('/attempt', null, {
+const startAttempt = async (technologyIds: number[]): Promise<AxiosResponse<UserAttempt>> => axios.post('/api/attempt', null, {
     params: {
         technologyId: technologyIds
     },
