@@ -5,7 +5,7 @@
   },
   "proxies": {
     "/api/": {
-      "origin": "https://learnit-backend.herokuapp.com"
+      "origin": "https://learnit-backend.herokuapp.com/api"
     }
   }
 }
