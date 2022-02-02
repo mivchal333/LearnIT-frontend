@@ -23,7 +23,7 @@ const StartCardsButton = (props: PropsType) => {
             variant={props.variant}
             color={props.color}
         >
-            Zacznij Ficzki
+            Zacznij Fiszki
         </Button>
     )
 }
