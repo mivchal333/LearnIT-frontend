@@ -7,7 +7,6 @@ import {loadCard} from "../../../../store/cards/card.actions";
 import {resetGameState, selectIsLoading} from "../../../../store/shared/game/game.slice";
 import {useRequireUserAttempt} from "../../../../hooks/useRequireUserAttempt";
 import {usePathTechnologyContext} from "../../../../hooks/usePathTechnologyContext";
-import TechnologyHeader from "../common/TechnologyHeader";
 import CardItem from "./CardItem";
 import KnowButton from "./button/KnowButton";
 import ForgotButton from "./button/ForgotButton";
@@ -55,7 +54,6 @@ const CardsGamePage = () => {
     }
     return (
         <div>
-            <TechnologyHeader/>
             <Paper elevation={3} className={classes.paper}>
                 <Grid container justifyContent="space-between" direction="row-reverse" spacing={4}>
                     <Grid item>

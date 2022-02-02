@@ -6,18 +6,21 @@ interface PropsType {
     user: UserModel
 }
 
-const AccountListItem = (props: PropsType) => {
-    const {user} = props
-    return (
-        <ListItem>
-            <ListItemAvatar>
-                <Avatar>
-                    <Avatar/>
-                </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={user.firstName + " " + user.lastName} secondary={user.email}/>
-        </ListItem>
-    )
+class AccountListItem extends React.Component<PropsType> {
+    render() {
+        const {user} = this.props
+        return (
+            <ListItem>
+                <ListItemAvatar>
+                    <Avatar>
+                        <Avatar/>
+                    </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                    primary={`${user.firstName} ${user.lastName}`}
+                    secondary={user.email}/>
+            </ListItem>
+        )
+    }
 }
-
 export default AccountListItem
