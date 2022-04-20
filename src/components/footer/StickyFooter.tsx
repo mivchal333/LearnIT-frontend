@@ -1,7 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
-import {getStaticImageUrl, PB_LOGO_IMAGE_PATH} from "../../service/staticProvider";
 import {Grid} from "@material-ui/core";
 
 function Copyright() {
@@ -29,9 +28,6 @@ export default function StickyFooter() {
     return (
         <footer className={classes.footer}>
             <Grid container justifyContent="center">
-                <Grid item>
-                    <img src={getStaticImageUrl(PB_LOGO_IMAGE_PATH)} height={55} width={55}/>
-                </Grid>
                 <Grid item>
                     <Typography variant="body1">Politechnika Białostocka</Typography>
                     <Copyright/>
